@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5.0" client="site" method="install">
+    <name>CiviCRM FullCalendar</name>
+    <author>Louis Giacalone, Andrew Schmitt</author>
+    <creationDate>November 2012</creationDate>
+    <copyright>Copyright (C)2012 Andrew Schmitt, Louis Giacalone</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
+    <authorUrl></authorUrl>
+    <version>0.1.0</version>
+    <description>A module for CiviCRM that displays events in an interactive calendar in Joomla, using
+        FullCalendar by Adam Shaw (arshaw.com) and extending the code base of CiviEvent Joomla Module. The CiviEvent
+        Joomla Module (http://wiki.civicrm.org/confluence/display/CRMDOC42/CiviEvent+Joomla+Module) was originally
+        developed by Nakul Ganesh as part of the 2009 Google Summer of Code Program and further developed by Brian
+        Shaughnessy before being leveraged here.
+    </description>
+    <files>
+        <filename module="mod_civicrm_fullcalendar">mod_civicrm_fullcalendar.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <folder>elements/</folder>
+        <folder>fullcalendar/</folder>
+        <folder>tmpl/</folder>
+    </files>
+
+
+    <config>
+        <fields name="params" addfieldpath="/modules/mod_civicrm_fullcalendar/elements">
+            <fieldset name="basic">
+
+                <field type="spacer" label="&lt;b&gt;Display Options&lt;/b&gt;"/>
+
+                <field name="maxevents" type="text" default="10" size="10" label="Maximum Events Listed"
+                       description="Maximum number of events to be listed."></field>
+
+                <field name="dateformat" type="text" default="m/d/Y" size="20" label="Date Format"
+                       description="Date display in strftime format"></field>
+
+                <field name="showdates" type="radio" default="1" label="Show Dates?"
+                       description="Indicate if you want the event dates listed.">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field name="showduration" type="radio" default="1" label="Show Duration?"
+                       description="Indicate if you want the event duration listed.">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field name="summary" type="radio" default="1" label="Display Summary Text?"
+                       description="Do you want to include event summary text with the listing?">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field name="privacy" type="radio" default="1" label="Privacy"
+                       description="Select Public or Private Events">
+                    <option value="1">Public</option>
+                    <option value="2">Private</option>
+                    <option value="0">Both</option>
+                </field>
+
+                <field name="pastevents" type="radio" default="0" label="Display Past Events"
+                       description="Show or hide events that have already happened">
+                    <option value="0">Show Past Events</option>
+                    <option value="1">Hide Past Events</option>
+                </field>
+
+                <field type="spacer" hr="true"/>
+                <field type="spacer" label="&lt;b&gt;Color Settings&lt;/b&gt;"/>
+
+                <field name="color" type="list" default="0" label="Color by"
+                       description="Choose how to olor events">
+                    <option value="0">Event Duration</option>
+                    <option value="1">Event Type</option>
+                </field>
+
+                <field name="colorpicker" type="list" default="0" label="Color Theme"
+                       description="Choose a color theme for events">
+                    <option value="0">Primary Colors</option>
+                    <option value="1">Light Colors</option>
+                    <option value="2">Strong Colors</option>
+                    <option value="3">Blue</option>
+                    <option value="4">Custom Colors</option>
+                </field>
+
+                <field type="spacer" hr="true"/>
+                <field type="spacer" label="&lt;b&gt;Custom Colors&lt;/b&gt;"/>
+
+                <field name="color1" type="color" value="blue" label="Color #1"></field>
+                <field name="color2" type="color" value="green" label="Color #2"></field>
+                <field name="color3" type="color" value="red" label="Color #3"></field>
+                <field name="color4" type="color" value="yellow" label="Color #4"></field>
+                <field name="color5" type="color" value="purple" label="Color #5"></field>
+                <field name="color6" type="color" value="orange" label="Color #6"></field>
+
+                <field type="spacer"  hr="true"/>
+                <field type="spacer"  hr="true"/>
+                <field type="spacer" label="&lt;b&gt;Custom Selection Mode&lt;/b&gt;"/>
+
+                <field name="mode" type="list" default="0" label="Event Selection Mode"
+                       description="Choose event selection method">
+                    <option value="0">Default</option>
+                    <option value="1">Date Range</option>
+                    <option value="2">Event Selection</option>
+                    <option value="3">Event Type</option>
+                </field>
+
+                <field type="spacer" hr="true"/>
+                <field type="spacer" label="&lt;b&gt;Mode: Date Range Options&lt;/b&gt;"/>
+
+                <field name="startdate" type="calendar" default="Select" label="Start date" description=""
+                       format="%d-%m-%Y"/>
+                <field name="enddate" type="calendar" default="Select" label="End date" description=""
+                       format="%d-%m-%Y"/>
+
+                <field type="spacer" label="&lt;b&gt;Mode: Custom Event Selection Options&lt;/b&gt;"/>
+
+                <field name="multievent" type="eventlist" default="0" label="Select Events"
+                       description="Select Events to be displayed"/>
+
+                <field type="spacer" label="&lt;b&gt;Mode: Event Type Options&lt;/b&gt;"/>
+
+                <field name="tid" type="sql" default="10" label="Event Type" query="
+            SELECT civicrm_option_value.value, civicrm_option_value.label
+            FROM civicrm_option_value
+            INNER JOIN
+                civicrm_option_group
+            ON (civicrm_option_value.option_group_id = civicrm_option_group.id)
+            WHERE (civicrm_option_group.name = 'event_type')"
+                       key_field="value" value_field="label"/>
+
+            </fieldset>
+        </fields>
+    </config>
+
+
+</extension>
