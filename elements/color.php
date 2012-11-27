@@ -26,7 +26,7 @@ class JFormFieldColor extends JFormFieldList
                 showInput: true
             });
             var header =  $("b:contains('Custom Colors')").parent().parent().parent().parent();
-            header.append('<br/><br/><dfn>When applying color based on event duration, only the first two colors will be used<br/>Color #1 is used for single day events, Color #2 is used for multi-day events</dfn><br/><br/>');
+            header.append('<br/><br/><dfn>When applying color based on event duration, only the first two colors will be used<br/> -Color #1 is used for single day events (events that start and end on the same day)<br/> -Color #2 is used for multi-day events (events that start and end on different days)</dfn><br/><br/>');
         }
     </script>
     <?php

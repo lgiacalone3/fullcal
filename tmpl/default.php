@@ -130,7 +130,7 @@ foreach ($eventtitles as &$event) {
         //duration and single/multi checker
         //also sets color for single/multi
         $duration = "";
-        if ($ed == $sd && $em == $sm) {
+        if ($ed == $sd && $em == $sm && $ey == $sy) {
             //single day
             $eventcolor = $color[0];
             if ($ehr - $shr == 1) {

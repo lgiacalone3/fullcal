@@ -6,14 +6,10 @@
     <copyright>Copyright (C)2012 Andrew Schmitt, Louis Giacalone</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
-    <authorUrl></authorUrl>
+    <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
     <version>0.1.0</version>
-    <description>A module for CiviCRM that displays events in an interactive calendar in Joomla, using
-        FullCalendar by Adam Shaw (arshaw.com) and extending the code base of CiviEvent Joomla Module. The CiviEvent
-        Joomla Module (http://wiki.civicrm.org/confluence/display/CRMDOC42/CiviEvent+Joomla+Module) was originally
-        developed by Nakul Ganesh as part of the 2009 Google Summer of Code Program and further developed by Brian
-        Shaughnessy before being leveraged here.
-    </description>
+    <description>A Joomla module for CiviCRM that displays events in an interactive calendar, using FullCalendar and the CiviEvent Joomla Module. See https://github.com/lgiacalone3/fullcal for full documentation.
+        Authored by Louis Giacalone and Andrew Schmitt.</description>
     <files>
         <filename module="mod_civicrm_fullcalendar">mod_civicrm_fullcalendar.php</filename>
         <filename>index.html</filename>
@@ -32,15 +28,6 @@
 
                 <field name="maxevents" type="text" default="10" size="10" label="Maximum Events Listed"
                        description="Maximum number of events to be listed."></field>
-
-                <field name="dateformat" type="text" default="m/d/Y" size="20" label="Date Format"
-                       description="Date display in strftime format"></field>
-
-                <field name="showdates" type="radio" default="1" label="Show Dates?"
-                       description="Indicate if you want the event dates listed.">
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                </field>
 
                 <field name="showduration" type="radio" default="1" label="Show Duration?"
                        description="Indicate if you want the event duration listed.">
@@ -71,7 +58,7 @@
                 <field type="spacer" label="&lt;b&gt;Color Settings&lt;/b&gt;"/>
 
                 <field name="color" type="list" default="0" label="Color by"
-                       description="Choose how to olor events">
+                       description="Choose how to color events">
                     <option value="0">Event Duration</option>
                     <option value="1">Event Type</option>
                 </field>
@@ -88,12 +75,12 @@
                 <field type="spacer" hr="true"/>
                 <field type="spacer" label="&lt;b&gt;Custom Colors&lt;/b&gt;"/>
 
-                <field name="color1" type="color" value="blue" label="Color #1"></field>
-                <field name="color2" type="color" value="green" label="Color #2"></field>
-                <field name="color3" type="color" value="red" label="Color #3"></field>
-                <field name="color4" type="color" value="yellow" label="Color #4"></field>
-                <field name="color5" type="color" value="purple" label="Color #5"></field>
-                <field name="color6" type="color" value="orange" label="Color #6"></field>
+                <field name="color1" description="Conference and single day color" type="color" value="blue" label="Color #1"></field>
+                <field name="color2" description="Exhibition and multi-day color" type="color" value="green" label="Color #2"></field>
+                <field name="color3" description="Fundraiser color" type="color" value="red" label="Color #3"></field>
+                <field name="color4" description="Meeting color" type="color" value="yellow" label="Color #4"></field>
+                <field name="color5" description="Performance color" type="color" value="purple" label="Color #5"></field>
+                <field name="color6" description="Workshop color" type="color" value="orange" label="Color #6"></field>
 
                 <field type="spacer"  hr="true"/>
                 <field type="spacer"  hr="true"/>
@@ -128,7 +115,8 @@
             INNER JOIN
                 civicrm_option_group
             ON (civicrm_option_value.option_group_id = civicrm_option_group.id)
-            WHERE (civicrm_option_group.name = 'event_type')"
+            WHERE (civicrm_option_group.name = 'event_type')
+            AND (civicrm_option_value.is_active = '1')"
                        key_field="value" value_field="label"/>
 
             </fieldset>
