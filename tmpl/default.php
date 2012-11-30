@@ -168,15 +168,39 @@ foreach ($eventtitles as &$event) {
             "{ " .
                 "id: '$event->id ', ";
         $color1 = $displayParams['color1'];
+        
+        
+        
+        
         //adds title, summary and duration according to settings
-        if ($displayParams['showduration'] && $displayParams['summary']) {
-            $statement .= "title: '$event->title - $event->summary - $duration', ";
+        // let's encode the title 
+        // but using the json encode function adds equals signs
+        // so lets remove that
+        // and then perfrom a trim on the final result
+        $e_title = trim( preg_replace('"\\""', '', json_encode(  ($event->title) ), -1, $count) );
+        
+        
+        // enocde this string as civicrm allows new lines in the 
+        // summary field and these are represented as \n\r
+        $e_summary = trim( preg_replace('"\\""', '', json_encode(  ($event->summary) ), -1, $count) );
+  		// catch prevent a null string that literally says null
+        if ( $e_summary == "null") {
+          $e_summary = "" ; }
+        else {
+        	// we'll add the hypen here so the there is not an extra
+        	// hypen in the case that there is no event summary text 
+        	// and the conditions for the second elsif evaluate to true
+        	$e_summary = " - ".$e_summary ; }
+  		
+  		
+        if ($displayParams['showduration'] &&  $displayParams['summary']  ) {
+            $statement .= "title: '$e_title - $e_summary - $duration', ";
         } elseif ($displayParams['showduration']) {
-            $statement .= "title: '$event->title - $duration', ";
+            $statement .= "title: '$e_title - $duratio', ";
         } elseif ($displayParams['summary']) {
-            $statement .= "title: '$event->title - $event->summary', ";
+            $statement .= "title: '$e_title $e_summary', ";
         } else {
-            $statement .= "title: '$event->title', ";
+            $statement .= "title: '$e_title', ";
         }
 
         //sets category colors
