@@ -172,17 +172,16 @@ foreach ($eventtitles as &$event) {
         
         
         
-        //adds title, summary and duration according to settings
+        // adds title, summary and duration according to settings
         // let's encode the title 
         // but using the json encode function adds equals signs
         // so lets remove that
         // and then perfrom a trim on the final result
-        $e_title = trim( preg_replace('"\\""', '', json_encode(  ($event->title) ), -1, $count) );
-        
+        $e_title = trim(  trim( json_encode(  ($event->title) ) ), 	"\"" );
         
         // enocde this string as civicrm allows new lines in the 
         // summary field and these are represented as \n\r
-        $e_summary = trim( preg_replace('"\\""', '', json_encode(  ($event->summary) ), -1, $count) );
+        $e_summary = trim(  trim( json_encode(  ($event->summary) ) ), 	"\"" );
   		// catch prevent a null string that literally says null
         if ( $e_summary == "null") {
           $e_summary = "" ; }
