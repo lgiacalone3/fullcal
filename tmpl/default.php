@@ -178,10 +178,15 @@ foreach ($eventtitles as &$event) {
         // so lets remove that
         // and then perfrom a trim on the final result
         $e_title = trim(  trim( json_encode(  ($event->title) ) ), 	"\"" );
-        
+        // apostrophes still cause a problem after the 
+        // json_encode.  So we will do a replace (escape) on that
+        // see this for help: http://www.the-art-of-web.com/javascript/escape/
+        $e_title = preg_replace("/\\'/","\\\'", $e_title ); 
         // enocde this string as civicrm allows new lines in the 
         // summary field and these are represented as \n\r
         $e_summary = trim(  trim( json_encode(  ($event->summary) ) ), 	"\"" );
+        // escape out the apostrophes
+        $e_summary = preg_replace("/\\'/","\\\'", $e_summary );
   		// catch prevent a null string that literally says null
         if ( $e_summary == "null") {
           $e_summary = "" ; }
