@@ -1,0 +1,12 @@
+#colorlegend{
+    width: 200px;
+}
+
+#colorsquare{
+    display: inline-block;
+    width:60px;
+}
+
+.text{
+    float:right;
+}

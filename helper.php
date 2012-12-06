@@ -172,6 +172,9 @@ class modCiviCRMFullCalendarHelper
         $displayParams['color5'] = trim($params->get('color5'));
         $displayParams['color6'] = trim($params->get('color6'));
         $displayParams['colorpicker'] = trim($params->get('colorpicker'));
+        $displayParams['customcolors'] = trim($params->get('customcolors'));
+        $displayParams['colorlegend'] = trim($params->get('colorlegend'));
+
 
         return $displayParams;
     } //end sendParams

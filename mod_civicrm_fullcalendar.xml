@@ -22,9 +22,8 @@
 
     <config>
         <fields name="params" addfieldpath="/modules/mod_civicrm_fullcalendar/elements">
-            <fieldset name="basic">
-
-                <field type="spacer" label="&lt;b&gt;Display Options&lt;/b&gt;"/>
+            <fieldset name="display" label="General Options">
+                <field type="spacer" label="&lt;b&gt;Display Settings&lt;/b&gt;"/>
 
                 <field name="maxevents" type="text" default="10" size="10" label="Maximum Events Listed"
                        description="Maximum number of events to be listed."></field>
@@ -72,23 +71,24 @@
                     <option value="4">Custom Colors</option>
                 </field>
 
+                <field name="colorlegend" type="radio" default="0" label="Display Color Legend"
+                       description="Show or hide the color legend">
+                    <option value="0">Show</option>
+                    <option value="1">Hide</option>
+                </field>
+
                 <field type="spacer" hr="true"/>
                 <field type="spacer" label="&lt;b&gt;Custom Colors&lt;/b&gt;"/>
 
-                <field name="color1" description="Conference and single day color" type="color" value="blue" label="Color #1"></field>
-                <field name="color2" description="Exhibition and multi-day color" type="color" value="green" label="Color #2"></field>
-                <field name="color3" description="Fundraiser color" type="color" value="red" label="Color #3"></field>
-                <field name="color4" description="Meeting color" type="color" value="yellow" label="Color #4"></field>
-                <field name="color5" description="Performance color" type="color" value="purple" label="Color #5"></field>
-                <field name="color6" description="Workshop color" type="color" value="orange" label="Color #6"></field>
+                <field name="customcolors" type="color" label="Color"></field>
 
-                <field type="spacer"  hr="true"/>
-                <field type="spacer"  hr="true"/>
-                <field type="spacer" label="&lt;b&gt;Custom Selection Mode&lt;/b&gt;"/>
+            </fieldset>
+            <fieldset name="customselect"  label="Custom Selection Options">
+                <legend><?php echo JText::_('Custom Selection Mode'); ?></legend>
 
                 <field name="mode" type="list" default="0" label="Event Selection Mode"
                        description="Choose event selection method">
-                    <option value="0">Default</option>
+                    <option value="0">Disable</option>
                     <option value="1">Date Range</option>
                     <option value="2">Event Selection</option>
                     <option value="3">Event Type</option>
