@@ -10,8 +10,6 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.html.html');
-
-
 ?>
 
 <link rel="stylesheet" href="modules/mod_civievent/civievent.css" type="text/css"/>
@@ -30,7 +28,7 @@ $document->addStyleSheet(JURI::base() . 'modules/mod_civicrm_fullcalendar/fullca
 ?>
 
 <?php
-// AQS
+
 // call FullCalendar's javascript
 // ====================================================
 $statement = <<<'JSJS'
@@ -102,11 +100,22 @@ $query = "SELECT civicrm_option_value.value, civicrm_option_value.label
             ON (civicrm_option_value.option_group_id = civicrm_option_group.id)
             WHERE (civicrm_option_group.name = 'event_type')
             AND (civicrm_option_value.is_active = '1')";
-$result = mysql_query($query) or die(mysql_error());
+$db =& JFactory::getDBO();
+$db->setQuery($query);
+$result = $db->loadObjectList();
+
+
+if ($result === null) {
+	JError::raiseWarning(1002, $db->getErrorMsg()); 
+	}
+	
+	
 
 $column = array();
 
-while ($row = mysql_fetch_array($result)) {
+
+$lines = $db->loadAssocList();
+foreach($lines as $row) {
     $categories[] = $row['value'];
     $catname[] = $row['label'];
 }
@@ -277,14 +286,29 @@ $document->addScriptDeclaration($statement);
 ?>
 
 <!-- this will add the FullCalendar dynamically inside the div below -->
+<div id='mod_civicrm_fullcalendar'>
 <div id='calendar'></div>
 <?PHP
     if ($colorlegend == 0){
-        echo "<br/><div id='legend'><table id='colorlegend'><tr><th>Color Legend</th></tr>";
+        echo "<br/><div id='mod_civicrm_fullcalendar_legend'>";
+        
+        echo "<table id='mod_civicrm_fullcalendar_colorlegend'>".
+        	  "<tr><th>Color Legend</th></tr>";
         for ($i = 0, $n = count($catname); ($i < $n); $i++) {
-            echo "<tr><td><span id='colorsquare' style='background-color:" . $color[$i] . "'>" . $color[$i] . "</span><span class='text'>" .  $catname[$i] ."</span></td></tr>";
-        }
-        echo "</table></div>";
-    }
+            echo "<tr><td><span id='colorsquare' style='text-align:center; background-color:" . 
+            $color[$i] . "'>" . $color[$i] . "</span><span class='text'>" .  
+            $catname[$i] ."</span></td></tr>";
+        }        
+        echo "</table>";
+        
+        
+        
+        echo "</div>"; // close div for id='mod_civicrm_fullcalendar_legend'
+    }  // if color legend
+    
+    
+    
+    
 ?>
+</div>  <!-- close div for id equal mod_civicrm_fullcalendar -->
 

@@ -21,7 +21,16 @@ class JFormFieldColor extends JFormFieldList
             ON (civicrm_option_value.option_group_id = civicrm_option_group.id)
             WHERE (civicrm_option_group.name = 'event_type')
             AND (civicrm_option_value.is_active = '1')";
-        $result = mysql_query($query) or die(mysql_error());
+        
+        $db =& JFactory::getDBO();
+        $db->setQuery($query);
+        $result = $db->loadObjectList();
+        
+        if ($result === null) {
+        	JError::raiseWarning(1001, $db->getErrorMsg());
+        }
+        
+        
         ?>
 
     <script src="<?php echo $jquery;?>"></script>

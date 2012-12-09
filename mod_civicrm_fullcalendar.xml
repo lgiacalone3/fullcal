@@ -78,9 +78,11 @@
                 </field>
 
                 <field type="spacer" hr="true"/>
-                <field type="spacer" label="&lt;b&gt;Custom Colors&lt;/b&gt;"/>
+                <field type="spacer" label="&lt;b&gt;Custom Colors&lt;/b&gt; (for this, choose 'Custom Colors' in the Color Theme dropdown box above.  In the text box to the below, use CSS &lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;color names&lt;/a&gt; or hex values separated by spaces.)"/>
+
 
                 <field name="customcolors" type="color" label="Color"></field>
+
 
             </fieldset>
             <fieldset name="customselect"  label="Custom Selection Options">
