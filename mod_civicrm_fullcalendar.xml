@@ -71,11 +71,13 @@
                     <option value="4">Custom Colors</option>
                 </field>
 
-                <field name="colorlegend" type="radio" default="0" label="Display Color Legend"
-                       description="Show or hide the color legend">
-                    <option value="0">Show</option>
-                    <option value="1">Hide</option>
+		<field name="legendpicker" type="list" default="0" label="Choice of Legend"
+                       description="Choose a color theme for events">
+                    <option value="0">None</option>
+                    <option value="1">Legend 1</option>
+                    <option value="2">Legend 2</option>
                 </field>
+
 
                 <field type="spacer" hr="true"/>
                 <field type="spacer" label="&lt;b&gt;Custom Colors&lt;/b&gt; (for this, choose 'Custom Colors' in the Color Theme dropdown box above.  In the text box to the below, use CSS &lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;color names&lt;/a&gt; or hex values separated by spaces.)"/>

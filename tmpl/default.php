@@ -74,8 +74,9 @@ if ($debug) {
 
 //color themes
 $theme = $displayParams['colorpicker'];
+$legend_picked = $displayParams['legendpicker'];
 $customcolorsstr = $displayParams['customcolors'];
-$colorlegend = $displayParams['colorlegend'];
+
 if ($theme == 1) {
     $color = array("#FF007F", "#00CCAA", "#14B5CC", "#51B207", "#FFBA14", "#CA5EFF");
 } elseif ($theme == 2) {
@@ -190,7 +191,7 @@ foreach ($eventtitles as &$event) {
             } elseif ($emin - $smin > 1) {
                 $duration .= ", " . ($emin - $smin) . " minutes";
             }
-        }
+        } // else
 
         $statement .=
             "{ " .
@@ -238,9 +239,17 @@ foreach ($eventtitles as &$event) {
         if ($displayParams['color'] == 1) {
             $eventid = $event->event_type_id;
             $key = array_search($eventid, $categories);
-            $eventcolor = $color[$key];
+        //    $eventcolor = $color[$key];
+            
+  
+        // map event type ids to the colors
+        $my_color_key_array = array_keys($categories,$event->event_type_id);
+        $eventcolor = $color[$my_color_key_array[0]];
         }
-
+        
+        
+        
+        
         $statement .=
             "start: new Date($sy, $sm, $sd), " .
                 "end: new Date($ey, $em, $ed), " .
@@ -289,8 +298,15 @@ $document->addScriptDeclaration($statement);
 <div id='mod_civicrm_fullcalendar'>
 <div id='calendar'></div>
 <?PHP
-    if ($colorlegend == 0){
-        echo "<br/><div id='mod_civicrm_fullcalendar_legend'>";
+
+
+
+	if ($legend_picked != "0") {
+
+
+    if ($legend_picked == "1") {
+        echo "<div id='mod_civicrm_fullcalendar_legend'>";
+
         
         echo "<table id='mod_civicrm_fullcalendar_colorlegend'>".
         	  "<tr><th>Color Legend</th></tr>";
@@ -300,8 +316,78 @@ $document->addScriptDeclaration($statement);
             $catname[$i] ."</span></td></tr>";
         }        
         echo "</table>";
+        } //   if ($legend_picked == "1") 
+
+     if ($legend_picked == "2") {
         
+
+
+
+// ==============
+// this site is a big help for css generation with divs
+// http://www.pagecolumn.com/grid_layout_generator.htm
+//
+// OK, create some CSS
+$legend_style = <<<'LEGEND_STYLE'
+<style type='text/css'>
+.wrapper{
+   position: relative;
+   float: left;
+   left: 0px;
+   width: 99%;
+   border-style:solid;
+   border-width:1px;
+   border-color: darkgray ;
+   background: white;	
+   padding: 3px;
+   margin-top: 10px;
+   margin-bottom: 25px;
+}
+LEGEND_STYLE;
+
+// how many boexs?
+$num_o_boxes = count($catname) ; 
+
+// one more box to say 'legend'
+$num_o_boxes++;
+
+// how wide?
+$box_width = round( ((1/$num_o_boxes)*100), 0)-1;
+
+// css for each box
+for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
+  $legend_style .= ".left".$i."{".
+  	  "position: relative; float: left; left: ".(($i*10)+10)."px; width: ".
+  	  $box_width.
+ 	  "%; ".
+ 	  "text-align: center; ";
+  if ( $i > 0) {
+    if ( ($color[$i-1] !== 0) && ($color[$i-1] !== null) ) {
+  	  $legend_style .= "color: white; background-color:".$color[$i-1]."; ";}
+  	  }
+  $legend_style .= "} ";
+}
+$legend_style .= "</style>";
+
+
+// ok, now for the content in the form of divs
+$legend_style .= "<div class='wrapper'>";
+for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
+	$legend_style .= "<div class='left".$i."'>";
+	if ($i == 0) {
+		$legend_style .= "Color Legend";}
+	else {
+		$legend_style .= $catname[$i-1];}
+	$legend_style .="</div> ";
+	} // for
+	$legend_style .= "</div>";
+
+// output the legend	
+echo $legend_style ;
         
+} //   if ($legend_picked == "2")
+
+
         
         echo "</div>"; // close div for id='mod_civicrm_fullcalendar_legend'
     }  // if color legend
