@@ -5,7 +5,7 @@
         Authored by Louis Giacalone and Andrew Schmitt.
 </description>
 <element>mod_civicrm_fullcalendar</element>
-<type>component</type>
+<type>module</type>
 <!--
  For a plugin, we would add a <folder> element with the plugin type (authentication, content, etc.). 
 -->
@@ -13,7 +13,7 @@
 <!--
  For a plugin, we would add a <client> element with a value of 0 (<client>0</client>). 
 -->
-<version>0.1.17</version>
+<version>0.1.18</version>
 <!--
  This will be the component version after the update. 
 -->
