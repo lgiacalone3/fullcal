@@ -1,0 +1,34 @@
+<updates>
+<update>
+<name>CiviCRM FullCalendar</name>
+<description>A Joomla module for CiviCRM that displays CiviEvent events in an interactive calendar, using FullCalendar. See https://github.com/lgiacalone3/fullcal for full documentation.
+        Authored by Louis Giacalone and Andrew Schmitt.
+</description>
+<element>mod_civicrm_fullcalendar</element>
+<type>component</type>
+<!--
+ For a plugin, we would add a <folder> element with the plugin type (authentication, content, etc.). 
+-->
+<!--  For example, <folder>system</folder> -->
+<!--
+ For a plugin, we would add a <client> element with a value of 0 (<client>0</client>). 
+-->
+<version>0.1.12</version>
+<!--
+ This will be the component version after the update. 
+-->
+<infourl title="CiviCRM FullCalendar for Joomla">https://github.com/lgiacalone3/fullcal</infourl>
+<downloads>
+<!--
+ Careful: No spaces or new lines are allowed in the downloadurl. 
+-->
+<downloadurl type="full" format="zip">https://github.com/lgiacalone3/fullcal/archive/master.zip</downloadurl>
+</downloads>
+<maintainer>Louis Giacalone, Andrew Schmitt</maintainer>
+<maintainerurl>https://github.com/lgiacalone3/fullcal</maintainerurl>
+<targetplatform name="joomla" version="2.5"/>
+<!--
+ This is the version of Joomla that this update works in. 
+-->
+</update>
+</updates>
