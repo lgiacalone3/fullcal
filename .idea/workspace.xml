@@ -23,7 +23,16 @@
       <file leaf-file-name="mod_civicrm_fullcalendar.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod_civicrm_fullcalendar.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="70" selection-start="4553" selection-end="4553" vertical-scroll-proportion="0.0">
+            <state line="93" column="51" selection-start="4346" selection-end="4346" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="helper.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/helper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="176" column="0" selection-start="7007" selection-end="7007" vertical-scroll-proportion="-26.307692">
               <folding />
             </state>
           </provider>
@@ -32,7 +41,7 @@
       <file leaf-file-name="color.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/elements/color.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="11" selection-start="2002" selection-end="2002" vertical-scroll-proportion="0.57410884">
+            <state line="43" column="29" selection-start="1390" selection-end="1390" vertical-scroll-proportion="0.617096">
               <folding />
             </state>
           </provider>
@@ -41,10 +50,10 @@
       <file leaf-file-name="default.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tmpl/default.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="288" column="2" selection-start="9315" selection-end="9315" vertical-scroll-proportion="-15.269231">
+            <state line="309" column="5" selection-start="9980" selection-end="9980" vertical-scroll-proportion="-25.653847">
               <folding>
-                <marker date="1354829233465" expanded="true" signature="9145:9180" placeholder="..." />
-                <marker date="1354829233465" expanded="true" signature="9145:9162" placeholder="..." />
+                <marker date="1355963873840" expanded="true" signature="9696:9717" placeholder="..." />
+                <marker date="1355963873840" expanded="true" signature="9696:9724" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -71,10 +80,10 @@
       <list>
         <option value="$PROJECT_DIR$/README.txt" />
         <option value="$PROJECT_DIR$/helper.php" />
-        <option value="$PROJECT_DIR$/tmpl/default.php" />
         <option value="$PROJECT_DIR$/elements/colors.css" />
-        <option value="$PROJECT_DIR$/mod_civicrm_fullcalendar.xml" />
         <option value="$PROJECT_DIR$/elements/color.php" />
+        <option value="$PROJECT_DIR$/mod_civicrm_fullcalendar.xml" />
+        <option value="$PROJECT_DIR$/tmpl/default.php" />
       </list>
     </option>
   </component>
@@ -82,8 +91,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-4" />
     <option name="y" value="-4" />
-    <option name="width" value="1608" />
-    <option name="height" value="880" />
+    <option name="width" value="1928" />
+    <option name="height" value="1180" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -179,10 +188,10 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="options.lastSelected" value="web.server" />
     <property name="recentsLimit" value="5" />
-    <property name="options.searchVisible" value="true" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PublishConfig" serverName="main" serverId="b1d8cf51-91a4-45fa-8ad8-e50d805c93c1" autoUpload="true">
     <servers>
@@ -243,25 +252,25 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1608" height="880" extended-state="6" />
+    <frame x="-4" y="-4" width="1928" height="1180" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20327422" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12391094" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287858" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287858" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15701416" sideWeight="0.7967258" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1456777" sideWeight="0.87608904" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287858" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287858" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -329,9 +338,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/elements/eventlist.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="43" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="18" column="43" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/helper.php">
@@ -352,8 +359,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="143" column="19" selection-start="4164" selection-end="4164" vertical-scroll-proportion="0.0">
           <folding>
-            <marker date="1354829233465" expanded="true" signature="9145:9180" placeholder="..." />
-            <marker date="1354829233465" expanded="true" signature="9145:9162" placeholder="..." />
+            <marker date="1355963873840" expanded="true" signature="9696:9717" placeholder="..." />
+            <marker date="1355963873840" expanded="true" signature="9696:9724" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -370,65 +377,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mod_civicrm_fullcalendar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/elements/eventlist.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="8" selection-start="490" selection-end="490" vertical-scroll-proportion="0.62115383">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmpl/default.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="288" column="2" selection-start="9315" selection-end="9315" vertical-scroll-proportion="-15.269231">
-          <folding>
-            <marker date="1354829233465" expanded="true" signature="9145:9180" placeholder="..." />
-            <marker date="1354829233465" expanded="true" signature="9145:9162" placeholder="..." />
-          </folding>
-        </state>
+        <state line="19" column="8" selection-start="490" selection-end="490" vertical-scroll-proportion="0.62115383" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fullcalendar/fullcalendar/fullcalendar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3070" column="13" selection-start="69646" selection-end="69646" vertical-scroll-proportion="0.27728087">
-          <folding>
-            <marker date="1352830324000" expanded="false" signature="5569:5586" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="15596:15606" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="49659:49669" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="50242:50259" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="50972:51012" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="66632:66642" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="67317:67334" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="68136:68181" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="68290:68330" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="68392:68402" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="68606:68623" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="69299:69361" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="69432:69476" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="69559:69599" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="69684:69694" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="70187:70204" placeholder="..." />
-            <marker date="1352830324000" expanded="false" signature="121718:121745" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="176" column="0" selection-start="7005" selection-end="7005" vertical-scroll-proportion="0.8611632">
-          <folding />
-        </state>
+        <state line="3070" column="13" selection-start="69646" selection-end="69646" vertical-scroll-proportion="0.27728087" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fullcalendar/fullcalendar/fullcalendar.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/elements/colors.css">
@@ -438,16 +402,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="176" column="0" selection-start="7007" selection-end="7007" vertical-scroll-proportion="-26.307692">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mod_civicrm_fullcalendar.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="70" selection-start="4553" selection-end="4553" vertical-scroll-proportion="0.0">
+        <state line="93" column="51" selection-start="4346" selection-end="4346" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tmpl/default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="309" column="5" selection-start="9980" selection-end="9980" vertical-scroll-proportion="-25.653847">
+          <folding>
+            <marker date="1355963873840" expanded="true" signature="9696:9717" placeholder="..." />
+            <marker date="1355963873840" expanded="true" signature="9696:9724" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/elements/color.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="11" selection-start="2002" selection-end="2002" vertical-scroll-proportion="0.57410884">
+        <state line="43" column="29" selection-start="1390" selection-end="1390" vertical-scroll-proportion="0.617096">
           <folding />
         </state>
       </provider>

@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 jimport('joomla.html.html');
 ?>
 
-<link rel="stylesheet" href="modules/mod_civievent/civievent.css" type="text/css"/>
+<link rel="stylesheet" href="modules/mod_civievent/civievent.css" type="text/css" xmlns="http://www.w3.org/1999/html"/>
 
 
 <?php
@@ -297,104 +297,18 @@ $document->addScriptDeclaration($statement);
 <!-- this will add the FullCalendar dynamically inside the div below -->
 <div id='mod_civicrm_fullcalendar'>
 <div id='calendar'></div>
-<?PHP
-
-
-
-	if ($legend_picked != "0") {
-
-
-    if ($legend_picked == "1") {
-        echo "<div id='mod_civicrm_fullcalendar_legend'>";
-
-        
-        echo "<table id='mod_civicrm_fullcalendar_colorlegend'>".
-        	  "<tr><th>Color Legend</th></tr>";
+<?php
+        //add in color legend
+    if ($legend_picked == 1){
+        echo "<br/><div style='border: thin solid black;'>"."<div style='display:inline-block; border-right: thin solid black; border-bottom: thin solid black; padding: 4px 10px'><b>Color Legend</b></div>";
         for ($i = 0, $n = count($catname); ($i < $n); $i++) {
-            echo "<tr><td><span id='colorsquare' style='text-align:center; background-color:" . 
-            $color[$i] . "'>" . $color[$i] . "</span><span class='text'>" .  
-            $catname[$i] ."</span></td></tr>";
+            echo "<div style='display:inline-block;padding: 4px 10px'>"."<div style='display: inline-block; width: 15px; height: 15px; background:".
+            $color[$i] . "'>&nbsp;</div><span class='text'>&nbsp;-&nbsp;" .
+            $catname[$i] ."</span></div>";
         }        
-        echo "</table>";
-        } //   if ($legend_picked == "1") 
+        echo "</div>";
+    }
 
-     if ($legend_picked == "2") {
-        
-
-
-
-// ==============
-// this site is a big help for css generation with divs
-// http://www.pagecolumn.com/grid_layout_generator.htm
-//
-// OK, create some CSS
-$legend_style = <<<'LEGEND_STYLE'
-<style type='text/css'>
-.wrapper{
-   position: relative;
-   float: left;
-   left: 0px;
-   width: 99%;
-   border-style:solid;
-   border-width:1px;
-   border-color: darkgray ;
-   background: white;	
-   padding: 3px;
-   margin-top: 10px;
-   margin-bottom: 25px;
-}
-LEGEND_STYLE;
-
-// how many boexs?
-$num_o_boxes = count($catname) ; 
-
-// one more box to say 'legend'
-$num_o_boxes++;
-
-// how wide?
-$box_width = round( ((1/$num_o_boxes)*100), 0)-1;
-
-// css for each box
-for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
-  $legend_style .= ".left".$i."{".
-  	  "position: relative; float: left; left: ".(($i*10)+10)."px; width: ".
-  	  $box_width.
- 	  "%; ".
- 	  "text-align: center; ";
-  if ( $i > 0) {
-    if ( ($color[$i-1] !== 0) && ($color[$i-1] !== null) ) {
-  	  $legend_style .= "color: white; background-color:".$color[$i-1]."; ";}
-  	  }
-  $legend_style .= "} ";
-}
-$legend_style .= "</style>";
-
-
-// ok, now for the content in the form of divs
-$legend_style .= "<div class='wrapper'>";
-for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
-	$legend_style .= "<div class='left".$i."'>";
-	if ($i == 0) {
-		$legend_style .= "Color Legend";}
-	else {
-		$legend_style .= $catname[$i-1];}
-	$legend_style .="</div> ";
-	} // for
-	$legend_style .= "</div>";
-
-// output the legend	
-echo $legend_style ;
-        
-} //   if ($legend_picked == "2")
-
-
-        
-        echo "</div>"; // close div for id='mod_civicrm_fullcalendar_legend'
-    }  // if color legend
-    
-    
-    
-    
 ?>
 </div>  <!-- close div for id equal mod_civicrm_fullcalendar -->
 

@@ -89,11 +89,10 @@
                     <option value="4">Custom Colors</option>
                 </field>
 
-		<field name="legendpicker" type="list" default="0" label="Choice of Legend"
-                       description="Choose a color theme for events">
-                    <option value="0">None</option>
-                    <option value="1">Legend 1</option>
-                    <option value="2">Legend 2</option>
+		<field name="legendpicker" type="radio" default="1" label="Color Legend"
+                       description="Display the color legend">
+                    <option value="1">Show</option>
+                    <option value="0">Hide</option>
                 </field>
 
 
