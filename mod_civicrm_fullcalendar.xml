@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.22</version>
+    <version>0.1.23</version>
     <description>A Joomla module for CiviCRM that displays CiviEvent events in an interactive calendar, using FullCalendar. See https://github.com/lgiacalone3/fullcal for full documentation.
         Authored by Louis Giacalone and Andrew Schmitt.
 </description>
@@ -43,11 +43,76 @@
             <fieldset name="display" label="General Options">
                 <field type="spacer" label="&lt;b&gt;Display Settings&lt;/b&gt;"/>
 
+		<field name="default_view" type="list" default="month" label="Default View/Layout"
+		       description="The default view the user will see.  For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/views/Available_Views/">
+		  <option value="month">month (month)</option>
+		  <option value="basicWeek">week (basicWeek)</option>
+		  <option value="basicDay">day (basicDay)</option>
+		  <option value="agendaWeek">agenda - week (agendaWeek)</option>
+		  <option value="agendaDay">agenda - day (agendaDay)</option>
+		</field>
+
+
+
+		<field name="weekMode" type="list" default="fixed" label="Week view (in monthl view)"
+		       description="In the month layout, this determines how many weeks are shown.  For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/display/weekMode/">
+		  <option value="fixed">fixed (fixed)</option>
+		  <option value="liquid">liquid (liquid)</option>
+		  <option value="variable">variable (variable)</option>
+		</field>
+
+		<field name="aspectRatio" type="text" default="1.35" size="10" label="Width-to-height aspect ratio."
+                       description="A calendar is a block-level element that fills its entire avaiable width. The calendar’s height, however, is determined by this ratio of width-to-height. (Hint: larger numbers make smaller heights).  For example, a value of 2 will initialize a calendar who's width is twice its height. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/display/aspectRatio/"></field>
+
+
+		<field name="axisFormat" type="text" default="h:mm TT" size="10" label="Agenda view vertical axis time format"
+                       description="Determines the time-text that will be displayed on the vertical axis of the agenda views.  The value is a format-string that will be processed by formatDate.  The default value of 'h:mm TT' will produce times that look like '9:00 AM' and '1:00 PM'. For those outside of the United States, you may prefer 'H:mm'. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/agenda/axisFormat/"></field>
+
+
+		<field name="showCalNav" type="radio" default="1" label="Calendar Navigation Buttons"
+		       description="Show or Hide calendar navigation buttons">
+		  <option value="1">Show</option>
+		  <option value="0">Hide</option>
+		  </field>
+
+		<field name="firstHour" type="list" default="9" label="First hour of the day (in agenda views)"
+		       description="In the month layout, this determines how many weeks are shown.  For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/agenda/firstHour/">
+		  <option value="0">0 (midnight)</option>
+		  <option value="1">1</option>
+		  <option value="2">2</option>
+		  <option value="3">3</option>
+		  <option value="4">4</option>
+		  <option value="5">5</option>
+		  <option value="6">6</option>
+		  <option value="7">7</option>
+		  <option value="8">8</option>
+		  <option value="9">9</option>
+		  <option value="10">10</option>
+		  <option value="11">11</option>
+		  <option value="12">12 (noon)</option>
+		  <option value="13">13</option>
+		  <option value="14">14</option>
+		  <option value="15">15</option>
+		  <option value="16">16</option>
+		  <option value="17">17</option>
+		  <option value="18">18</option>
+		  <option value="19">19</option>
+		  <option value="20">20</option>
+		  <option value="21">21</option>
+		  <option value="22">22</option>
+		  <option value="23">23</option>
+		</field>
+
+
+                <field name="slotMinutes" type="text" default="30" size="10" label="Time slot duration minutes."
+                       description="Integer value for time slot duration in minutes in the agneda views.  For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/agenda/slotMinutes/"></field>
+
+
                 <field name="maxevents" type="text" default="10" size="10" label="Maximum Events Listed"
                        description="Maximum number of events to be listed."></field>
 
-                <field name="showduration" type="radio" default="1" label="Show Duration?"
-                       description="Indicate if you want the event duration listed.">
+                <field name="showduration" type="radio" default="1" label="Show event duration?"
+                       description="Indicate if you want the event duration shown.">
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </field>

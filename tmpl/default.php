@@ -44,6 +44,10 @@ $document->addStyleSheet(JURI::base() . 'modules/mod_civicrm_fullcalendar/fullca
 
 <?php
 
+
+
+
+
 // call FullCalendar's javascript
 // ====================================================
 $statement = <<<'JSJS'
@@ -54,12 +58,42 @@ var $cfcj = jQuery.noConflict();
 	$cfcj(document).ready(function() {
 
 	$cfcj('#calendar').fullCalendar({
-		firstHour: 10,
-		slotMinutes: 30,
-		axisFormat: 'h:mm TT',
+
+JSJS;
+// ====================================================
+	
+	
+
+
+// Add some more parameters:
+$statement .= "\t\tdefaultView: '".$displayParams['defalt_view']."', \n" ;
+$statement .= "\t\tweekMode: '".$displayParams['weekMode']."', \n" ;
+$statement .= "\t\tfirstHour: ".intval($displayParams['firstHour']).", \n" ;
+$statement .= "\t\tslotMinutes: ".intval($displayParams['slotMinutes']).", \n" ;
+$statement .= "\t\taspectRatio: ".$displayParams['aspectRatio'].", \n" ;
+$statement .= "\t\taxisFormat: '".$displayParams['axisFormat']."', \n" ;
+
+if ($displayParams[showCalNav] === "1") {
+	$statement .=
+	"\t\t	header: { \n".
+	"\t\t\t	left: 'prev,next today', \n".
+	"\t\t\t	center: 'title', \n".
+	"\t\t\t	right: 'month,agendaWeek,agendaDay' \n".
+	"\t\t	},	\n" ;
+}
+else {
+	$statement .=
+	"\t\t	header: { \n".
+	"\t\t\t	left: 'false', \n".
+	"\t\t\t	center: 'false', \n".
+	"\t\t\t	right: 'false' \n".
+	"\t\t	},	\n" ;
+}
+
+// more paramaters
+// ====================================================
+$statement .= <<<'JSJS'
 		theme: true,
-		aspectRatio: 2,
-		weekMode: 'liquid',
 		timeFormat:
 			{
 			    // for agendaWeek and agendaDay
@@ -68,12 +102,6 @@ var $cfcj = jQuery.noConflict();
 			    // for all other views
 			    '': 'h:mm TT'            // 7p
 			},
-
-		header: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
-		},
 		editable: false,
 		events: [
 
@@ -147,12 +175,11 @@ foreach ($eventtitles as &$event) {
 	$baselink = 'index.php/component/civicrm/?task=civicrm/event/';
 
 	for ($i = 0, $n = count($event->title); ($i < $n); $i++) {
-
-		 
+			
 		if( $displayParams['modal'] == "1" ) {
 			// modallink
 			$link =  $baselink.'info&reset=1&id='.$event->eventID.'&tmpl=component' ;
-			 
+
 		}
 		else {
 			$link = JRoute::_($baselink . 'info&reset=1&id=' . $event->eventID);

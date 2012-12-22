@@ -174,8 +174,15 @@ class modCiviCRMFullCalendarHelper
         $displayParams['colorpicker'] = trim($params->get('colorpicker'));
         $displayParams['legendpicker'] = trim($params->get('legendpicker'));
         $displayParams['customcolors'] = trim($params->get('customcolors'));
-
-
+        $displayParams['defalt_view'] = trim($params->get('default_view'));
+        $displayParams['weekMode'] = trim($params->get('weekMode'));
+        $displayParams['firstHour'] = trim($params->get('firstHour'));
+        $displayParams['slotMinutes'] = trim($params->get('slotMinutes'));
+        $displayParams['aspectRatio'] = trim($params->get('aspectRatio'));
+        $displayParams['axisFormat'] = trim($params->get('axisFormat'));
+        $displayParams['showCalNav'] = trim($params->get('showCalNav'));
+        
+        
         return $displayParams;
     } //end sendParams
 }
