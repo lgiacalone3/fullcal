@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.21</version>
+    <version>0.1.22</version>
     <description>A Joomla module for CiviCRM that displays CiviEvent events in an interactive calendar, using FullCalendar. See https://github.com/lgiacalone3/fullcal for full documentation.
         Authored by Louis Giacalone and Andrew Schmitt.
 </description>
@@ -58,6 +58,12 @@
                     <option value="0">No</option>
                 </field>
 
+		<field name="modal" type="radio" default="1" label="Link Style"
+		       description="Select Modal Link or Normal Link">
+		  <option value="1">Modal Popup</option>
+		  <option value="0">Page Redirection</option>
+		</field>
+
                 <field name="privacy" type="radio" default="1" label="Privacy"
                        description="Select Public or Private Events">
                     <option value="1">Public</option>
@@ -89,10 +95,11 @@
                     <option value="4">Custom Colors</option>
                 </field>
 
-		<field name="legendpicker" type="radio" default="1" label="Color Legend"
-                       description="Display the color legend">
-                    <option value="1">Show</option>
-                    <option value="0">Hide</option>
+		<field name="legendpicker" type="list" default="0" label="Choice of Legend"
+                       description="Choose a color theme for events">
+                    <option value="0">None</option>
+                    <option value="1">Legend 1</option>
+                    <option value="2">Legend 2</option>
                 </field>
 
 

@@ -14,7 +14,7 @@
 <!--
  For a plugin, we would add a <client> element with a value of 0 (<client>0</client>). 
 -->
-<version>0.1.21</version>
+<version>0.1.22</version>
 <!--
  This will be the component version after the update. 
 -->
