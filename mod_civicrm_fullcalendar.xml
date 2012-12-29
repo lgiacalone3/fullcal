@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.23</version>
+    <version>0.1.24</version>
     <description>A Joomla module for CiviCRM that displays CiviEvent events in an interactive calendar, using FullCalendar. See https://github.com/lgiacalone3/fullcal for full documentation.
         Authored by Louis Giacalone and Andrew Schmitt.
 </description>
@@ -166,6 +166,8 @@
                     <option value="1">Legend 1</option>
                     <option value="2">Legend 2</option>
                 </field>
+                <field name="legendLabel" type="text" default="Color Legend" size="50" label="Legend Label"
+                       description="The textual label for the legend.  For example: 'Color Legend'"></field>
 
 
                 <field type="spacer" hr="true"/>
@@ -186,6 +188,8 @@
                     <option value="2">Event Selection</option>
                     <option value="3">Event Type</option>
                 </field>
+
+
 
                 <field type="spacer" hr="true"/>
                 <field type="spacer" label="&lt;b&gt;Mode: Date Range Options&lt;/b&gt;"/>

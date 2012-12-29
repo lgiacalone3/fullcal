@@ -181,6 +181,7 @@ class modCiviCRMFullCalendarHelper
         $displayParams['aspectRatio'] = trim($params->get('aspectRatio'));
         $displayParams['axisFormat'] = trim($params->get('axisFormat'));
         $displayParams['showCalNav'] = trim($params->get('showCalNav'));
+        $displayParams['legendLabel'] = trim($params->get('legendLabel'));
         
         
         return $displayParams;

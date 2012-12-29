@@ -61,8 +61,8 @@ var $cfcj = jQuery.noConflict();
 
 JSJS;
 // ====================================================
-	
-	
+
+
 
 
 // Add some more parameters:
@@ -398,17 +398,19 @@ $document->addScriptDeclaration($statement);
         echo "</table>";
         } //   if ($legend_picked == "1")
 
+
+        // legend2
         if ($legend_picked == "2") {
 
 
 
 
-// ==============
-// this site is a big help for css generation with divs
-// http://www.pagecolumn.com/grid_layout_generator.htm
-//
-// OK, create some CSS
-$legend_style = <<<'LEGEND_STYLE'
+        	// ==============
+        	// this site is a big help for css generation with divs
+        	// http://www.pagecolumn.com/grid_layout_generator.htm
+        	//
+        	// OK, create some CSS
+        	$legend_style = <<<'LEGEND_STYLE'
 
 
 
@@ -430,54 +432,72 @@ $legend_style = <<<'LEGEND_STYLE'
 }
 LEGEND_STYLE;
 
-// how many boexs?
-$num_o_boxes = count($catname) ;
+        	// how many boexs?
+        	$num_o_boxes = count($catname) ;
 
-// one more box to say 'legend'
-$num_o_boxes++;
+        	// one more box to say 'legend'
+        	// if there is legend text that is not null
+        	$legendLabel = trim($displayParams['legendLabel']) ;
+        	$legend_offset = 0 ; 
+        	if ( $legendLabel != null) {
+        		$num_o_boxes++;
+        		$legend_offset = 1 ;
+        	}
 
-// how wide?
-$box_width = round( ((1/$num_o_boxes)*100), 0)-1;
+        	// how wide?
+        	$box_width = floor( ((1/$num_o_boxes)*100) ) - $legend_offset  ;
 
-// css for each box
-for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
-  $legend_style .= ".left".$i."{".
-    "position: relative; float: left; left: ".(($i*10)+10)."px; width: ".
-    $box_width.
- 	  "%; ".
- 	  "text-align: center; ";
-  if ( $i > 0) {
-    if ( ($color[$i-1] !== 0) && ($color[$i-1] !== null) ) {
-  	  $legend_style .= "color: white; background-color:".$color[$i-1]."; ";
-}
-  	  }
-  	  $legend_style .= "} ";
-}
-$legend_style .= "</style>";
-
-
-// ok, now for the content in the form of divs
-$legend_style .= "<div class='wrapper'>";
-for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
-	$legend_style .= "<div class='left".$i."'>";
-	if ($i == 0) {
-		$legend_style .= "Color Legend";
-}
-else {
-		$legend_style .= $catname[$i-1];
-}
-$legend_style .="</div> ";
-	} // for
-	$legend_style .= "</div>";
-
-	// output the legend
-	echo $legend_style ;
-
-} //   if ($legend_picked == "2")
+        	// css for each box
+        	for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
+			    $legend_style .= ".left".$i."{".
+			      "position: relative; float: left; left: ".(($i*5)+5)."px; width: ".
+			      $box_width.
+			 	  "%; ".
+			      "padding-right: 1px;".
+			 	  "text-align: center; ";
+			    // if this is not the 0th row, put in the color
+			    // of if this is the 0th row and we don't have legend text, then put in the color
+			    if (  ( $i > 0) || (  ( $i == 0) && ( $legendLabel == null) )) {
+			      if ( ($color[$i-$legend_offset] !== 0) && ($color[$i-$legend_offset] !== null) ) {
+			    	  $legend_style .= "color: white; background-color:".
+			    	  $color[$i-$legend_offset]."; ";
+				  }
+			    } // if
+			    $legend_style .= "} ";
+			} // for
+			$legend_style .= "</style>";
 
 
+		// ok, now for the content in the form of divs
+		// no div needed if the legend text is null
+		$legend_style .= "<div class='wrapper'>";
+		for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
 
-echo "</div>"; // close div for id='mod_civicrm_fullcalendar_legend'
+
+			// if this is not the 0th row, put in the color
+			// of if this is the 0th row and we don't have legend text, then put in the color
+			if (  ( $i > 0) || (  ( $i == 0) && ( $legendLabel == null) )) {
+				$legend_style .= "<div class='left".$i."'>";
+				$legend_style .= $catname[$i-$legend_offset];
+				$legend_style .="</div> ";		
+			} else 
+			// if this is 0th row we have legend text, then spit out the legend text
+			if ( ( $i == 0) && ( $legendLabel != null) ) {
+				$legend_style .= "<div class='left".$i."'>";
+				$legend_style .= $legendLabel ;
+				$legend_style .="</div> ";
+			}
+		} // for
+		$legend_style .= "</div>"; // the ending div for <div class='wrapper'>
+
+		// output the legend
+		echo $legend_style ;
+
+        } //   if ($legend_picked == "2")
+
+
+
+        echo "</div>"; // close div for id='mod_civicrm_fullcalendar_legend'
     }  // if color legend
 
 
