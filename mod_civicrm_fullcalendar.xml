@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.24</version>
+    <version>0.1.25</version>
     <description>A Joomla module for CiviCRM that displays CiviEvent events in an interactive calendar, using FullCalendar. See https://github.com/lgiacalone3/fullcal for full documentation.
         Authored by Louis Giacalone and Andrew Schmitt.
 </description>
@@ -165,13 +165,14 @@
                     <option value="0">None</option>
                     <option value="1">Legend 1</option>
                     <option value="2">Legend 2</option>
+                    <option value="3">Legend 3</option>
                 </field>
                 <field name="legendLabel" type="text" default="Color Legend" size="50" label="Legend Label"
                        description="The textual label for the legend.  For example: 'Color Legend'"></field>
 
 
                 <field type="spacer" hr="true"/>
-                <field type="spacer" label="&lt;b&gt;Custom Colors&lt;/b&gt; (for this, choose 'Custom Colors' in the Color Theme dropdown box above.  In the text box to the below, use CSS &lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;color names&lt;/a&gt; or hex values separated by spaces.)"/>
+                <field type="spacer" label="&lt;b&gt;Custom Colors&lt;/b&gt; (for this, choose 'Custom Colors' in the Color Theme dropdown box above.  In the text box to the below, use CSS &lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;color names&lt;/a&gt; or hex values separated by spaces. If using hex values, remember the # - for example the color gold would be #FFD700)"/>
 
 
                 <field name="customcolors" type="color" label="Color"></field>
