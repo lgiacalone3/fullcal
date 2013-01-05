@@ -1,12 +1,13 @@
 #colorlegend{
-    width: 200px;
+    width: 300px;
 }
 
 #colorsquare{
     display: inline-block;
-    width:60px;
+    width:80px;
 }
 
 .text{
     float:right;
+    margin-left: 20px;
 }

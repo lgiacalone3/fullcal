@@ -583,21 +583,43 @@ $document->addScriptDeclaration($statement);
 
 	if ($legend_picked != "0") {
 
+	$legendLabel = trim($displayParams['legendLabel']) ;
 
+	
+	
     if ($legend_picked == "1") {
         echo "<div id='mod_civicrm_fullcalendar_legend'>";
 
 
         echo "<table id='mod_civicrm_fullcalendar_colorlegend'>".
-          "<tr><th>Color Legend</th></tr>";
+          "<tr><th>".$legendLabel."</th></tr>";
         for ($i = 0, $n = count($catname); ($i < $n); $i++) {
-            echo "<tr><td><span id='colorsquare' style='text-align:center; background-color:" .
-              $color[$i] . "'>" . $color[$i] . "</span><span class='text'>" .
-              $catname[$i] ."</span></td></tr>";
+            echo 	"<tr><td>".
+            		"<span id='colorsquare' ".
+            		"style='";
+
+            
+            if ( $displayParams[useHighContrast] == true) {
+            	echo "color: #".getContrastingColor($color[$i])."; ";
+            }
+            else {
+            	echo "color: ".$displayParams[eventTextColor]."; ";
+            }           
+            
+            
+            echo
+              		"text-align:center; background-color:" .
+              		$color[$i] . "'>" . $color[$i] . "</span><span class='text'>" .
+              		$catname[$i] ."</span></td></tr>";
         }
         echo "</table>";
         } //   if ($legend_picked == "1")
 
+
+        
+
+        
+        
 
 
 
@@ -606,7 +628,6 @@ $document->addScriptDeclaration($statement);
     if  ( ($legend_picked == "2") ||  ($legend_picked == "3") ) {
     	$legendOutput  = "<div id='mod_civicrm_fullcalendar_legend' style=\"background-color: white;";
     	$legendOutput .= "margin-top: 5px; margin-bottom: 5px; ";
-    	//$legendOutput .= "padding-top: 5px; padding-bottom: 5px;\">";
     	$legendOutput .= "padding: 5px;";
     	$legendOutput .= "\">";
     	 
@@ -615,7 +636,6 @@ $document->addScriptDeclaration($statement);
     	
     	// one more box to say 'legend'
     	// if there is legend text that is not null
-    	$legendLabel = trim($displayParams['legendLabel']) ;
     	$legend_offset = 0 ;
     	if ( $legendLabel != null) {
     		$num_o_boxes++;
@@ -635,7 +655,13 @@ $document->addScriptDeclaration($statement);
 			// or if this is the 0th row and we don't have legend text, then put in the color
 			if (  ( $i > 0) || (  ( $i == 0) && ( $legendLabel == null) )) {
 				$legendOutput .= "background-color: ".$color[$i-$legend_offset]."; ";
-				$legendOutput .= "color: #".getContrastingColor($color[$i-$legend_offset])."; ";
+				
+				if ( $displayParams[useHighContrast] == true) {
+					$legendOutput .= "color: #".getContrastingColor($color[$i-$legend_offset])."; ";
+				}
+				else {
+					$legendOutput .= "color: ".$displayParams[eventTextColor]."; ";
+				}										
 			}
 			// if this is 0th row we have legend text, then spit out the legend text
 			else if ( ( $i == 0) && ( $legendLabel != null) ) {
