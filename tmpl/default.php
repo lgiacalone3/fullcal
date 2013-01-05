@@ -498,8 +498,16 @@ foreach ($eventtitles as &$event) {
 		$statement .=
 		"start: new Date($sy, $sm, $sd), " .
 		"end: new Date($ey, $em, $ed), " .
-		"color: '$eventcolor', " .
-		"textColor: '#".getContrastingColor($eventcolor)."', " .
+		"color: '$eventcolor', " ;
+		
+		if ( $displayParams[useHighContrast] == true) {
+		  $statement .= "textColor: '#".getContrastingColor($eventcolor)."', " ;
+		}
+		else { 
+		  $statement .= "textColor: '".$displayParams[eventTextColor]."', " ;
+		}
+		
+		$statement .=
 		"allDay: '$allday', " .
 		"url: '$link' " .
 		"}";

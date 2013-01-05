@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.25</version>
+    <version>0.1.26</version>
     <description>A Joomla module for CiviCRM that displays CiviEvent events in an interactive calendar, using FullCalendar. See https://github.com/lgiacalone3/fullcal for full documentation.
         Authored by Louis Giacalone and Andrew Schmitt.
 </description>
@@ -40,6 +40,17 @@
 
     <config>
         <fields name="params" addfieldpath="/modules/mod_civicrm_fullcalendar/elements">
+
+
+	    <!--
+		+==================================================+
+		|                                                  |
+		|                                                  |
+		|          G E N E R A L   O P T I O N S           |
+		|                                                  |
+		|                                                  |
+		+==================================================+
+	      -->
             <fieldset name="display" label="General Options">
                 <field type="spacer" label="&lt;b&gt;Display Settings&lt;/b&gt;"/>
 
@@ -129,18 +140,6 @@
 		  <option value="0">Page Redirection</option>
 		</field>
 
-                <field name="privacy" type="radio" default="1" label="Privacy"
-                       description="Select Public or Private Events">
-                    <option value="1">Public</option>
-                    <option value="2">Private</option>
-                    <option value="0">Both</option>
-                </field>
-
-                <field name="pastevents" type="radio" default="0" label="Display Past Events"
-                       description="Show or hide events that have already happened">
-                    <option value="0">Show Past Events</option>
-                    <option value="1">Hide Past Events</option>
-                </field>
 
                 <field type="spacer" hr="true"/>
                 <field type="spacer" label="&lt;b&gt;Color Settings&lt;/b&gt;"/>
@@ -160,27 +159,56 @@
                     <option value="4">Custom Colors</option>
                 </field>
 
-		<field name="legendpicker" type="list" default="0" label="Choice of Legend"
-                       description="Choose a color theme for events">
-                    <option value="0">None</option>
-                    <option value="1">Legend 1</option>
-                    <option value="2">Legend 2</option>
-                    <option value="3">Legend 3</option>
-                </field>
-                <field name="legendLabel" type="text" default="Color Legend" size="50" label="Legend Label"
-                       description="The textual label for the legend.  For example: 'Color Legend'"></field>
-
-
-                <field type="spacer" hr="true"/>
-                <field type="spacer" label="&lt;b&gt;Custom Colors&lt;/b&gt; (for this, choose 'Custom Colors' in the Color Theme dropdown box above.  In the text box to the below, use CSS &lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;color names&lt;/a&gt; or hex values separated by spaces. If using hex values, remember the # - for example the color gold would be #FFD700)"/>
-
-
+                <field type="spacer" label="Event Custom Background Colors (&lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;CSS color names&lt;/a&gt;)"  description="&lt;b&gt;Custom Colors&lt;/b&gt; (for this, choose 'Custom Colors' in the Color Theme dropdown box above.  In the text box to the right, use CSS &lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;color names&lt;/a&gt; or hex values separated by spaces. If using hex values, remember the # - for example the color gold would be #FFD700)"/>
                 <field name="customcolors" type="color" label="Color"></field>
 
 
+		<field name="eventTextColor" type="text" default="black" size="10" label="Event Text Color (&lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;CSS color name&lt;/a&gt;)" description="In the text box, use CSS &lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;color names&lt;/a&gt; or hex values separated by spaces to set the text color of the &lt;event text&gt;. If using hex values, remember the # - for example the color gold would be #FFD700).  The default is 'black'"></field>
+
+
+
+		<field name="useHighContrast" type="radio" default="0" label="High Contrast Event Text"
+		       description="Select High Contrast to compute the best contrast for event text on the calendar.  Text will be displayed in white or black.  This OVERRIDES the selection for Event Text Color.">
+		  <option value="0">Disabled</option>
+		  <option value="1">High Contrast</option>
+		</field>
+
+
             </fieldset>
-            <fieldset name="customselect"  label="Custom Selection Options">
-                <legend><?php echo JText::_('Custom Selection Mode'); ?></legend>
+
+
+
+
+
+
+	    <!--
+		+==================================================+
+		|                                                  |
+		|                                                  |
+		|          E V E N T   S E L E C T I O N           |
+		|                                                  |
+		|                                                  |
+		+==================================================+
+	      -->
+            <fieldset name="customselect"  label="Event Selection Options">
+                <legend><?php echo JText::_('Event Selection Mode'); ?></legend>
+
+                <field name="privacy" type="radio" default="1" label="Privacy"
+                       description="Select Public or Private Events">
+                    <option value="1">Public</option>
+                    <option value="2">Private</option>
+                    <option value="0">Both</option>
+                </field>
+
+                <field name="pastevents" type="radio" default="0" label="Display Past Events"
+                       description="Show or hide events that have already happened">
+                    <option value="0">Show Past Events</option>
+                    <option value="1">Hide Past Events</option>
+                </field>
+
+                <field type="spacer" hr="true"/>
+                <field type="spacer" hr="true"/>
+
 
                 <field name="mode" type="list" default="0" label="Event Selection Mode"
                        description="Choose event selection method">
@@ -190,9 +218,6 @@
                     <option value="3">Event Type</option>
                 </field>
 
-
-
-                <field type="spacer" hr="true"/>
                 <field type="spacer" label="&lt;b&gt;Mode: Date Range Options&lt;/b&gt;"/>
 
                 <field name="startdate" type="calendar" default="Select" label="Start date" description=""
@@ -218,6 +243,33 @@
                        key_field="value" value_field="label"/>
 
             </fieldset>
+
+
+
+	    <!--
+		+==================================================+
+		|                                                  |
+		|                                                  |
+		|                   L E G E N D                    |
+		|                                                  |
+		|                                                  |
+		+==================================================+
+	      -->
+            <fieldset name="legendoptions"  label="Color Legend Options">
+		<field name="legendpicker" type="list" default="0" label="Choice of Legend"
+                       description="Choose a color theme for events">
+                    <option value="0">None</option>
+                    <option value="1">Legend 1</option>
+                    <option value="2">Legend 2</option>
+                    <option value="3">Legend 3</option>
+                </field>
+                <field name="legendLabel" type="text" default="Color Legend" size="50" label="Legend Label"
+                       description="The textual label for the legend.  For example: 'Color Legend'"></field>
+            </fieldset>
+
+
+
+
         </fields>
     </config>
 

@@ -182,6 +182,8 @@ class modCiviCRMFullCalendarHelper
         $displayParams['axisFormat'] = trim($params->get('axisFormat'));
         $displayParams['showCalNav'] = trim($params->get('showCalNav'));
         $displayParams['legendLabel'] = trim($params->get('legendLabel'));
+        $displayParams['eventTextColor'] = trim($params->get('eventTextColor'));
+        $displayParams['useHighContrast'] = trim($params->get('useHighContrast'));
         
         
         return $displayParams;
