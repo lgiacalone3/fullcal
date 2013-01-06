@@ -20,13 +20,13 @@ if ( $displayParams['modal'] == "1" ) {
 
 	// we need a place holder for the link
 	// we will put that in a hidden div of 0 pixels in height
-	echo 
-	  "<div ".  
-	  "id=\"mod_civicrm_fullcalendar_dialog\" class=\"modal\" title=\"\">".
-	  "<a id=\"aref_mod_civicrm_fullcalendar_dialog\" class=\"modal\" ".
-	  "href=\"\" ".
-	  "rel=\"{handler: 'iframe', size: {x: 520, y: 400}}\"></a>".
-	  "</div>";
+	echo
+	"<div ".
+	"id=\"mod_civicrm_fullcalendar_dialog\" class=\"modal\" title=\"\">".
+	"<a id=\"aref_mod_civicrm_fullcalendar_dialog\" class=\"modal\" ".
+	"href=\"\" ".
+	"rel=\"{handler: 'iframe', size: {x: 520, y: 400}}\"></a>".
+	"</div>";
 }
 ?>
 
@@ -42,16 +42,16 @@ $document =& JFactory::getDocument();
 
 
 $document->addStyleSheet(JURI::base() .
-	'modules/mod_civicrm_fullcalendar/fullcalendar/demos/cupertino/theme.css', 
+	'modules/mod_civicrm_fullcalendar/fullcalendar/demos/cupertino/theme.css',
 	'text/css', 'screen');
 $document->addStyleSheet(JURI::base() .
-	'modules/mod_civicrm_fullcalendar/elements/legend.css', 
+	'modules/mod_civicrm_fullcalendar/elements/legend.css',
 	'text/css', 'screen');
-$document->addStyleSheet(JURI::base() . 
-	'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.css', 
+$document->addStyleSheet(JURI::base() .
+	'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.css',
 	'text/css', 'screen');
-$document->addStyleSheet(JURI::base() .	
-	'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.print.css', 
+$document->addStyleSheet(JURI::base() .
+	'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.print.css',
 	'text/css', 'print');
 ?>
 
@@ -177,7 +177,11 @@ foreach($lines as $row) {
 	$catname[] = $row['label'];
 }
 
+
 foreach ($eventtitles as &$event) {
+
+	$allDay = false;
+	$e_title = "";
 
 	if ($x > $maxevents) {
 		return;
@@ -213,36 +217,69 @@ foreach ($eventtitles as &$event) {
 		$ssec = date('s', $datetime);
 
 
+
+		// Do we event have an end date ???
+		// if not and if the start time was MIDNIGHT, we will assume that this event will
+		// be a pure ALL DAY event
+		// if the start time was not midnight, this will be a reminder of the day event
 		$datetime = strtotime($event->end_date);
-		//$mysqldate = date("m/d/y g:i A", $datetime);
-		$ed = date('j', $datetime);
-		$em = date('n', $datetime);
-		$em = $em - 1; //	why do I need to decrement the month?
-		$ey = date('Y', $datetime);
-		$ehr = date('G', $datetime);
-		$emin = date('i', $datetime);
-		$esec = date('s', $datetime);
+		if ($datetime == null) {
+			$ed = $sd ;
+			$em = $sm ;
+			$ey = $sy ;
+			$ehr = $shr ;
+			$emin = $smin ;
+			$esec = $ssec ;
+				
+			if (( $shr + $smin) == 0) {
+				$allDay = true;
+			} else {
+				$allDay = false;
+				$ehr = 23; $emin = 59; $esec=59; 
+			}
+
+		} // if end_date is null 
+		else {
+			// end_date is not null - that's good.... 
+			
+			//$mysqldate = date("m/d/y g:i A", $datetime);
+			$ed = date('j', $datetime);
+			$em = date('n', $datetime);
+			$em = $em - 1; 	//why do I need to decrement the month?
+			// .. because for JavaScript, Jan is month 0
+			$ey = date('Y', $datetime);
+			$ehr = date('G', $datetime);
+			$emin = date('i', $datetime);
+			$esec = date('s', $datetime);
+		}
 
 		//duration and single/multi checker
 		//also sets color for single/multi
 		$duration = "";
 		if ($ed == $sd && $em == $sm && $ey == $sy) {
 			//single day
+			
+			
 			$eventcolor = $color[0];
-			if ($ehr - $shr == 1) {
-				$duration .= ($ehr - $shr) . " hour";
-			} elseif ($ehr - $shr > 1) {
-				$duration .= ($ehr - $shr) . " hours";
-			}
-			if ($emin - $smin == 1) {
-				$duration .= ", " . ($emin - $smin) . " minute";
-			} elseif ($emin - $smin > 1) {
-				$duration .= ", " . ($emin - $smin) . " minutes";
-			}
+			if ( ($emin == $smin) &&  ($shr==$ehr)   ) {
+				$duration = "1 day";
+			} else {
+				if ($ehr - $shr == 1) {
+					$duration .= ($ehr - $shr) . " hour";
+				} elseif ($ehr - $shr >= 1) {
+					$duration .= ($ehr - $shr) . " hours";
+				}
+				if ($emin - $smin == 1) {
+					$duration .= ", " . ($emin - $smin) . " minute";
+				} elseif ($emin - $smin >= 1) {
+					$duration .= ", " . ($emin - $smin) . " minutes";
+			} 
+		} // shr==ehr smin==emin 
+			
 		} else {
 			//multi-day
 			$eventcolor = $color[1];
-			$allday = true;
+			$allDay = true;
 			if ($ed - $sd == 1) {
 				$duration .= ($ed - $sd) . " day";
 			} elseif ($ed - $sd > 1) {
@@ -271,7 +308,7 @@ foreach ($eventtitles as &$event) {
 		// but using the json encode function adds equals signs
 		// so lets remove that
 		// and then perfrom a trim on the final result
-		$e_title = trim(trim(json_encode(($event->title))), "\"");
+		$e_title .= trim(trim(json_encode(($event->title))), "\"");
 		// apostrophes still cause a problem after the
 		// json_encode.  So we will do a replace (escape) on that
 		// see this for help: http://www.the-art-of-web.com/javascript/escape/
@@ -317,22 +354,32 @@ foreach ($eventtitles as &$event) {
 
 
 
-		$statement .=
-		"start: new Date($sy, $sm, $sd), " .
-		"end: new Date($ey, $em, $ed), " .
-		"color: '$eventcolor', " ;
-		
 		if ( $displayParams[useHighContrast] == true) {
-		  $statement .= "textColor: '#".modCiviCRMFullCalendarHelper::getHighContrastColor($eventcolor)."', " ;
+			$statement .= "textColor: '#".modCiviCRMFullCalendarHelper::getHighContrastColor($eventcolor)."', " ;
 		}
-		else { 
-		  $statement .= "textColor: '".$displayParams[eventTextColor]."', " ;
+		else {
+			$statement .= "textColor: '".$displayParams[eventTextColor]."', " ;
 		}
-		
+
+
+
+		if ( $allDay == 0 ) {
+			$statement .=
+			"allDay: false, ".
+			"start: new Date($sy, $sm, $sd, $shr, $smin), " .
+			"end: new Date($ey, $em, $ed, $ehr, $emin), " ;
+		}
+		else {
+			$statement .=
+			"allDay: true, " .
+			"start: new Date($sy, $sm, $sd), " .
+			"end: new Date($ey, $em, $ed), " ;
+		}
+
 		$statement .=
-		"allDay: '$allday', " .
-		"url: '$link' " .
-		"}";
+		"url: '$link' ,".
+		"color: '$eventcolor' " ;
+		$statement .= "}";
 
 		// need the comma, but not for the last event, of course
 		if ($i < $n) {
@@ -407,9 +454,9 @@ $document->addScriptDeclaration($statement);
 
 	$legendLabel = trim($displayParams['legendLabel']) ;
 
-	
-	
-    if ($legend_picked == "1") {
+
+
+	if ($legend_picked == "1") {
         echo "<div id='mod_civicrm_fullcalendar_legend'>";
 
 
@@ -420,40 +467,40 @@ $document->addScriptDeclaration($statement);
             		"<span id='colorsquare' ".
             		"style='";
 
-            
+
             if ( $displayParams[useHighContrast] == true) {
             	echo "color: #".modCiviCRMFullCalendarHelper::getHighContrastColor($color[$i])."; ";
             }
             else {
             	echo "color: ".$displayParams[eventTextColor]."; ";
-            }           
-            
-            
+            }
+
+
             echo
-              		"text-align:center; background-color:" .
-              		$color[$i] . "'>" . $color[$i] . "</span><span class='text'>" .
-              		$catname[$i] ."</span></td></tr>";
+            "text-align:center; background-color:" .
+            $color[$i] . "'>" . $color[$i] . "</span><span class='text'>" .
+            $catname[$i] ."</span></td></tr>";
         }
         echo "</table>";
         } //   if ($legend_picked == "1")
 
 
-        
-
-        
-        
 
 
 
 
 
-    if  ( ($legend_picked == "2") ||  ($legend_picked == "3") ) {
+
+
+
+
+        if  ( ($legend_picked == "2") ||  ($legend_picked == "3") ) {
     	$legendOutput  = "<div id='mod_civicrm_fullcalendar_legend' >";
 
-    	    	 
+
     	// how many boexs?
     	$num_o_boxes = count($catname) ;
-    	
+
     	// one more box to say 'legend'
     	// if there is legend text that is not null
     	$legend_offset = 0 ;
@@ -461,33 +508,33 @@ $document->addScriptDeclaration($statement);
     		$num_o_boxes++;
     		$legend_offset = 1 ;
     	}
-    	
-		$legendOutput .=  "<div id=\"mod_civicrm_fullcalendar_legend_wrapper\"  >";
-		for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
-			$legendOutput .= "<div class=\"mod_civicrm_fullcalendar_legend_cell\" "; 
-			$legendOutput .= "style=\""; 
-		
-			
+
+    	$legendOutput .=  "<div id=\"mod_civicrm_fullcalendar_legend_wrapper\"  >";
+    	for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
+			$legendOutput .= "<div class=\"mod_civicrm_fullcalendar_legend_cell\" ";
+			$legendOutput .= "style=\"";
+
+
 			// if this is not the 0th row, put in the color
 			// or if this is the 0th row and we don't have legend text, then put in the color
 			if (  ( $i > 0) || (  ( $i == 0) && ( $legendLabel == null) )) {
 				$legendOutput .= "background-color: ".$color[$i-$legend_offset]."; ";
-				
+
 				if ( $displayParams[useHighContrast] == true) {
 					$legendOutput .= "color: #".modCiviCRMFullCalendarHelper::getHighContrastColor($color[$i-$legend_offset])."; ";
 				}
 				else {
 					$legendOutput .= "color: ".$displayParams[eventTextColor]."; ";
-				}										
+				}
 			}
 			// if this is 0th row we have legend text, then spit out the legend text
 			else if ( ( $i == 0) && ( $legendLabel != null) ) {
 				$legendOutput .= "color: black;";
-			}			
-			
+			}
+
 			if ( ($legend_picked == "2") ) {
 			$legendOutput .= "width:".
-					substr_replace( 
+					substr_replace(
 						sprintf("%.3f", ((1/$num_o_boxes)*(100 - ($num_o_boxes*.25 )  ) ) )
 						,"",-1
 					).
@@ -496,42 +543,42 @@ $document->addScriptDeclaration($statement);
 				$legendOutput .= "width: 280px;" ;
 			}
 			$legendOutput .= "\">";
-					
-			
-						
+
+
+
 			// if this is not the 0th row, put in the color
 			// or if this is the 0th row and we don't have legend text, then put in the color
 			if (  ( $i > 0) || (  ( $i == 0) && ( $legendLabel == null) )) {
 				$legendOutput .= $catname[$i-$legend_offset] ;
 				// ."-->".getHighContrastColor($color[$i-$legend_offset]);
-				
-			} 
+
+			}
 			// if this is 0th row we have legend text, then spit out the legend text
 			else if ( ( $i == 0) && ( $legendLabel != null) ) {
 				$legendOutput .= $legendLabel ;
-			}	
-			
+			}
+
 			$legendOutput .= "</div>";
 		} // for
 
-		$legendOutput .= "</div>"; // mod_civicrm_fullcalendar_legend_wrapper 
-		
-		
+		$legendOutput .= "</div>"; // mod_civicrm_fullcalendar_legend_wrapper
+
+
 		// output the legend
 		echo $legendOutput ;
-		
-		
-    	echo "</div>"; // close div for id='mod_civicrm_fullcalendar_legend'
-    	}  // if legend_picked == 3 
-    	   
-    
-    
+
+
+		echo "</div>"; // close div for id='mod_civicrm_fullcalendar_legend'
+    	}  // if legend_picked == 3
+
+
+
 
 
     	echo "</div>"; // close div for id='mod_civicrm_fullcalendar_legend'
     	}  // if color legend
 
-    ?>
+    	?>
 </div>
 <!-- close div for id equal mod_civicrm_fullcalendar -->
 
