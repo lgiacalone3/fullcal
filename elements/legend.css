@@ -1,0 +1,38 @@
+#colorlegend {
+	width: 300px;
+}
+
+#colorsquare {
+	display: inline-block;
+	width: 80px;
+}
+
+.text {
+	float: right;
+	margin-left: 20px;
+}
+
+#mod_civicrm_fullcalendar_dialog {
+	visibility: hidden;
+	height: 0px;
+}
+
+#mod_civicrm_fullcalendar_legend {
+	background-color: white;";
+    margin-top: 5px; 
+    margin-bottom: 5px; ";
+    padding: 5px;";
+}
+
+#mod_civicrm_fullcalendar_legend_wrapper {
+	
+}
+
+
+div.mod_civicrm_fullcalendar_legend_cell {
+	display:inline-block;
+	text-align: center; 
+	margin-left: 0.25%;
+	vertical-align: middle;
+    height: 100%; 
+}

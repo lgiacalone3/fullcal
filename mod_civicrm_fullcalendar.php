@@ -9,7 +9,6 @@ $displayParams = modCiviCRMFullCalendarHelper::sendParam( $params );
 
 require( JModuleHelper::getLayoutPath( 'mod_civicrm_fullcalendar' ) );
 
-//echo "This is your test module!";
 
 ?>
 
