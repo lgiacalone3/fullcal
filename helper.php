@@ -22,7 +22,10 @@ class modCiviCRMFullCalendarHelper
         //retrieve all custom data tables impacting events
         $customdatapresent = 1; //assume data unless none found below
 
-        $query_customevent = " SELECT table_name FROM civicrm_custom_group WHERE extends = 'Event' ";
+        $query_customevent = 
+        	"SELECT table_name ".
+        	"FROM civicrm_custom_group".
+        	"WHERE extends = 'Event' ";
 
         $db->setQuery($query_customevent);
         $result_customevent = $db->loadObjectList();
@@ -33,17 +36,24 @@ class modCiviCRMFullCalendarHelper
         //print_r($result_customevent);
         //echo '<br />';
 
-        //set core SELECT and FROM clauses based on presence of custom fields
+        $select = "SELECT ";
+        $from = "FROM " ;
+        $where = "WHERE " ; 
+        
+
+         //set core SELECT and FROM clauses based on presence of custom fields
         if ($customdatapresent == 0) { //no custom data
-            $select = 'SELECT title, id AS eventID, start_date, end_date, event_type_id, summary, is_active, is_public, is_online_registration';
-            $from = 'FROM civicrm_event';
+            $select .= "e.title, e.id AS eventID, e.start_date, e.end_date, ".
+            			"e.event_type_id, e.summary, e.is_active, ".
+            			"e.is_public, e.is_online_registration " ;
+            $from .= "civicrm_event e ";
 
         } elseif ($customdatapresent == 1) { //custom data present
 
             //for each custom event custom data table, build SELECT and FROM clause
             //$arraycount = 0;
-            $select = 'SELECT civicrm_event.id AS eventID, civicrm_event.*';
-            $from = 'FROM civicrm_event';
+            $select .= "e.civicrm_event.id AS e.eventID, e.* ";
+            $from .= "civicrm_event e";
 
             foreach ($result_customevent as $key => $value) { //recurse through the custom tables and build sql
                 foreach ($value as $tablename) {
@@ -51,19 +61,20 @@ class modCiviCRMFullCalendarHelper
                     $from .= ' LEFT OUTER JOIN ' . $tablename . ' ON (' . $tablename . '.entity_id = civicrm_event.id)';
                 }
             }
-        }
+        } // elsif
 
         //set core WHERE clause
-        $where = 'WHERE is_active = 1 AND is_template != 1 ';
+        $where .= 'e.is_active = 1 AND e.is_template != 1 ';
+
 
         $currentdate = date("Y-m-d");
 
         //disable past events setting
         if ($pastevents){
             //only view events that end on or after current date, or where no end_date is defined
-            $wheredaterange = " AND ( end_date >= '" . $currentdate . "' OR end_date IS NULL OR end_date = '' ) ";
+            $wheredaterange = " AND ( e.end_date >= '" . $currentdate . "' OR e.end_date IS NULL OR e.end_date = '' ) ";
             //only view events that start on or after current date
-            $wheredaterange .= " AND start_date >= '" . $currentdate . "'";
+            $wheredaterange .= " AND e.start_date >= '" . $currentdate . "'";
         }
 
         //determine privacy setting
@@ -75,12 +86,12 @@ class modCiviCRMFullCalendarHelper
             }
             case(1):
             {
-                $privacy = " AND is_public = 1 ";
+                $privacy = " AND e.is_public = 1 ";
                 break;
             }
             case(2):
             {
-                $privacy = " AND is_public = 0 ";
+                $privacy = " AND e.is_public = 0 ";
                 break;
             }
         }
@@ -113,30 +124,45 @@ class modCiviCRMFullCalendarHelper
                     JError::raiseWarning(500, "No start date selected for CiviEvent module.");
                 } elseif ($enddate == "" OR $enddate == "Select") //Open end date parameter
                 {
-                    $wheredaterange = " AND start_date >= '" . $startdate . "'";
+                    $wheredaterange = " AND e.start_date >= '" . $startdate . "'";
                 } else //both start and end date parameter, replace default end date range
                 {
-                    //$wheredaterange = " AND start_date >= '".$startdate."'"." AND end_date <= '".$enddate."'";
-
                     //v2 BOTH start/end date measured by event start date in order to make month-wrap ranges ruled by start
-                    $wheredaterange = " AND start_date >= '" . $startdate . "'" . " AND start_date < '" . $enddate . "'";
+                    $wheredaterange = " AND e.start_date >= '" . $startdate . "'" . " AND e.start_date < '" . $enddate . "'";
                 }
                 break;
             }
 
             case(2): //custom select mode
             {
-                $where .= ((count($multievent) > 1) ? ' AND ( id=' . implode(' OR id= ', $multievent) . ' ) ' : ' AND id=' . $multievent);
+                $where .= ((count($multievent) > 1) ? ' AND ( e.id=' . implode(' OR e.id= ', $multievent) . ' ) ' : ' AND e.id=' . $multievent);
                 break;
             }
 
             case(3): //event type mode
             {
-                $where .= ' AND event_type_id = ' . $tid;
+                $where .= ' AND e.event_type_id = ' . $tid;
                 break;
             }
         } //close mode switch
 
+        
+        
+
+        // do we even need the location?
+        if ( 
+              (stristr(trim($params->get('fieldtemplate')), "{event_street_address}") != FALSE) || 
+              (stristr(trim($params->get('fieldtemplate')), "{event_supplemental_address_1}") != FALSE) ||
+              (stristr(trim($params->get('fieldtemplate')), "{event_supplemental_address_2}") != FALSE) 
+        ) {
+        	// get the event location data
+        	$select .= ", a.street_address, a.supplemental_address_1, a.supplemental_address_2 ";
+        	$from   .= ", civicrm_address a, civicrm_loc_block lb ";
+        	$where  .= " AND e.loc_block_id = lb.id AND a.id = lb.id " ;
+        }
+
+       	
+       	
         //build query statement
         $query = $select . ' ';
         $query .= $from . ' ';
@@ -146,6 +172,8 @@ class modCiviCRMFullCalendarHelper
         $db->setQuery($query);
         $result = $db->loadObjectList();
 
+
+        
         if ($db->getErrorNum()) {
             JError::raiseWarning(500, "No events meet the selected criteria.");
         }
@@ -161,9 +189,9 @@ class modCiviCRMFullCalendarHelper
         $displayParams['modal'] = trim($params->get('modal'));
         $displayParams['maxevents'] = trim($params->get('maxevents'));
         $displayParams['showdates'] = trim($params->get('showdates'));
-        $displayParams['showduration'] = trim($params->get('showduration'));
+        //$displayParams['showduration'] = trim($params->get('showduration'));
         $displayParams['dateformat'] = trim($params->get('dateformat'));
-        $displayParams['summary'] = trim($params->get('summary'));
+        //$displayParams['summary'] = trim($params->get('summary'));
         $displayParams['color'] = trim($params->get('color'));
         $displayParams['color1'] = trim($params->get('color1'));
         $displayParams['color2'] = trim($params->get('color2'));
@@ -184,6 +212,11 @@ class modCiviCRMFullCalendarHelper
         $displayParams['legendLabel'] = trim($params->get('legendLabel'));
         $displayParams['eventTextColor'] = trim($params->get('eventTextColor'));
         $displayParams['useHighContrast'] = trim($params->get('useHighContrast'));
+        $displayParams['advancedoptions'] = trim($params->get('advancedoptions'));
+        $displayParams['fieldtemplate'] = trim($params->get('fieldtemplate'));
+        $displayParams['agenda_timeFormat'] = trim($params->get('agenda_timeFormat'));
+        $displayParams['allother_timeFormat'] = trim($params->get('allother_timeFormat'));
+        
         
         
         return $displayParams;
