@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.30</version>
+    <version>0.1.32</version>
     <description>A Joomla module for CiviCRM that displays CiviEvent events in an interactive calendar, using FullCalendar. See https://github.com/lgiacalone3/fullcal for full documentation.
         Authored by Louis Giacalone and Andrew Schmitt.
 </description>
@@ -157,10 +157,13 @@
                 <field type="spacer" hr="true"/>
                 <field type="spacer" label="&lt;b&gt;Color Settings&lt;/b&gt;"/>
 
-                <field name="color" type="list" default="0" label="Color by:"
+                <field name="colorby" type="list" default="0" label="Color by:"
                        description="Choose how to color events">
                     <option value="0">Event Duration</option>
                     <option value="1">Event Type</option>
+                    <option value="2">Event Street Address</option>
+                    <option value="3">Event Supplemental Address 1</option>
+                    <option value="4">Event Supplemental Address 2</option> 
                 </field>
 
                 <field name="colorpicker" type="list" default="0" label="Color Theme:"
@@ -287,6 +290,29 @@
 		+==================================================+
 		|                                                  |
 		|                                                  |
+		|                 F I L T E R                      |
+		|                O P T I O N S                     |
+		|                                                  |
+		|                                                  |
+		+==================================================+
+	      -->
+            <fieldset name="filteroptionsfieldset"  label="Front End / User Filter Options">
+		<field name="filterOnStreetAddress" type="radio" default="0" label="Front End Filter on Street Address Field:"
+		       description="Show or Hide a filter on the front end to dynamically filter on event on the calendar">
+		  <option value="0">Hide</option>
+		  <option value="1">Show</option>
+		  </field>
+                <field name="filterTextForAllStreetAddresses" type="text" default="ALL LOCATIONS" size="50" label="Text for 'All Locations' for Street Address filter:"
+                       description="The textual value for the first entry in the filter which is for all locations.  Default: ALL LOCATIONS">
+		</field>
+            </fieldset>
+
+
+
+	    <!--
+		+==================================================+
+		|                                                  |
+		|                                                  |
 		|               A D V A N C E D                    |
 		|                                                  |
 		|                                                  |
@@ -294,7 +320,7 @@
 	      -->
             <fieldset name="advancedoptionsfieldset"  label="Advanced Options">
                 <field name="advancedoptions" type="text" default="" size="60" label="Additonal Parameters to pass to FullCalendar:"
-                       description="To pass paramaters not set in this module interface, you can pass them here.  Please be careful - your text will be passed as is.  See http://http://arshaw.com/fullcalendar for additional paramaters.  Use commas to separate for more than one set.  For example this will create a calendar that has 5 days with the first day as Wednesday: weekends: false, firstDay: 1">
+                       description="To pass paramaters not set in this module interface, you can pass them here.  Please be careful - your text will be passed as is.  See http://http://arshaw.com/fullcalendar for additional paramaters.  Use commas to separate for more than one set.  For example this will create a calendar that has only 5 days with the first day as Wednesday: weekends: false, firstDay: 3">
 		</field>
 
             </fieldset>

@@ -192,7 +192,7 @@ class modCiviCRMFullCalendarHelper
         //$displayParams['showduration'] = trim($params->get('showduration'));
         $displayParams['dateformat'] = trim($params->get('dateformat'));
         //$displayParams['summary'] = trim($params->get('summary'));
-        $displayParams['color'] = trim($params->get('color'));
+        $displayParams['colorby'] = trim($params->get('colorby'));
         $displayParams['color1'] = trim($params->get('color1'));
         $displayParams['color2'] = trim($params->get('color2'));
         $displayParams['color3'] = trim($params->get('color3'));
@@ -216,7 +216,8 @@ class modCiviCRMFullCalendarHelper
         $displayParams['fieldtemplate'] = trim($params->get('fieldtemplate'));
         $displayParams['agenda_timeFormat'] = trim($params->get('agenda_timeFormat'));
         $displayParams['allother_timeFormat'] = trim($params->get('allother_timeFormat'));
-        
+        $displayParams['filterOnStreetAddress'] = trim($params->get('filterOnStreetAddress'));
+        $displayParams['filterTextForAllStreetAddresses'] = trim($params->get('filterTextForAllStreetAddresses'));
         
         
         return $displayParams;
