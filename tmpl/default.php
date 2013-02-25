@@ -72,16 +72,12 @@ $statement =  "var \$cfcj = jQuery.noConflict();\n".
 			  "\$cfcj(document).ready(function() {\n";
 					
 if ( $displayParams['filterOnStreetAddress'] === "1" ) {
-	$statement .= "var allLocationsText = \$cfcj('#mcfc_location_filter').children()[0].label;\n\n";
-	}
+	$statement .= "\n\n//DEBUG alert('will init allLocationsText with '+ \$cfcj('#mcfc_location_filter').val() || []  );";
+	$statement .= "\nvar allLocationsText = \$cfcj('#mcfc_location_filter').val()  || [] ; \n\n";
+}
+
 
 $statement .= "\$cfcj('#calendar').fullCalendar({\n\n"; 
-
-
-
-
-
-
 
 
 
@@ -142,11 +138,11 @@ $statement .=
 			"\t\t events: myEventsArray" ;
 
 
-			$debug = 0;
-
-			if ($debug) {
-				echo '<ul class="civieventlist">';
-			}
+//			$debug = 0;
+//
+//			if ($debug) {
+//				echo '<ul class="civieventlist">';
+//			}
 
 			//color themes
 			$theme = $displayParams['colorpicker'];
@@ -284,12 +280,11 @@ $statement .=
 					"Filter by Location<BR />".
 					"<P>".
 					"<select name='select' id='mcfc_location_filter' multiple>".
-					"<option value='1' selected>".$displayParams['filterTextForAllStreetAddresses']."</option>";
-					$optValN = 2;
+					"<option value='".$displayParams['filterTextForAllStreetAddresses']."' selected>".$displayParams['filterTextForAllStreetAddresses']."</option>";
 						
 						
 					foreach ($locationArray as &$loc) {
-						$select_and_option_values .= "<option value='".$optValN++."'>".$loc."</option>";
+						$select_and_option_values .= "<option value='".$loc."'>".$loc."</option>";
 					}
 						
 					$select_and_option_values .= "</select>";
@@ -311,6 +306,29 @@ $statement .=
 				
 					$eventNumberWhat++;
 				
+
+					
+					/*
+					// ================================= DELETE AQS BELOW
+					// DEBUG for IE testing
+					// echo "eventNumberWhat".$eventNumberWhat."<BR/>" ;   // DEBUG
+					if ($eventNumberWhat >= 999) {
+
+						$events_array_statement .=
+						"{\n".
+						"id: '99999999', title: 'TEST EVENT',\n".
+						"eventLoc : 'TEST LOCATION',\n".
+						"textColor: '#FFFFFF',\n".
+						"allDay: false,\n".
+						"start: new Date(2013, 1, 3, 9, 00),\n".
+						"end: new Date(2013, 1, 3, 10, 00),\n".
+						"color: 'blue'\n".
+						"}\n";
+						break;
+					}
+					// ================================= DELETE AQS ABOVE
+					*/		
+					
 					if ($x > $maxevents) {
 						return;
 					} else {
@@ -319,7 +337,7 @@ $statement .=
 				
 					$baselink = 'index.php/component/civicrm/?task=civicrm/event/';
 				
-					for ($i = 0, $n = count($event->title); ($i < $n); $i++) {
+						
 						$allDay = false;
 						$e_title = "";
 						$e_summary = "";
@@ -328,6 +346,9 @@ $statement .=
 						$e_supplemental_address_2 = "";
 						$e_duration = "";
 						$color1 = $displayParams['color1'];
+						
+
+												
 				
 				
 						if( $displayParams['modal'] == "1" ) {
@@ -682,8 +703,8 @@ $statement .=
 							$events_array_statement .= ",";
 					}
 					$events_array_statement .= "\n";
-					}
-					}
+
+					}  // foreact
 				
 				
 				
@@ -710,17 +731,21 @@ $statement .=
 
 			
 			
-			
+
+						
 			$statement .= "\n\t\t}); // END of READY FUNCTION";
 			
+			
+
 			
 			$statement .= $events_array_statement ;
 			
 			
 			// FOOBAR - move the event code starting at line 305 to this function 
-			//$statement .= mcfcEventsArray::buildArray( $eventtitles, $params );
+			$statement .= mcfcEventsArray::buildArray( $eventtitles, $params );
 
 			// debug - only 2 events
+			// these two do not seem to break IE 
 			// $statement .= mcfcEventsArray::buildArrayDEBUG( $eventtitles, $params );
 				
 			

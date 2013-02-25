@@ -37,9 +37,9 @@ class modCiviCRMFullCalendarHelper
         //echo '<br />';
 
         $select = "SELECT ";
-        $from = "FROM " ;
-        $where = "WHERE " ; 
-        
+        $from = " FROM " ;
+        $where = " WHERE " ; 
+        $orderby = " ORDER BY ";
 
          //set core SELECT and FROM clauses based on presence of custom fields
         if ($customdatapresent == 0) { //no custom data
@@ -95,8 +95,8 @@ class modCiviCRMFullCalendarHelper
                 break;
             }
         }
-        $where .= $privacy; //add privacy to WHERE clause
 
+        
         //determine link type (info or reg). if reg, make sure events have online reg setup
         if ($link == "1") {
             $where .= $isonline;
@@ -106,7 +106,7 @@ class modCiviCRMFullCalendarHelper
         switch ($mode) {
             case(0): //default mode
             {
-                break;
+            	break;
             }
 
             case(1): //date range mode
@@ -125,10 +125,12 @@ class modCiviCRMFullCalendarHelper
                 } elseif ($enddate == "" OR $enddate == "Select") //Open end date parameter
                 {
                     $wheredaterange = " AND e.start_date >= '" . $startdate . "'";
+                    
                 } else //both start and end date parameter, replace default end date range
                 {
                     //v2 BOTH start/end date measured by event start date in order to make month-wrap ranges ruled by start
                     $wheredaterange = " AND e.start_date >= '" . $startdate . "'" . " AND e.start_date < '" . $enddate . "'";
+                    
                 }
                 break;
             }
@@ -147,7 +149,7 @@ class modCiviCRMFullCalendarHelper
         } //close mode switch
 
         
-        
+        $orderby .= '1'; 
 
         // do we even need the location?
         if ( 
@@ -161,12 +163,16 @@ class modCiviCRMFullCalendarHelper
         	$where  .= " AND e.loc_block_id = lb.id AND a.id = lb.id " ;
         }
 
+        
+         
        	
        	
         //build query statement
         $query = $select . ' ';
         $query .= $from . ' ';
-        $query .= $where . $wheredaterange . ' ';
+        $query .= $where . $wheredaterange ; 
+        $query .= $orderby . '  ' ;
+        // echo $query ;  // DEBUG 
 
         //run $query;
         $db->setQuery($query);

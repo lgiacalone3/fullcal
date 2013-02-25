@@ -57,8 +57,8 @@ class mcfcEventsArray extends JObject
 				
 				textColor: '#FFFFFF', 
 				allDay: false, 
-				start: new Date(2013, 1, 21, 19, 00), 
-				end: new Date(2013, 1, 21, 21, 00), 
+				start: new Date(2013, 1, 5, 19, 00), 
+				end: new Date(2013, 1, 5, 21, 00), 
 				url: 'index.php/component/civicrm/?task=civicrm/event/info&reset=1&id=26&tmpl=component' ,
 				color: 'green' 
 			}
