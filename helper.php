@@ -81,16 +81,19 @@ class modCiviCRMFullCalendarHelper
         switch ($privacy) {
             case(0):
             {
+            	// both public or private
                 $privacy = "";
                 break;
             }
             case(1):
             {
+            	// public only
                 $privacy = " AND e.is_public = 1 ";
                 break;
             }
             case(2):
             {
+            	// private only
                 $privacy = " AND e.is_public = 0 ";
                 break;
             }
@@ -164,6 +167,8 @@ class modCiviCRMFullCalendarHelper
         }
 
         
+        // public, private or both???
+        $where .= $privacy ; 
          
        	
        	
@@ -172,7 +177,7 @@ class modCiviCRMFullCalendarHelper
         $query .= $from . ' ';
         $query .= $where . $wheredaterange ; 
         $query .= $orderby . '  ' ;
-        // echo $query ;  // DEBUG 
+        // DEBUG echo $query ;  // DEBUG 
 
         //run $query;
         $db->setQuery($query);
