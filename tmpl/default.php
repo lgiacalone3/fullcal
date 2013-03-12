@@ -26,26 +26,19 @@ if ( $displayParams['modal'] == "1" ) {
 	"<a id=\"aref_mod_civicrm_fullcalendar_dialog\" class=\"modal\" ".
 	"href=\"\" ".
 	"rel=\"{handler: 'iframe', size: {x: 520, y: 400}}\"></a>".
-	"</div>";
+	"</div>\n\n";
+}
+
+
+if ( $displayParams['filterOnStreetAddress'] == 1 ) {
+	echo
+	  "<div id=\"mod_civicrm_fullcalendar_filter_by\"></div>\n\n";
 }
 
 
 
 
-?>
 
-
-
-
-
-											<div id="mod_civicrm_fullcalendar_filter_by">
-
-											</div>
-
-
-											
-											
-<?php
 
 $document =& JFactory::getDocument();
 
@@ -162,7 +155,7 @@ $statement .=
 			}
 
 			// Set number of records to be displayed and clear counter
-			$maxevents = ($displayParams['maxevents']) ? $displayParams['maxevents'] : 10;
+			$maxevents = $displayParams['maxevents'] ;
 
 			$x = 1;
 
@@ -241,7 +234,7 @@ $statement .=
 
 					
 				foreach ($eventtitles as &$event) {
-					// the use of street address below does not look right  AQS
+					// the use of street address below does not look right  schmitt2048
 					for ($i = 0, $n = count($event->street_address); ($i < $n); $i++) {
 						switch ($displayParams['colorby']) {
 							case 2:
@@ -309,10 +302,11 @@ $statement .=
 
 					
 					/*
-					// ================================= DELETE AQS BELOW
+					// ================================= 
 					// DEBUG for IE testing
-					// echo "eventNumberWhat".$eventNumberWhat."<BR/>" ;   // DEBUG
-					if ($eventNumberWhat >= 999) {
+					//
+					echo "eventNumberWhat"."=".$eventNumberWhat." for ".$event->title." for id ".$event->eventID."<BR/>" ;   // DEBUG
+					 if ($eventNumberWhat >= 999) {
 
 						$events_array_statement .=
 						"{\n".
@@ -326,11 +320,11 @@ $statement .=
 						"}\n";
 						break;
 					}
-					// ================================= DELETE AQS ABOVE
+					// ================================= 
 					*/		
 					
 					if ($x > $maxevents) {
-						return;
+						break;
 					} else {
 						$x++;
 					}
@@ -781,14 +775,12 @@ $document->addScript(JURI::base()
 $document->addScriptDeclaration($statement);
 ?>
 
+
+
 <!-- this will add the FullCalendar dynamically inside the div below -->
 <div id='mod_civicrm_fullcalendar'>
 	<div id='calendar'></div>
-	<?PHP
-
-
-
-
+<?PHP
 
 	if ($legend_picked != "0") {
 
@@ -798,8 +790,6 @@ $document->addScriptDeclaration($statement);
 		);
 
 	$legendLabel = trim($displayParams['legendLabel']) ;
-
-
 
 
 
@@ -821,7 +811,7 @@ $document->addScriptDeclaration($statement);
 
 
         echo "<table id='mod_civicrm_fullcalendar_colorlegend'>".
-          "<tr><th>".$legendLabel."</th></tr>";
+          "<tr><th>".$legendLabel."</th></tr>\n";
 
         // are we coloring by duration?
         if  ($displayParams['colorby'] == 0)  {
@@ -942,7 +932,7 @@ $document->addScriptDeclaration($statement);
 	*
 	*/
 	if  ( ($legend_picked == "2") ||  ($legend_picked == "3") ) {
-		$legendOutput  = "<div id='mod_civicrm_fullcalendar_legend' >";
+		$legendOutput  = "\t<div id=\"mod_civicrm_fullcalendar_legend\" >\n";
 
 			
 		// how many boexs?
@@ -963,7 +953,7 @@ $document->addScriptDeclaration($statement);
     		$num_o_boxes++;
     		$legend_offset = 1 ;
     	}
-    	$legendOutput .=  "<div id=\"mod_civicrm_fullcalendar_legend_wrapper\"  >";
+    	$legendOutput .=  "\t\t<div id=\"mod_civicrm_fullcalendar_legend_wrapper\"  >\n";
 
 
     	// are we coloring by duration?
@@ -1022,23 +1012,25 @@ $document->addScriptDeclaration($statement);
 
 		}
 		else {
-		// nope, coloring be event category
+		// nope, coloring by event category
+			$legendOutput .= "\t\t\t<!-- coloring by event category -->\n";
 	    	for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
-				$legendOutput .= "<div class=\"mod_civicrm_fullcalendar_legend_cell\" ";
-				$legendOutput .= "style=\"";
+				$legendOutput .= "\t\t\t<div class=\"mod_civicrm_fullcalendar_legend_cell\" \n";
+				$legendOutput .= "\t\t\t\tstyle=\"";
 
 
 				// if this is not the 0th row, put in the color
 				// or if this is the 0th row and we don't have legend text, then put in the color
 				if (  ( $i > 0) || (  ( $i == 0) && ( $legendLabel == null) )) {
-					$legendOutput .= "background-color: ".$color[$i-$legend_offset]."; ";
-
+					$legendOutput .= "background-color: ".$color[$i-$legend_offset]."; \n";
+					$legendOutput .= "\t\t\t\t";
+					
 					if ( $displayParams[useHighContrast] == true) {
 						$legendOutput .= "color: #".modCiviCRMFullCalendarHelper::getHighContrastColor($color[$i-$legend_offset])."; ";
 					}
 					else {
 						$legendOutput .= "color: ".$displayParams[eventTextColor]."; ";
-					}
+					}						
 				}
 				// if this is 0th row we have legend text, then spit out the legend text
 				else if ( ( $i == 0) && ( $legendLabel != null) ) {
@@ -1046,9 +1038,9 @@ $document->addScriptDeclaration($statement);
 				}
 
 				if ( ($legend_picked == "2") ) {
-				$legendOutput .= "width:".
+					$legendOutput .= "width:".
 						substr_replace(
-							sprintf("%.3f", ((1/$num_o_boxes)*(100 - ($num_o_boxes*.25 )  ) ) )
+							sprintf("%.3f", ((1/$num_o_boxes)*(100 - ($num_o_boxes*.75 )  ) ) )
 							,"",-1
 						).
 						"%;";
@@ -1056,7 +1048,8 @@ $document->addScriptDeclaration($statement);
 					$legendOutput .= "width: 280px;" ;
 				}
 				$legendOutput .= "\">";
-
+				
+				
 
 
 				// if this is not the 0th row, put in the color
@@ -1071,31 +1064,29 @@ $document->addScriptDeclaration($statement);
 					$legendOutput .= $legendLabel ;
 				}
 	
-				$legendOutput .= "</div>";
+				$legendOutput .= "\n\t\t\t</div>\n";
 			} // for
 
 		} // if then else --> color be event category
 		
 		
-		$legendOutput .= "</div>"; // mod_civicrm_fullcalendar_legend_wrapper
+		$legendOutput .= "\t\t</div> <!-- mod_civicrm_fullcalendar_legend_wrapper -->\n";
 
 
 		// output the legend
 		echo $legendOutput ;
 
 
-		echo "</div>"; // close div for id='mod_civicrm_fullcalendar_legend'
     	}  // if legend_picked == 3
 
 
 
 
 
-    	echo "</div>"; // close div for id='mod_civicrm_fullcalendar_legend'
+    	echo "\t</div> <!-- mod_civicrm_fullcalendar_legend -->\n"; 
     	}  // if color legend
 
     	?>
-</div>
-<!-- close div for id equal mod_civicrm_fullcalendar -->
+</div><!-- mod_civicrm_fullcalendar -->
 
 
