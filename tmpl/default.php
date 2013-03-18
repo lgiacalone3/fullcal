@@ -84,6 +84,85 @@ $statement .= "\t\tslotMinutes: ".intval($displayParams['slotMinutes']).", \n" ;
 $statement .= "\t\taspectRatio: ".$displayParams['aspectRatio'].", \n" ;
 $statement .= "\t\taxisFormat: '".$displayParams['axisFormat']."', \n" ;
 
+
+// Set the Months
+$statement .= "\t\tmonthNamesShort: [".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_01" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_02" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_03" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_04" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_05" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_06" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_07" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_08" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_09" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_10" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_11" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_SHORT_12" )."'".
+		"], \n" ;
+
+
+// Set the Months
+$statement .= "\t\tmonthNames: [".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_01" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_02" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_03" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_04" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_05" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_06" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_07" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_08" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_09" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_10" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_11" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_MONTH_NAMES_12" )."'".
+		"], \n" ; 
+
+// Set the day names (short)
+$statement .= "\t\tdayNamesShort: [".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_SHORT_1" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_SHORT_2" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_SHORT_3" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_SHORT_4" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_SHORT_5" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_SHORT_6" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_SHORT_7" )."'".
+		"], \n" ;
+
+// Set the day names 
+$statement .= "\t\tdayNames: [".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_1" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_2" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_3" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_4" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_5" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_6" )."', ".
+		"'".JText::_( "MOD_CIVICRM_FULLCALENDAR_DAY_NAMES_7" )."',".
+		"], \n" ;
+
+
+$statement .= "\t\tbuttonText: {\n".
+		"\t\t\tprev:     '&nbsp;&#9668;&nbsp;',  // left triangle\n".
+		"\t\t\tnext:     '&nbsp;&#9658;&nbsp;',  // right triangle\n".
+		"\t\t\tprevYear: '&nbsp;&lt;&lt;&nbsp;', // <<\n".
+		"\t\t\tnextYear: '&nbsp;&gt;&gt;&nbsp;', // >>\n".
+		"\t\t\ttoday:    '".JText::_( "MOD_CIVICRM_FULLCALENDAR_BUTTON_TODAY" )."',\n".
+		"\t\t\tmonth:    '".JText::_( "MOD_CIVICRM_FULLCALENDAR_BUTTON_MONTH" )."',\n".
+		"\t\t\tweek:     '".JText::_( "MOD_CIVICRM_FULLCALENDAR_BUTTON_WEEK" )."',\n".
+		"\t\t\tday:      '".JText::_( "MOD_CIVICRM_FULLCALENDAR_BUTTON_DAY" )."'\n".
+		"\t\t}, \n" ;
+
+
+$statement .= "\t\ttitleFormat: {\n".
+		"\t\t\tmonth: '".$displayParams[calendar_titleFormat_month]."',\n".
+		"\t\t\tweek: '".$displayParams[calendar_titleFormat_week]."',\n".
+		"\t\t\tday: '".$displayParams[calendar_titleFormat_day]."',\n".
+		"\t\t}, \n" ;
+		
+
+
+
+
 if ($displayParams[showCalNav] === "1") {
 	$statement .=
 	"\t\t	header: { \n".
@@ -268,9 +347,15 @@ $statement .=
 			 *  +------------------------------------------------------------------
 			 * 
 			 */
+				
+	
+
+
+				
 				if ( $displayParams['filterOnStreetAddress'] === "1" ) {
 					$select_and_option_values =
-					"Filter by Location<BR />".
+					JText::_( "MOD_CIVICRM_FULLCALENDAR_FILTER_BY_LOCATION_LABEL" ).
+					":<BR />".
 					"<P>".
 					"<select name='select' id='mcfc_location_filter' multiple>".
 					"<option value='".$displayParams['filterTextForAllStreetAddresses']."' selected>".$displayParams['filterTextForAllStreetAddresses']."</option>";
@@ -347,7 +432,7 @@ $statement .=
 				
 						if( $displayParams['modal'] == "1" ) {
 							// modallink
-							$link =  $baselink.'info&reset=1&id='.$event->eventID.'&tmpl=component' ;
+							$link =  JRoute::_($baselink . 'info&reset=1&id='.$event->eventID.'&tmpl=component') ;
 				
 						}
 						else {
@@ -698,7 +783,7 @@ $statement .=
 					}
 					$events_array_statement .= "\n";
 
-					}  // foreact
+					}  // foreach
 				
 				
 				

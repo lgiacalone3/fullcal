@@ -229,8 +229,9 @@ class modCiviCRMFullCalendarHelper
         $displayParams['allother_timeFormat'] = trim($params->get('allother_timeFormat'));
         $displayParams['filterOnStreetAddress'] = trim($params->get('filterOnStreetAddress'));
         $displayParams['filterTextForAllStreetAddresses'] = trim($params->get('filterTextForAllStreetAddresses'));
-        
-        
+        $displayParams['calendar_titleFormat_month'] = trim($params->get('calendar_titleFormat_month'));
+        $displayParams['calendar_titleFormat_week'] = trim($params->get('calendar_titleFormat_week'));
+        $displayParams['calendar_titleFormat_day'] = trim($params->get('calendar_titleFormat_day'));
         return $displayParams;
     } //end sendParams
 

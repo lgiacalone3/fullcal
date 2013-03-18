@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.37</version>
+    <version>0.1.38</version>
     <description>A Joomla module for CiviCRM that displays CiviEvent events in an interactive calendar, using FullCalendar. See https://github.com/lgiacalone3/fullcal for full documentation.
         Authored by Louis Giacalone and Andrew Schmitt.
 </description>
@@ -78,6 +78,23 @@
 
                 <field name="slotMinutes" type="text" default="30" size="10" label="Time slot duration minutes:"
                        description="Integer value for time slot duration in minutes in the agneda views.  For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/agenda/slotMinutes/"></field>
+
+
+
+
+		<field name="calendar_titleFormat_month" type="text" default="MMMM yyyy" size="30" label="Calendar title - in month view:"
+                       description="Determines the title of the calendar in month view. Uses formatDate/formatDates formatting rules. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/text/timeFormat  The default is 'MMMM yyyy.'"></field>
+
+		<field name="calendar_titleFormat_week" type="text" default="MMM d[ yyyy]{ \'&#8212;\'[ MMM] d yyyy}" size="30" label="Calendar title - in week view:"
+                       description="Determines the title of the calendar in week view. Uses formatDate/formatDates formatting rules. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/text/timeFormat  For those outside of the United States, you may prefer 'dd MMM [ yyyy]{ \'&#8212;\'dd [ MMM] yyyy}'.   The default is 'MMM d[ yyyy]{ \'&#8212;\'[ MMM] d yyyy}.'"></field>
+
+		<field name="calendar_titleFormat_day" type="text" default="dddd, MMM d, yyyy" size="30" label="Calendar title - in day view:"
+                       description="Determines the title of the calendar in day view. Uses formatDate/formatDates formatting rules. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/text/timeFormat  The default is 'dddd, MMM d, yyyy.'"></field>
+
+
+
+
+
 
 
 		<field name="agenda_timeFormat" type="text" default="h:mm{ - h:mm}" size="30" label="Event time format (agendaWeek and agendaDay views):"

@@ -2,6 +2,9 @@
 defined( '_JEXEC' ) or die;
 
 
+
+
+
 require_once( dirname(__FILE__).DS.'elements/EventData.php' );
 
 require_once( dirname(__FILE__).DS.'elements/js_snippet_mcfc_location_filter_change.php' );
