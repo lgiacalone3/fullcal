@@ -59,7 +59,7 @@ class JFormFieldColor extends JFormFieldList
 
         ?>
     <br/>
-    <a href="javascript:void(0)" id="toggle">Show/Hide Text Field</a>
+    <a href="javascript:void(0)" id="toggle"><?php echo JText::_( "MOD_CIVICRM_FULLCALENDAR_FILTER_BY_LOCATION_LABEL" ); ?></a>
     <div id="output">
         <br/>
         <input name="<?php echo $this->name;?>" type="text" value="<?php echo $this->value; ?>"/>

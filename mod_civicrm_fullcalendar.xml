@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="2.5.0" client="site" method="install">
-    <name>CiviCRM FullCalendar</name>
+    <name>MOD_CIVICRM_FULLCALENDAR</name>
     <author>Louis Giacalone, Andrew Schmitt</author>
     <creationDate>December 2012</creationDate>
     <copyright>Copyright (C)2012 Andrew Schmitt, Louis Giacalone</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.38</version>
-    <description>A Joomla module for CiviCRM that displays CiviEvent events in an interactive calendar, using FullCalendar. See https://github.com/lgiacalone3/fullcal for full documentation.
-        Authored by Louis Giacalone and Andrew Schmitt.
-</description>
+    <version>0.1.39</version>
+    <description>MOD_CIVICRM_FULLCALENDAR_DESCRIPTION
+    </description>
 <!--
 	<install>
     	<sql>
@@ -51,159 +50,197 @@
 		|                                                  |
 		+==================================================+
 	      -->
-            <fieldset name="display" label="General Options">
-                <field type="spacer" label="&lt;b&gt;Display Settings&lt;/b&gt;"/>
+            <fieldset name="display" 
+		      label="MOD_CIVICRM_FULLCALENDAR_GENERAL_OPTIONS"
+		      >
+                <field type="spacer" 
+		       label="MOD_CIVICRM_FULLCALENDAR_DISPLAY_SETTINGS"
+		       />
 
-		<field name="default_view" type="list" default="month" label="Default View/Layout:"
-		       description="The default view the user will see.  For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/views/Available_Views/">
-		  <option value="month">month (month)</option>
-		  <option value="basicWeek">week (basicWeek)</option>
-		  <option value="basicDay">day (basicDay)</option>
-		  <option value="agendaWeek">agenda - week (agendaWeek)</option>
-		  <option value="agendaDay">agenda - day (agendaDay)</option>
+
+		<field name="default_view" type="list" default="month" 
+		       label="MOD_CIVICRM_FULLCALENDAR_DEFAULT_VIEW_LAYOUT"
+		       description="MOD_CIVICRM_FULLCALENDAR_DEFAULT_VIEW_LAYOUT_DESCRIPTION">
+		  <option value="month">MOD_CIVICRM_FULLCALENDAR_MONTH_MONTH</option>
+		  <option value="basicWeek">MOD_CIVICRM_FULLCALENDAR_WEEK_BASICWEEK</option>
+		  <option value="basicDay">MOD_CIVICRM_FULLCALENDAR_DAY_BASICDAY</option>
+		  <option value="agendaWeek">MOD_CIVICRM_FULLCALENDAR_AGENDA__WEEK_AGENDAWEEK</option>
+		  <option value="agendaDay">MOD_CIVICRM_FULLCALENDAR_AGENDA__DAY_AGENDADAY</option>
 		</field>
 
 
 
-		<field name="weekMode" type="list" default="fixed" label="Week view (in month view ONLY):"
-		       description="In the month layout, this determines how many weeks are shown.  For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/display/weekMode/">
-		  <option value="fixed">fixed (fixed)</option>
-		  <option value="liquid">liquid (liquid)</option>
-		  <option value="variable">variable (variable)</option>
+		<field name="weekMode" type="list" default="fixed" 
+		       label="MOD_CIVICRM_FULLCALENDAR_WEEK_VIEW_IN_MONTH_VIEW_ONLY"
+		       description="MOD_CIVICRM_FULLCALENDAR_WEEK_VIEW_IN_MONTH_VIEW_ONLY_DESCRIPTION">
+		  <option value="fixed">MOD_CIVICRM_FULLCALENDAR_FIXED_FIXED</option>
+		  <option value="liquid">MOD_CIVICRM_FULLCALENDAR_LIQUID_LIQUID</option>
+		  <option value="variable">MOD_CIVICRM_FULLCALENDAR_VARIABLE_VARIABLE</option>
 		</field>
 
-		<field name="aspectRatio" type="text" default="1.35" size="10" label="Width-to-height aspect ratio:"
-                       description="A calendar is a block-level element that fills its entire avaiable width. The calendar’s height, however, is determined by this ratio of width-to-height. (Hint: larger numbers make smaller heights).  For example, a value of 2 will initialize a calendar who's width is twice its height. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/display/aspectRatio/"></field>
+		<field name="aspectRatio" type="text" default="1.35" size="10" 
+		       label="MOD_CIVICRM_FULLCALENDAR_WIDTH_TO_HEIGHT_ASPECT_RATIO"
+                       description="MOD_CIVICRM_FULLCALENDAR_WIDTH_TO_HEIGHT_ASPECT_RATIO_DESCRIPTION">
+		</field>
 
 
-                <field name="slotMinutes" type="text" default="30" size="10" label="Time slot duration minutes:"
-                       description="Integer value for time slot duration in minutes in the agneda views.  For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/agenda/slotMinutes/"></field>
-
-
-
-
-		<field name="calendar_titleFormat_month" type="text" default="MMMM yyyy" size="30" label="Calendar title - in month view:"
-                       description="Determines the title of the calendar in month view. Uses formatDate/formatDates formatting rules. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/text/timeFormat  The default is 'MMMM yyyy.'"></field>
-
-		<field name="calendar_titleFormat_week" type="text" default="MMM d[ yyyy]{ \'&#8212;\'[ MMM] d yyyy}" size="30" label="Calendar title - in week view:"
-                       description="Determines the title of the calendar in week view. Uses formatDate/formatDates formatting rules. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/text/timeFormat  For those outside of the United States, you may prefer 'dd MMM [ yyyy]{ \'&#8212;\'dd [ MMM] yyyy}'.   The default is 'MMM d[ yyyy]{ \'&#8212;\'[ MMM] d yyyy}.'"></field>
-
-		<field name="calendar_titleFormat_day" type="text" default="dddd, MMM d, yyyy" size="30" label="Calendar title - in day view:"
-                       description="Determines the title of the calendar in day view. Uses formatDate/formatDates formatting rules. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/text/timeFormat  The default is 'dddd, MMM d, yyyy.'"></field>
+                <field name="slotMinutes" type="text" default="30" size="10" 
+		       label="MOD_CIVICRM_FULLCALENDAR_TIME_SLOT_DURATION_MINUTES"
+                       description="MOD_CIVICRM_FULLCALENDAR_TIME_SLOT_DURATION_MINUTES_DESCRIPTION">
+		</field>
 
 
 
 
+		<field name="calendar_titleFormat_month" type="text" default="MMMM yyyy" size="30" 
+		       label="MOD_CIVICRM_FULLCALENDAR_CALENDAR_TITLE_IN_MONTH_VIEW"
+                       description="MOD_CIVICRM_FULLCALENDAR_CALENDAR_TITLE_IN_MONTH_VIEW_DESCRIPTION">
+		</field>
+
+		<field name="calendar_titleFormat_week" type="text" default="MMM d[ yyyy]{ \'&#8212;\'[ MMM] d yyyy}" size="30" 
+		       label="MOD_CIVICRM_FULLCALENDAR_CALENDAR_TITLE_IN_WEEK_VIEW"
+                       description="MOD_CIVICRM_FULLCALENDAR_CALENDAR_TITLE_IN_WEEK_VIEW_DESCRIPTION">
+	       </field>
+
+		<field name="calendar_titleFormat_day" type="text" default="dddd, MMM d, yyyy" size="30" 
+		       label="MOD_CIVICRM_FULLCALENDAR_CALENDAR_TITLE_IN_DAY_VIEW"
+                       description="MOD_CIVICRM_FULLCALENDAR_CALENDAR_TITLE_IN_DAY_VIEW_DESCRIPTION">
+	       </field>
+
+		<field name="agenda_timeFormat" type="text" default="h:mm{ - h:mm}" size="30" 
+		       label="MOD_CIVICRM_FULLCALENDAR_EVENT_TIME_FORMAT_AGENDAWEEK_AND_AGENDADAY_VIEWS"
+                       description="MOD_CIVICRM_FULLCALENDAR_EVENT_TIME_FORMAT_AGENDAWEEK_AND_AGENDADAY_VIEWS_DESCRIPTION">
+		</field>
+		<field name="allother_timeFormat" type="text" default="h:mm TT" size="20" 
+		       label="MOD_CIVICRM_FULLCALENDAR_EVENT_TIME_FORMAT_ALL_OTHER_VIEWS"
+                       description="MOD_CIVICRM_FULLCALENDAR_EVENT_TIME_FORMAT_ALL_OTHER_VIEWS_DESCRIPTION">
+	        </field>
 
 
 
-		<field name="agenda_timeFormat" type="text" default="h:mm{ - h:mm}" size="30" label="Event time format (agendaWeek and agendaDay views):"
-                       description="Determines the time-text that will be displayed on an event appearing in the agendaWeek and agendaDay The value is a format-string that will be processed by formatDate.  The default value of 'h:mm { - h:mm}' will produce times that look like '9:00 AM - 1:00 PM'. For those outside of the United States, you may prefer 'H:mm{ - H:mm}'. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/text/timeFormat  Time-text will only be displayed for Event Objects that have allDay equal to false.  The default is 'h:mm{ - h:mm}'."></field>
-		<field name="allother_timeFormat" type="text" default="h:mm TT" size="20" label="Event time format (all other views):"
-                       description="Determines the time-text that will be displayed on an event appearing in views other than agendaWeek and agendaDay The value is a format-string that will be processed by formatDate.  The default value of 'h:mm TT' will produce times that look like '9:00 AM' and '1:00 PM'. For those outside of the United States, you may prefer 'H:mm'. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/text/timeFormat  Time-text will only be displayed for Event Objects that have allDay equal to false."></field>
+		<field name="axisFormat" type="text" default="h:mm TT" size="20" 
+		       label="MOD_CIVICRM_FULLCALENDAR_AGENDA_VIEW_VERTICAL_AXIS_TIME_FORMAT"
+                       description="MOD_CIVICRM_FULLCALENDAR_AGENDA_VIEW_VERTICAL_AXIS_TIME_FORMAT_DESCRIPTION">
+		</field>
 
 
-
-		<field name="axisFormat" type="text" default="h:mm TT" size="20" label="Agenda view vertical axis time format:"
-                       description="Determines the time-text that will be displayed on the vertical axis of the agenda views.  The value is a format-string that will be processed by formatDate.  The default value of 'h:mm TT' will produce times that look like '9:00 AM' and '1:00 PM'. For those outside of the United States, you may prefer 'H:mm'. For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/agenda/axisFormat/"></field>
-
-
-		<field name="showCalNav" type="radio" default="1" label="Calendar Navigation Buttons:"
-		       description="Show or Hide calendar navigation buttons">
-		  <option value="1">Show</option>
-		  <option value="0">Hide</option>
+		<field name="showCalNav" type="radio" default="1" 
+		       label="MOD_CIVICRM_FULLCALENDAR_CALENDAR_NAVIGATION_BUTTONS"
+		       description="MOD_CIVICRM_FULLCALENDAR_CALENDAR_NAVIGATION_BUTTONS_DESCRIPTION">
+		  <option value="1">MOD_CIVICRM_FULLCALENDAR_SHOW</option>
+		  <option value="0">MOD_CIVICRM_FULLCALENDAR_HIDE</option>
 		  </field>
 
-		<field name="firstHour" type="list" default="9" label="First hour of the day (in agenda views):"
-		       description="In the month layout, this determines how many weeks are shown.  For more info, see the FullCalendar documentation at http://arshaw.com/fullcalendar/docs/agenda/firstHour/">
-		  <option value="0">0 (midnight)</option>
-		  <option value="1">1</option>
-		  <option value="2">2</option>
-		  <option value="3">3</option>
-		  <option value="4">4</option>
-		  <option value="5">5</option>
-		  <option value="6">6</option>
-		  <option value="7">7</option>
-		  <option value="8">8</option>
-		  <option value="9">9</option>
-		  <option value="10">10</option>
-		  <option value="11">11</option>
-		  <option value="12">12 (noon)</option>
-		  <option value="13">13</option>
-		  <option value="14">14</option>
-		  <option value="15">15</option>
-		  <option value="16">16</option>
-		  <option value="17">17</option>
-		  <option value="18">18</option>
-		  <option value="19">19</option>
-		  <option value="20">20</option>
-		  <option value="21">21</option>
-		  <option value="22">22</option>
-		  <option value="23">23</option>
+		<field name="firstHour" type="list" default="9" 
+		       label="MOD_CIVICRM_FULLCALENDAR_FIRST_HOUR_OF_THE_DAY_IN_AGENDA_VIEWS"
+		       description="MOD_CIVICRM_FULLCALENDAR_FIRST_HOUR_OF_THE_DAY_IN_AGENDA_VIEWS_DESCRIPTION">
+		  <option value="0">MOD_CIVICRM_FULLCALENDAR_12_AM</option>
+		  <option value="1">MOD_CIVICRM_FULLCALENDAR_1_AM</option>
+		  <option value="2">MOD_CIVICRM_FULLCALENDAR_2_AM</option>
+		  <option value="3">MOD_CIVICRM_FULLCALENDAR_3_AM</option>
+		  <option value="4">MOD_CIVICRM_FULLCALENDAR_4_AM</option>
+		  <option value="5">MOD_CIVICRM_FULLCALENDAR_5_AM</option>
+		  <option value="6">MOD_CIVICRM_FULLCALENDAR_6_AM</option>
+		  <option value="7">MOD_CIVICRM_FULLCALENDAR_7_AM</option>
+		  <option value="8">MOD_CIVICRM_FULLCALENDAR_8_AM</option>
+		  <option value="9">MOD_CIVICRM_FULLCALENDAR_9_AM</option>
+		  <option value="10">MOD_CIVICRM_FULLCALENDAR_10_AM</option>
+		  <option value="11">MOD_CIVICRM_FULLCALENDAR_11_AM</option>
+		  <option value="12">MOD_CIVICRM_FULLCALENDAR_12_PM</option>
+		  <option value="13">MOD_CIVICRM_FULLCALENDAR_1_PM</option>
+		  <option value="14">MOD_CIVICRM_FULLCALENDAR_2_PM</option>
+		  <option value="15">MOD_CIVICRM_FULLCALENDAR_3_PM</option>
+		  <option value="16">MOD_CIVICRM_FULLCALENDAR_4_PM</option>
+		  <option value="17">MOD_CIVICRM_FULLCALENDAR_5_PM</option>
+		  <option value="18">MOD_CIVICRM_FULLCALENDAR_6_PM</option>
+		  <option value="19">MOD_CIVICRM_FULLCALENDAR_7_PM</option>
+		  <option value="20">MOD_CIVICRM_FULLCALENDAR_8_PM</option>
+		  <option value="21">MOD_CIVICRM_FULLCALENDAR_9_PM</option>
+		  <option value="22">MOD_CIVICRM_FULLCALENDAR_10_PM</option>
+		  <option value="23">MOD_CIVICRM_FULLCALENDAR_11_PM</option>
 		</field>
 
 
 
-                <field name="maxevents" type="text" default="10" size="10" label="Maximum Events Listed:"
-                       description="Maximum number of events to be listed."></field>
+                <field name="maxevents" type="text" default="10" size="10" 
+		       label="MOD_CIVICRM_FULLCALENDAR_MAXIMUM_EVENTS_LISTED"
+                       description="MOD_CIVICRM_FULLCALENDAR_MAXIMUM_EVENTS_LISTED_DESCRIPTION">
+		</field>
 
 <!--
-                <field name="showduration" type="radio" default="1" label="Show event duration?:"
-                       description="Indicate if you want the event duration shown.">
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
+                <field name="showduration" type="radio" default="1" 
+		       label="MOD_CIVICRM_FULLCALENDAR_SHOW_EVENT_DURATION"
+                       description="MOD_CIVICRM_FULLCALENDAR_SHOW_EVENT_DURATION_DESCRIPTION">
+		       <option value="1">MOD_CIVICRM_FULLCALENDAR_YES</option>
+                    <option value="0">MOD_CIVICRM_FULLCALENDAR_NO</option>
                 </field>
-                <field name="summary" type="radio" default="1" label="Display Summary Text?:"
-                       description="Do you want to include event summary text with the listing?">
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
+                <field name="summary" type="radio" default="1" 
+		       label="MOD_CIVICRM_FULLCALENDAR_DISPLAY_SUMMARY_TEXT"
+                       description="MOD_CIVICRM_FULLCALENDAR_DISPLAY_SUMMARY_TEXT_DESCRIPTION">
+                    <option value="1">MOD_CIVICRM_FULLCALENDAR_YES</option>
+                    <option value="0">MOD_CIVICRM_FULLCALENDAR_NO</option>
                 </field>
 -->
 
-                <field name="fieldtemplate" type="text" default="{event_title} ({event_street_address})" size="60" label="Field Template:" description="Set what text is displayed.  Available fields are {event_title}, {event_street_address}, {event_supplemental_address_1}, {event_supplemental_address_2}, {event_duration}, {event_summary}. This will allow for use of hypens and other formating characters, just replacing the fields in curly brackets. Default: {event_title} ({event_street_address})">
-		  </field>
+                <field name="fieldtemplate" type="text" default="{event_title} ({event_street_address})" size="60" 
+		       label="MOD_CIVICRM_FULLCALENDAR_FIELD_TEMPLATE"
+		       description="MOD_CIVICRM_FULLCALENDAR_FIELD_TEMPLATE_DESCRIPTION">
+		</field>
 
 
-		<field name="modal" type="radio" default="1" label="Link Style:"
-		       description="Select Modal Link or Normal Link">
-		  <option value="1">Modal Popup</option>
-		  <option value="0">Page Redirection</option>
+		<field name="modal" type="radio" default="1" 
+		       label="MOD_CIVICRM_FULLCALENDAR_LINK_STYLE"
+		       description="MOD_CIVICRM_FULLCALENDAR_LINK_STYLE_DESCRIPTION">
+		  <option value="1">MOD_CIVICRM_FULLCALENDAR_MODAL_POPUP</option>
+		  <option value="0">MOD_CIVICRM_FULLCALENDAR_PAGE_REDIRECTION</option>
 		</field>
 
 
                 <field type="spacer" hr="true"/>
-                <field type="spacer" label="&lt;b&gt;Color Settings&lt;/b&gt;"/>
+                <field type="spacer" 
+		       label="MOD_CIVICRM_FULLCALENDAR_COLOR_SETTINGS"
+		       />
 
-                <field name="colorby" type="list" default="0" label="Color by:"
-                       description="Choose how to color events">
-                    <option value="0">Event Duration</option>
-                    <option value="1">Event Type</option>
-                    <option value="2">Event Street Address</option>
-                    <option value="3">Event Supplemental Address 1</option>
-                    <option value="4">Event Supplemental Address 2</option> 
+                <field name="colorby" type="list" default="0" 
+		       label="MOD_CIVICRM_FULLCALENDAR_COLOR_BY"
+                       description="MOD_CIVICRM_FULLCALENDAR_COLOR_BY_DESCRIPTION">
+                    <option value="0">MOD_CIVICRM_FULLCALENDAR_EVENT_DURATION</option>
+                    <option value="1">MOD_CIVICRM_FULLCALENDAR_EVENT_TYPE</option>
+                    <option value="2">MOD_CIVICRM_FULLCALENDAR_EVENT_STREET_ADDRESS</option>
+                    <option value="3">MOD_CIVICRM_FULLCALENDAR_EVENT_SUPPLEMENTAL_ADDRESS_1</option>
+                    <option value="4">MOD_CIVICRM_FULLCALENDAR_EVENT_SUPPLEMENTAL_ADDRESS_2</option> 
                 </field>
 
-                <field name="colorpicker" type="list" default="0" label="Color Theme:"
-                       description="Choose a color theme for events">
-                    <option value="0">Primary Colors</option>
-                    <option value="1">Light Colors</option>
-                    <option value="2">Strong Colors</option>
-                    <option value="3">Blue</option>
-                    <option value="4">Custom Colors</option>
+                <field name="colorpicker" type="list" default="0" 
+		       label="MOD_CIVICRM_FULLCALENDAR_COLOR_THEME"
+                       description="MOD_CIVICRM_FULLCALENDAR_COLOR_THEME_DESCRIPTION">
+                    <option value="0">MOD_CIVICRM_FULLCALENDAR_PRIMARY_COLORS</option>
+                    <option value="1">MOD_CIVICRM_FULLCALENDAR_LIGHT_COLORS</option>
+                    <option value="2">MOD_CIVICRM_FULLCALENDAR_STRONG_COLORS</option>
+                    <option value="3">MOD_CIVICRM_FULLCALENDAR_BLUE</option>
+                    <option value="4">MOD_CIVICRM_FULLCALENDAR_CUSTOM_COLORS</option>
                 </field>
 
-                <field type="spacer" label="Event Custom Background Colors (&lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;CSS color names&lt;/a&gt;)"  description="&lt;b&gt;Custom Colors&lt;/b&gt; (for this, choose 'Custom Colors' in the Color Theme dropdown box above.  In the text box to the right, use CSS &lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;color names&lt;/a&gt; or hex values separated by spaces. If using hex values, remember the # - for example the color gold would be #FFD700):"/>
-                <field name="customcolors" type="color" label="Color:"></field>
+                <field type="spacer" 
+		       label="MOD_CIVICRM_FULLCALENDAR_EVENT_CUSTOM_BACKGROUND_COLORS"
+		       description="MOD_CIVICRM_FULLCALENDAR_EVENT_CUSTOM_BACKGROUND_COLORS_DESCRIPTION"/>
+                <field name="customcolors" type="color" 
+		       label="MOD_CIVICRM_FULLCALENDAR_COLOR">
+		</field>
 
 
-		<field name="eventTextColor" type="text" default="black" size="10" label="Event Text Color (&lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;CSS color name&lt;/a&gt;):" description="In the text box, use CSS &lt;A href='http://www.w3schools.com/cssref/css_colornames.asp'&gt;color names&lt;/a&gt; or hex values separated by spaces to set the text color of the &lt;event text&gt;. If using hex values, remember the # - for example the color gold would be #FFD700).  The default is 'black'"></field>
+		<field name="eventTextColor" type="text" default="black" size="10" 
+		       label="MOD_CIVICRM_FULLCALENDAR_EVENT_TEXT_COLOR"
+		       description="MOD_CIVICRM_FULLCALENDAR_EVENT_TEXT_COLOR_DESCRIPTION">
+		</field>
 
 
 
-		<field name="useHighContrast" type="radio" default="0" label="High Contrast Event Text:"
-		       description="Select High Contrast to compute the best contrast for event text on the calendar.  Text will be displayed in white or black.  This OVERRIDES the selection for Event Text Color.">
-		  <option value="0">Disabled</option>
-		  <option value="1">High Contrast</option>
+		<field name="useHighContrast" type="radio" default="0" 
+		       label="MOD_CIVICRM_FULLCALENDAR_HIGH_CONTRAST_EVENT_TEXT"
+		       description="MOD_CIVICRM_FULLCALENDAR_HIGH_CONTRAST_EVENT_TEXT_DESCRIPTION">
+		  <option value="0">MOD_CIVICRM_FULLCALENDAR_DISABLED</option>
+		  <option value="1">MOD_CIVICRM_FULLCALENDAR_HIGH_CONTRAST</option>
 		</field>
 
 
@@ -223,49 +260,66 @@
 		|                                                  |
 		+==================================================+
 	      -->
-            <fieldset name="customselect"  label="Event Selection Options:">
+            <fieldset name="customselect"  
+		      label="MOD_CIVICRM_FULLCALENDAR_EVENT_SELECTION_OPTIONS"
+		      >
                 <legend><?php echo JText::_('Event Selection Mode'); ?></legend>
 
-                <field name="privacy" type="radio" default="1" label="Privacy:"
-                       description="Select Public or Private Events">
-                    <option value="1">Public</option>
-                    <option value="2">Private</option>
-                    <option value="0">Both</option>
+                <field name="privacy" type="radio" default="1" 
+		       label="MOD_CIVICRM_FULLCALENDAR_PRIVACY"
+                       description="MOD_CIVICRM_FULLCALENDAR_PRIVACY_DESCRIPTION">
+                    <option value="1">MOD_CIVICRM_FULLCALENDAR_PUBLIC</option>
+                    <option value="2">MOD_CIVICRM_FULLCALENDAR_PRIVATE</option>
+                    <option value="0">MOD_CIVICRM_FULLCALENDAR_BOTH</option>
                 </field>
 
-                <field name="pastevents" type="radio" default="0" label="Display Past Events:"
-                       description="Show or hide events that have already happened">
-                    <option value="0">Show Past Events</option>
-                    <option value="1">Hide Past Events</option>
+                <field name="pastevents" type="radio" default="0" 
+		       label="MOD_CIVICRM_FULLCALENDAR_DISPLAY_PAST_EVENTS"
+                       description="MOD_CIVICRM_FULLCALENDAR_DISPLAY_PAST_EVENTS_DESCRIPTION">
+                    <option value="0">MOD_CIVICRM_FULLCALENDAR_SHOW_PAST_EVENTS</option>
+                    <option value="1">MOD_CIVICRM_FULLCALENDAR_HIDE_PAST_EVENTS</option>
                 </field>
 
                 <field type="spacer" hr="true"/>
                 <field type="spacer" hr="true"/>
 
 
-                <field name="mode" type="list" default="0" label="Event Selection Mode:"
-                       description="Choose event selection method">
-                    <option value="0">Disable</option>
-                    <option value="1">Date Range</option>
-                    <option value="2">Event Selection</option>
-                    <option value="3">Event Type</option>
+                <field name="mode" type="list" default="0" 
+		       label="MOD_CIVICRM_FULLCALENDAR_EVENT_SELECTION_MODE"
+                       description="MOD_CIVICRM_FULLCALENDAR_EVENT_SELECTION_MODE_DESCRIPTION">
+                    <option value="0">MOD_CIVICRM_FULLCALENDAR_DISABLE</option>
+                    <option value="1">MOD_CIVICRM_FULLCALENDAR_DATE_RANGE</option>
+                    <option value="2">MOD_CIVICRM_FULLCALENDAR_EVENT_SELECTION</option>
+                    <option value="3">MOD_CIVICRM_FULLCALENDAR_EVENT_TYPE</option>
                 </field>
+                <field type="spacer" 
+		       label="MOD_CIVICRM_FULLCALENDAR_MODE_DATE_RANGE_OPTIONS"
+		       />
 
-                <field type="spacer" label="&lt;b&gt;Mode: Date Range Options&lt;/b&gt;:"/>
-
-                <field name="startdate" type="calendar" default="Select" label="Start date:" description=""
+                <field name="startdate" type="calendar" default="Select" 
+		       label="MOD_CIVICRM_FULLCALENDAR_START_DATE"
+		       description="MOD_CIVICRM_FULLCALENDAR_START_DATE_DESCRIPTION"
                        format="%d-%m-%Y"/>
-                <field name="enddate" type="calendar" default="Select" label="End date:" description=""
+                <field name="enddate" type="calendar" default="Select" 
+		       label="MOD_CIVICRM_FULLCALENDAR_END_DATE"
+		       description="MOD_CIVICRM_FULLCALENDAR_END_DATE_DESCRIPTION"
                        format="%d-%m-%Y"/>
 
-                <field type="spacer" label="&lt;b&gt;Mode: Custom Event Selection Options&lt;/b&gt;:"/>
+                <field type="spacer" 
+		       label="MOD_CIVICRM_FULLCALENDAR_MODE_CUSTOM_EVENT_SELECTION_OPTIONS"
+		       />
 
-                <field name="multievent" type="eventlist" default="0" label="Select Events:"
-                       description="Select Events to be displayed"/>
+                <field name="multievent" type="eventlist" default="0" 
+		       label="MOD_CIVICRM_FULLCALENDAR_SELECT_EVENTS"
+                       description="MOD_CIVICRM_FULLCALENDAR_SELECT_EVENTS_DESCRIPTION"/>
 
-                <field type="spacer" label="&lt;b&gt;Mode: Event Type Options&lt;/b&gt;:"/>
+                <field type="spacer" 
+		       label="MOD_CIVICRM_FULLCALENDAR_MODE_EVENT_TYPE_OPTIONS"
+		       />
 
-                <field name="tid" type="sql" default="10" label="Event Type:" query="
+                <field name="tid" type="sql" default="10" 
+		       label="MOD_CIVICRM_FULLCALENDAR_EVENT_TYPE_QUERY"
+		       query="
             SELECT civicrm_option_value.value, civicrm_option_value.label
             FROM civicrm_option_value
             INNER JOIN
@@ -288,16 +342,21 @@
 		|                                                  |
 		+==================================================+
 	      -->
-            <fieldset name="legendoptions"  label="Color Legend Options">
-		<field name="legendpicker" type="list" default="0" label="Choice of Legend:"
-                       description="Choose a color theme for events">
-                    <option value="0">None</option>
-                    <option value="1">Legend 1</option>
-                    <option value="2">Legend 2</option>
-                    <option value="3">Legend 3</option>
+            <fieldset name="legendoptions"  
+		      label="MOD_CIVICRM_FULLCALENDAR_COLOR_LEGEND_OPTIONS"
+		      >
+		<field name="legendpicker" type="list" default="0" 
+		       label="MOD_CIVICRM_FULLCALENDAR_CHOICE_OF_LEGEND"
+                       description="MOD_CIVICRM_FULLCALENDAR_CHOICE_OF_LEGEND_DESCRIPTION">
+                    <option value="0">MOD_CIVICRM_FULLCALENDAR_NONE</option>
+                    <option value="1">MOD_CIVICRM_FULLCALENDAR_LEGEND_1</option>
+                    <option value="2">MOD_CIVICRM_FULLCALENDAR_LEGEND_2</option>
+                    <option value="3">MOD_CIVICRM_FULLCALENDAR_LEGEND_3</option>
                 </field>
-                <field name="legendLabel" type="text" default="Color Legend" size="50" label="Legend Label:"
-                       description="The textual label for the legend.  For example: 'Color Legend'"></field>
+                <field name="legendLabel" type="text" default="Color Legend" size="50" 
+		       label="MOD_CIVICRM_FULLCALENDAR_LEGEND_LABEL"
+                       description="MOD_CIVICRM_FULLCALENDAR_LEGEND_LABEL_DESCRIPTION">
+		</field>
             </fieldset>
 
 
@@ -313,14 +372,20 @@
 		|                                                  |
 		+==================================================+
 	      -->
-            <fieldset name="filteroptionsfieldset"  label="Front End / User Filter Options">
-		<field name="filterOnStreetAddress" type="radio" default="0" label="Front End Filter on Street Address Field:"
-		       description="Show or Hide a filter on the front end to dynamically filter on event on the calendar">
-		  <option value="0">Hide</option>
-		  <option value="1">Show</option>
+            <fieldset name="filteroptionsfieldset"  
+		      label="MOD_CIVICRM_FULLCALENDAR_FRONT_END_USER_FILTER_OPTIONS"
+		      >
+		<field name="filterOnStreetAddress" type="radio" default="0" 
+		       label="MOD_CIVICRM_FULLCALENDAR_FRONT_END_FILTER_ON_STREET_ADDRESS_FIELD"
+		       description="MOD_CIVICRM_FULLCALENDAR_FRONT_END_FILTER_ON_STREET_ADDRESS_FIELD_DESCRIPTION">
+		  <option value="0">MOD_CIVICRM_FULLCALENDAR_HIDE</option>
+		  <option value="1">MOD_CIVICRM_FULLCALENDAR_SHOW</option>
 		  </field>
-                <field name="filterTextForAllStreetAddresses" type="text" default="ALL LOCATIONS" size="50" label="Text for 'All Locations' for Street Address filter:"
-                       description="The textual value for the first entry in the filter which is for all locations.  Default: ALL LOCATIONS">
+                <field name="filterTextForAllStreetAddresses" type="text" 
+		       default="ALL LOCATIONS"
+		       size="50" 
+		       label="MOD_CIVICRM_FULLCALENDAR_TEXT_FOR_ALL_LOCATIONS_FOR_STREET_ADDRESS_FILTER"
+                       description="MOD_CIVICRM_FULLCALENDAR_TEXT_FOR_ALL_LOCATIONS_FOR_STREET_ADDRESS_FILTER_DESCRIPTION">
 		</field>
             </fieldset>
 
@@ -335,9 +400,12 @@
 		|                                                  |
 		+==================================================+
 	      -->
-            <fieldset name="advancedoptionsfieldset"  label="Advanced Options">
-                <field name="advancedoptions" type="text" default="" size="60" label="Additonal Parameters to pass to FullCalendar:"
-                       description="To pass paramaters not set in this module interface, you can pass them here.  Please be careful - your text will be passed as is.  See http://http://arshaw.com/fullcalendar for additional paramaters.  Use commas to separate for more than one set.  For example this will create a calendar that has only 5 days with the first day as Wednesday: weekends: false, firstDay: 3">
+            <fieldset name="advancedoptionsfieldset"  
+		      label="MOD_CIVICRM_FULLCALENDAR_ADVANCED_OPTIONS"
+		      >
+                <field name="advancedoptions" type="text" default="" size="60" 
+		       label="MOD_CIVICRM_FULLCALENDAR_ADDITONAL_PARAMETERS_TO_PASS_TO_FULLCALENDAR"
+                       description="MOD_CIVICRM_FULLCALENDAR_ADDITONAL_PARAMETERS_TO_PASS_TO_FULLCALENDAR_DESCRIPTION">
 		</field>
 
             </fieldset>
@@ -347,6 +415,15 @@
 
         </fields>
     </config>
+
+
+<languages>
+   <language tag="en-GB">en-GB.mod_civicrm_fullcalendar.ini</language>
+   <language tag="en-US">en-GB.mod_civicrm_fullcalendar.ini</language>
+   <language tag="es-ES">es-ES.mod_civicrm_fullcalendar.ini</language>
+</languages>
+
+
 
 	<updateservers>
 		<server type="extension" priority="1" name="CiviCRM FullCalendar">https://raw.github.com/lgiacalone3/fullcal/master/mod_civicrm_fullcalendar-update.xml</server>

@@ -7,8 +7,8 @@ class modCiviCRMFullCalendarHelper
     {
         jimport('joomla.application.module.helper');
 
-        $mode = trim($params->get('mode'));
         $db =& JFactory::getDBO();
+        $mode = trim($params->get('mode'));
         $result = null;
         $link = trim($params->get('link'));
         $multievent = $params->get('multievent');
@@ -19,35 +19,38 @@ class modCiviCRMFullCalendarHelper
         $pastevents = trim($params->get('pastevents'));
         $isonline = " AND is_online_registration = 1 ";
 
+        
+        
+
         //retrieve all custom data tables impacting events
         $customdatapresent = 1; //assume data unless none found below
-
         $query_customevent = 
         	"SELECT table_name ".
-        	"FROM civicrm_custom_group".
+        	"FROM civicrm_custom_group ".
         	"WHERE extends = 'Event' ";
-
+        
         $db->setQuery($query_customevent);
         $result_customevent = $db->loadObjectList();
-
+        
         if ($db->getErrorNum()) {
             $customdatapresent = 0;
         }
         //print_r($result_customevent);
         //echo '<br />';
 
+        
+        
         $select = "SELECT ";
         $from = " FROM " ;
         $where = " WHERE " ; 
         $orderby = " ORDER BY ";
 
          //set core SELECT and FROM clauses based on presence of custom fields
-        if ($customdatapresent == 0) { //no custom data
+        $customdatapresent = 0 ; if ($customdatapresent == 0) { //no custom data
             $select .= "e.title, e.id AS eventID, e.start_date, e.end_date, ".
             			"e.event_type_id, e.summary, e.is_active, ".
             			"e.is_public, e.is_online_registration " ;
             $from .= "civicrm_event e ";
-
         } elseif ($customdatapresent == 1) { //custom data present
 
             //for each custom event custom data table, build SELECT and FROM clause
@@ -61,8 +64,9 @@ class modCiviCRMFullCalendarHelper
                     $from .= ' LEFT OUTER JOIN ' . $tablename . ' ON (' . $tablename . '.entity_id = civicrm_event.id)';
                 }
             }
-        } // elsif
-
+        } 
+        
+        
         //set core WHERE clause
         $where .= 'e.is_active = 1 AND e.is_template != 1 ';
 
@@ -182,8 +186,6 @@ class modCiviCRMFullCalendarHelper
         //run $query;
         $db->setQuery($query);
         $result = $db->loadObjectList();
-
-
         
         if ($db->getErrorNum()) {
             JError::raiseWarning(500, "No events meet the selected criteria.");
