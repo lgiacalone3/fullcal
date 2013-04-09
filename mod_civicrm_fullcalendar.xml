@@ -7,9 +7,8 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.39</version>
-    <description>MOD_CIVICRM_FULLCALENDAR_DESCRIPTION
-    </description>
+    <version>0.1.40</version>
+    <description>MOD_CIVICRM_FULLCALENDAR_DESCRIPTION</description>
 <!--
 	<install>
     	<sql>
@@ -32,6 +31,7 @@
         <filename>index.html</filename>
         <filename>helper.php</filename>
         <folder>elements/</folder>
+	<folder>language/</folder>
         <folder>fullcalendar/</folder>
         <folder>tmpl/</folder>
     </files>
@@ -418,9 +418,14 @@
 
 
 <languages>
-   <language tag="en-GB">en-GB.mod_civicrm_fullcalendar.ini</language>
-   <language tag="en-US">en-GB.mod_civicrm_fullcalendar.ini</language>
-   <language tag="es-ES">es-ES.mod_civicrm_fullcalendar.ini</language>
+   <language tag="en-GB">language/en-GB/en-GB.mod_civicrm_fullcalendar.ini</language>
+   <language tag="en-GB">language/en-GB/en-GB.mod_civicrm_fullcalendar.sys.ini</language>
+
+   <language tag="en-US">language/en-US/en-GB.mod_civicrm_fullcalendar.ini</language>
+   <language tag="en-US">language/en-US/en-GB.mod_civicrm_fullcalendar.sys.ini</language>
+
+   <language tag="es-ES">language/es-ES/es-ES.mod_civicrm_fullcalendar.ini</language>
+   <language tag="es-ES">language/es-ES/es-ES.mod_civicrm_fullcalendar.sys.ini</language>
 </languages>
 
 
