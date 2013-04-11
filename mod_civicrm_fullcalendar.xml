@@ -2,12 +2,12 @@
 <extension type="module" version="2.5.0" client="site" method="install">
     <name>MOD_CIVICRM_FULLCALENDAR</name>
     <author>Louis Giacalone, Andrew Schmitt</author>
-    <creationDate>December 2012</creationDate>
+    <creationDate>April 2013</creationDate>
     <copyright>Copyright (C)2012 Andrew Schmitt, Louis Giacalone</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.40</version>
+    <version>0.1.41</version>
     <description>MOD_CIVICRM_FULLCALENDAR_DESCRIPTION</description>
 <!--
 	<install>
@@ -162,7 +162,7 @@
 
 
 
-                <field name="maxevents" type="text" default="10" size="10" 
+                <field name="maxevents" type="text" default="999" size="10" 
 		       label="MOD_CIVICRM_FULLCALENDAR_MAXIMUM_EVENTS_LISTED"
                        description="MOD_CIVICRM_FULLCALENDAR_MAXIMUM_EVENTS_LISTED_DESCRIPTION">
 		</field>
@@ -201,7 +201,7 @@
 		       label="MOD_CIVICRM_FULLCALENDAR_COLOR_SETTINGS"
 		       />
 
-                <field name="colorby" type="list" default="0" 
+                <field name="colorby" type="list" default="1" 
 		       label="MOD_CIVICRM_FULLCALENDAR_COLOR_BY"
                        description="MOD_CIVICRM_FULLCALENDAR_COLOR_BY_DESCRIPTION">
                     <option value="0">MOD_CIVICRM_FULLCALENDAR_EVENT_DURATION</option>
@@ -211,7 +211,7 @@
                     <option value="4">MOD_CIVICRM_FULLCALENDAR_EVENT_SUPPLEMENTAL_ADDRESS_2</option> 
                 </field>
 
-                <field name="colorpicker" type="list" default="0" 
+                <field name="colorpicker" type="list" default="2" 
 		       label="MOD_CIVICRM_FULLCALENDAR_COLOR_THEME"
                        description="MOD_CIVICRM_FULLCALENDAR_COLOR_THEME_DESCRIPTION">
                     <option value="0">MOD_CIVICRM_FULLCALENDAR_PRIMARY_COLORS</option>
@@ -236,7 +236,7 @@
 
 
 
-		<field name="useHighContrast" type="radio" default="0" 
+		<field name="useHighContrast" type="radio" default="1" 
 		       label="MOD_CIVICRM_FULLCALENDAR_HIGH_CONTRAST_EVENT_TEXT"
 		       description="MOD_CIVICRM_FULLCALENDAR_HIGH_CONTRAST_EVENT_TEXT_DESCRIPTION">
 		  <option value="0">MOD_CIVICRM_FULLCALENDAR_DISABLED</option>
@@ -284,7 +284,7 @@
                 <field type="spacer" hr="true"/>
 
 
-                <field name="mode" type="list" default="0" 
+                <field name="mode" type="list" default="3" 
 		       label="MOD_CIVICRM_FULLCALENDAR_EVENT_SELECTION_MODE"
                        description="MOD_CIVICRM_FULLCALENDAR_EVENT_SELECTION_MODE_DESCRIPTION">
                     <option value="0">MOD_CIVICRM_FULLCALENDAR_DISABLE</option>
@@ -345,7 +345,7 @@
             <fieldset name="legendoptions"  
 		      label="MOD_CIVICRM_FULLCALENDAR_COLOR_LEGEND_OPTIONS"
 		      >
-		<field name="legendpicker" type="list" default="0" 
+		<field name="legendpicker" type="list" default="2" 
 		       label="MOD_CIVICRM_FULLCALENDAR_CHOICE_OF_LEGEND"
                        description="MOD_CIVICRM_FULLCALENDAR_CHOICE_OF_LEGEND_DESCRIPTION">
                     <option value="0">MOD_CIVICRM_FULLCALENDAR_NONE</option>
