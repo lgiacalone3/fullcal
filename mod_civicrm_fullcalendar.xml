@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.41</version>
+    <version>0.1.42</version>
     <description>MOD_CIVICRM_FULLCALENDAR_DESCRIPTION</description>
 <!--
 	<install>
@@ -273,24 +273,23 @@
                     <option value="0">MOD_CIVICRM_FULLCALENDAR_BOTH</option>
                 </field>
 
-                <field name="pastevents" type="radio" default="0" 
+                <field name="showpastevents" type="radio" default="1"  
 		       label="MOD_CIVICRM_FULLCALENDAR_DISPLAY_PAST_EVENTS"
                        description="MOD_CIVICRM_FULLCALENDAR_DISPLAY_PAST_EVENTS_DESCRIPTION">
-                    <option value="0">MOD_CIVICRM_FULLCALENDAR_SHOW_PAST_EVENTS</option>
-                    <option value="1">MOD_CIVICRM_FULLCALENDAR_HIDE_PAST_EVENTS</option>
+                    <option value="1">MOD_CIVICRM_FULLCALENDAR_SHOW_PAST_EVENTS</option>
+                    <option value="0">MOD_CIVICRM_FULLCALENDAR_HIDE_PAST_EVENTS</option>
                 </field>
 
                 <field type="spacer" hr="true"/>
                 <field type="spacer" hr="true"/>
 
 
-                <field name="mode" type="list" default="3" 
+                <field name="mode" type="list" default="0" 
 		       label="MOD_CIVICRM_FULLCALENDAR_EVENT_SELECTION_MODE"
                        description="MOD_CIVICRM_FULLCALENDAR_EVENT_SELECTION_MODE_DESCRIPTION">
                     <option value="0">MOD_CIVICRM_FULLCALENDAR_DISABLE</option>
                     <option value="1">MOD_CIVICRM_FULLCALENDAR_DATE_RANGE</option>
-                    <option value="2">MOD_CIVICRM_FULLCALENDAR_EVENT_SELECTION</option>
-                    <option value="3">MOD_CIVICRM_FULLCALENDAR_EVENT_TYPE</option>
+                    <option value="2">MOD_CIVICRM_FULLCALENDAR_EVENT_TYPE</option>
                 </field>
                 <field type="spacer" 
 		       label="MOD_CIVICRM_FULLCALENDAR_MODE_DATE_RANGE_OPTIONS"
@@ -304,14 +303,6 @@
 		       label="MOD_CIVICRM_FULLCALENDAR_END_DATE"
 		       description="MOD_CIVICRM_FULLCALENDAR_END_DATE_DESCRIPTION"
                        format="%d-%m-%Y"/>
-
-                <field type="spacer" 
-		       label="MOD_CIVICRM_FULLCALENDAR_MODE_CUSTOM_EVENT_SELECTION_OPTIONS"
-		       />
-
-                <field name="multievent" type="eventlist" default="0" 
-		       label="MOD_CIVICRM_FULLCALENDAR_SELECT_EVENTS"
-                       description="MOD_CIVICRM_FULLCALENDAR_SELECT_EVENTS_DESCRIPTION"/>
 
                 <field type="spacer" 
 		       label="MOD_CIVICRM_FULLCALENDAR_MODE_EVENT_TYPE_OPTIONS"
