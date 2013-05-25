@@ -666,6 +666,9 @@ $statement .=
 								$e_street_address = "";
 							}
 						}  // if(stristr($titleTemplate, "{event_street_address}") != FALSE) {
+						
+						
+						
 				
 						if  (stristr($titleTemplate, "{event_supplemental_address_1}") != FALSE) {
 							// let's encode the string
@@ -717,13 +720,13 @@ $statement .=
 							$the_field = "";
 							switch ($displayParams['locationFilterField']) {
 								case 1:
-									$the_field = $event->street_address;
+									$the_field = $e_street_address ;
 									break;
 								case 2:
-									$the_field = $event->supplemental_address1;
+									$the_field = $e_supplemental_address1;
 									break;
 								case 3:
-									$the_field = $event->supplemental_address2;
+									$the_field = $e_supplemental_address2;
 									break;
 							} // switch
 
@@ -1271,5 +1274,4 @@ $document->addScriptDeclaration($statement);
 
     	?>
 </div><!-- mod_civicrm_fullcalendar -->
-
 
