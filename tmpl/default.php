@@ -498,7 +498,7 @@ $statement .=
 						*  +-----------------------------------------------------+
 						*
 						*/
-						// we need to do lots of date stuff regarless of coloring or
+						// we need to do lots of date stuff regargless of coloring or
 						// if we have {event_duration} in the template
 				
 						$datetime = strtotime($event->start_date);
@@ -516,8 +516,11 @@ $statement .=
 						// Do we event have an end date ???
 						// if not and if the start time was MIDNIGHT, we will assume that this event will
 						// be a pure ALL DAY event
-						// if the start time was not midnight, this will be a reminder of the day event
+						// if the start time was not midnight, this will be a remainder of the day event
 						$datetime = strtotime($event->end_date);
+						
+						
+						
 						if ($datetime == null) {
 							$ed = $sd ;
 							$em = $sm ;
@@ -548,15 +551,18 @@ $statement .=
 							$esec = date('s', $datetime);
 						}
 				
+						
+						
 						//duration and single/multi checker
 						//also sets color for single/multi
 						if ($ed == $sd && $em == $sm && $ey == $sy) {
 							//single day
 				
-				
 							$eventcolor = $color[0];
 							if ( ($emin == $smin) &&  ($shr==$ehr)   ) {
 								$e_duration = "1 day";
+								$allDay = true;
+								
 							} else {
 								if ($ehr - $shr == 1) {
 									$e_duration .= ($ehr - $shr) . " hour";
