@@ -30,7 +30,7 @@ if ( $displayParams['modal'] == "1" ) {
 }
 
 
-if ( $displayParams['filterOnStreetAddress'] == 1 ) {
+if ( $displayParams['filterOnLocation'] == 1 ) {
 	echo
 	  "<div id=\"mod_civicrm_fullcalendar_filter_by\"></div>\n\n";
 }
@@ -64,7 +64,7 @@ $document->addStyleSheet(JURI::base() .
 $statement =  "var \$cfcj = jQuery.noConflict();\n".
 			  "\$cfcj(document).ready(function() {\n";
 					
-if ( $displayParams['filterOnStreetAddress'] === "1" ) {
+if ( $displayParams['filterOnLocation'] === "1" ) {
 	$statement .= "\n\n//DEBUG alert('will init allLocationsText with '+ \$cfcj('#mcfc_location_filter').val() || []  );";
 	$statement .= "\nvar allLocationsText = \$cfcj('#mcfc_location_filter').val()  || [] ; \n\n";
 }
@@ -248,14 +248,29 @@ $statement .=
 			*  +---------------------------------------------+
 			*/
 
-
+			// which categories are in the ones the user wants?
+			foreach ($eventtitles as &$event) {
+				for ($i = 0, $n = count($event->street_address); ($i < $n); $i++) {
+							$which_category_ids[] = $event->event_type_id;
+				} //for
+			}  // foreach
+			$which_category_ids = array_unique($which_category_ids);
+			sort($which_category_ids);
+			$inclausevalues = "";
+			for ( $i=0, $n = count($which_category_ids); ($i < $n); $i++) {
+				$inclausevalues .= $which_category_ids[$i];
+				if ($i < ($n-1)) { $inclausevalues.=","; }  // don't add the last comma
+			}
+			
+			
 			$query = "SELECT civicrm_option_value.value, civicrm_option_value.label
 						FROM civicrm_option_value
 						INNER JOIN
 						civicrm_option_group
 						ON (civicrm_option_value.option_group_id = civicrm_option_group.id)
 						WHERE (civicrm_option_group.name = 'event_type')
-						AND (civicrm_option_value.is_active = '1')";
+			              and value in (".$inclausevalues.")";
+						// AND (civicrm_option_value.is_active = '1')";
 			$db =& JFactory::getDBO();
 			$db->setQuery($query);
 			$result = $db->loadObjectList();
@@ -276,6 +291,7 @@ $statement .=
 				$catname[] = $row['label'];
 			}
 			// ---------------------------------------------------
+			// ---------------------------------------------------
 
 
 
@@ -295,6 +311,8 @@ $statement .=
 			*  |
 			*  +---------------------------------------------+
 			*/
+			
+			/*
 			if ( ($displayParams['colorby'] == 2 ) &&
 					(stristr($titleTemplate, "{event_street_address}") == FALSE)    )  {
 				$locationArray[]="color by legend settings do not match fieds in tempate.";
@@ -310,19 +328,26 @@ $statement .=
 				$locationArray[]="color by legend settings do not match fieds in tempate.";
 				JError::raiseWarning(2001,  $locationArray[0] );
 			} else {
-
-					
+*/
+			
+			
+			if ( 
+					($displayParams['colorby'] == 2 ) ||
+					($displayParams['colorby'] == 3 ) ||
+					($displayParams['colorby'] == 4 ) ||
+					($displayParams['filterOnLocation'] == 1 )
+				){		
+						
 				foreach ($eventtitles as &$event) {
-					// the use of street address below does not look right  schmitt2048
 					for ($i = 0, $n = count($event->street_address); ($i < $n); $i++) {
-						switch ($displayParams['colorby']) {
-							case 2:
+						switch ($displayParams['locationFilterField']) {
+							case 1:
 								$locationArray[] = $event->street_address;
 								break;
-							case 3:
+							case 2:
 								$locationArray[] = $event->supplemental_address1;
 								break;
-							case 4:
+							case 3:
 								$locationArray[] = $event->supplemental_address2;
 								break;
 						} // switch
@@ -330,9 +355,12 @@ $statement .=
 				}  // foreach
 				$locationArray = array_unique($locationArray);
 				sort($locationArray);
+			} // if we need locations for colorby 2,3,4 or filterOnLocation
+				
+				
 	
 
-				} //else
+//				} //else
 				// ---------------------------------------------------
 				
 
@@ -352,13 +380,13 @@ $statement .=
 
 
 				
-				if ( $displayParams['filterOnStreetAddress'] === "1" ) {
+				if ( $displayParams['filterOnLocation'] === "1" ) {
 					$select_and_option_values =
 					JText::_( "MOD_CIVICRM_FULLCALENDAR_FILTER_BY_LOCATION_LABEL" ).
 					":<BR />".
 					"<P>".
 					"<select name='select' id='mcfc_location_filter' multiple>".
-					"<option value='".$displayParams['filterTextForAllStreetAddresses']."' selected>".$displayParams['filterTextForAllStreetAddresses']."</option>";
+					"<option value='".$displayParams['filterTextForAllLocations']."' selected>".$displayParams['filterTextForAllLocations']."</option>";
 						
 						
 					foreach ($locationArray as &$loc) {
@@ -372,7 +400,7 @@ $statement .=
 					"<script type=\"text/javascript\">\n".
 					"document.getElementById('mod_civicrm_fullcalendar_filter_by').innerHTML = \"".$select_and_option_values."\";".
 					"</script>\n\n";
-				} // if ( $displayParams['filterOnStreetAddress'] === "1" )
+				} // if ( $displayParams['filterOnLocation'] === "1" )
 
 			
 
@@ -396,7 +424,7 @@ $statement .=
 						$events_array_statement .=
 						"{\n".
 						"id: '99999999', title: 'TEST EVENT',\n".
-						"eventLoc : 'TEST LOCATION',\n".
+						"eventLoc: 'TEST LOCATION',\n".
 						"textColor: '#FFFFFF',\n".
 						"allDay: false,\n".
 						"start: new Date(2013, 1, 3, 9, 00),\n".
@@ -671,7 +699,41 @@ $statement .=
 							}
 						}  // if(stristr($titleTemplate, "{event_supplemental_address_1}") != FALSE) {
 				
-				
+
+
+						
+						/*
+						 *
+						 *
+						 *
+						 */
+						if (
+								($displayParams['colorby'] == 2) ||
+								($displayParams['colorby'] == 3) ||
+								($displayParams['colorby'] == 4) ||
+								($displayParams['filterOnLocation'] == 1)
+						) {
+								
+							$the_field = "";
+							switch ($displayParams['locationFilterField']) {
+								case 1:
+									$the_field = $event->street_address;
+									break;
+								case 2:
+									$the_field = $event->supplemental_address1;
+									break;
+								case 3:
+									$the_field = $event->supplemental_address2;
+									break;
+							} // switch
+
+
+							$events_array_statement .= "\n\t\t\t\teventLoc: '".
+									$the_field.								"',\n\t\t\t\t";
+
+						}
+						
+						
 				
 				
 						/*
@@ -697,10 +759,9 @@ $statement .=
 				
 						//sets category colors
 						if ($displayParams['colorby'] == 1) {
+							// event type
 							$eventid = $event->event_type_id;
 							$key = array_search($eventid, $categories);
-							//    $eventcolor = $color[$key];
-				
 				
 							// map event type ids to the colors
 							$my_color_key_array = array_keys($categories,$event->event_type_id);
@@ -708,22 +769,20 @@ $statement .=
 						}
 						else if (
 								// color by location
+								// any of the following:
+								//   street_address, supplemental_address_1, supplemental_address_2
 								($displayParams['colorby'] == 2) ||
 								($displayParams['colorby'] == 3) ||
-								($displayParams['colorby'] == 4) ) {
+								($displayParams['colorby'] == 4) 
+								) {
 				
 				
 							$eventcolor = $color[
 							array_search( $event->street_address , $locationArray)];
-				
-							$events_array_statement .= "\n\t\t\t\teventLoc : '".
-									$e_street_address.$e_supplemental_address_1.$e_supplemental_address_2.
-									"',\n\t\t\t\t";
-				
-				
-				
-				
-						} // color by location
+
+
+							
+				        } // color by location
 						//
 						//else {
 						// well, then it was color by duration and that was set up above
@@ -804,7 +863,7 @@ $statement .=
 
 			
 			// add in the javascrupt for front-end filtering 
-			if ( $displayParams['filterOnStreetAddress'] === "1" ) {
+			if ( $displayParams['filterOnLocation'] === "1" ) {
 				$statement .= $js_snippet_mcfc_location_filter_mouseup ;
 			}
 
@@ -843,16 +902,16 @@ JSJS;
 
 			
 			
-			
+				
 			$document->addScript(JURI::base()
-    . 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/jquery-1.8.1.min.js');
+					. 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/jquery-1.8.1.min.js');
 
-$document->addScript(JURI::base()
-    . 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/jquery-ui-1.8.23.custom.min.js');
+			$document->addScript(JURI::base()
+					. 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/jquery-ui-1.8.23.custom.min.js');
 
 
-$document->addScript(JURI::base()
-    . 'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.min.js');
+			$document->addScript(JURI::base()
+					. 'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.min.js');
 
 
 // This will add the javascript call for FullCalendar to the <HEAD>
@@ -1019,23 +1078,11 @@ $document->addScriptDeclaration($statement);
 	if  ( ($legend_picked == "2") ||  ($legend_picked == "3") ) {
 		$legendOutput  = "\t<div id=\"mod_civicrm_fullcalendar_legend\" >\n";
 
-			
-		// how many boexs?
-		// ...
-		// are we coloring by duration?
-		if  ($displayParams['colorby'] == 0)  {
-			$num_o_boxes = 2 ;
-		}
-		else {
-    	$num_o_boxes = count($catname) ;
-		}
-			
 
 		// one more box to say 'legend'
 		// if there is legend text that is not null
 		$legend_offset = 0 ;
 		if ( $legendLabel != null) {
-    		$num_o_boxes++;
     		$legend_offset = 1 ;
     	}
     	$legendOutput .=  "\t\t<div id=\"mod_civicrm_fullcalendar_legend_wrapper\"  >\n";
@@ -1043,7 +1090,10 @@ $document->addScriptDeclaration($statement);
 
     	// are we coloring by duration?
     	if  ($displayParams['colorby'] == 0)  {
-		// yes, coloring by duration and need only two boxes plus maybe the legend
+		// yes, coloring by DURATION and need only two boxes plus maybe the legend
+		$num_o_boxes = 2 ;
+		if ($legendLabel != null) {$num_o_boxes+=1; }
+		
 
 			for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
 				$legendOutput .= "<div class=\"mod_civicrm_fullcalendar_legend_cell\" ";
@@ -1067,37 +1117,85 @@ $document->addScriptDeclaration($statement);
 				$legendOutput .= "color: black;";
 			}
 
-			if ( ($legend_picked == "2") ) {
-							$legendOutput .= "width:".
-									substr_replace(
-							sprintf("%.3f", ((1/$num_o_boxes)*(100 - ($num_o_boxes*.25 )  ) ) )
-							,"",-1
-			).
-			"%;";
-							} else {
-							$legendOutput .= "width: 280px;" ;
-							}
-							$legendOutput .= "\">";
-
-
-
-							// if this is not the 0th row, put in the color
-							// or if this is the 0th row and we don't have legend text, then put in the color
-							if (  ( $i > 0) || (  ( $i == 0) && ( $legendLabel == null) )) {
-								$legendOutput .= $durationColoringTextArray[$i-$legend_offset] ;
-							}
-							// if this is 0th row and we have legend text, then spit out the legend text
-							else if ( ( $i == 0) && ( $legendLabel != null) ) {
-							$legendOutput .= $legendLabel ;
-			}
-
 			$legendOutput .= "</div>";
 			} // for
+			} // if color by druation
+			
+			
+			
+			
+			
+			
+			if (
+					($displayParams['colorby'] == 2) ||
+					($displayParams['colorby'] == 3) ||
+					($displayParams['colorby'] == 4)
+ 				)
+			{
+				$legendOutput .= "\t\t\t<!-- coloring by event location -->\n";
+				$num_o_boxes = count($locationArray) ;
+				if ($legendLabel != null) {$num_o_boxes+=1; }
+				
+				for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
+				$legendOutput .= "\t\t\t<div class=\"mod_civicrm_fullcalendar_legend_cell\" \n";
+				$legendOutput .= "\t\t\t\tstyle=\"";
 
 
-		}
-		else {
-		// nope, coloring by event category
+				// if this is not the 0th box, put in the color
+				// or if this is the 0th box and we don't have legend text, then put in the color
+				if (  ( $i > 0) || (  ( $i == 0) && ( $legendLabel == null) )) {
+					$legendOutput .= "background-color: ".$color[$i-$legend_offset]."; \n";
+					$legendOutput .= "\t\t\t\t";
+						
+					if ( $displayParams[useHighContrast] == true) {
+						$legendOutput .= "color: #".modCiviCRMFullCalendarHelper::getHighContrastColor($color[$i-$legend_offset])."; ";
+					}
+					else {
+						$legendOutput .= "color: ".$displayParams[eventTextColor]."; ";
+					}
+				}
+				// if this is 0th box we have legend text, then spit out the legend text
+				else if ( ( $i == 0) && ( $legendLabel != null) ) {
+					$legendOutput .= "color: black;";
+				}
+
+				if ( ($legend_picked == "2") ) {
+					$legendOutput .= "width:".
+							substr_replace(
+							sprintf("%.3f", ((1/$num_o_boxes)*(100 - ($num_o_boxes*.75 )  ) ) )
+							,"",-1
+						).
+						"%;";
+				} else {
+					$legendOutput .= "padding: 2px; padding-left: 8px; padding-right: 4px; margin-top: 4px;" ;
+				}
+				$legendOutput .= "\">";
+
+				// if this is not the 0th row, put in the color
+				// or if this is the 0th row and we don't have legend text, then put in the color
+				if (  ( $i > 0) || (  ( $i == 0) && ( $legendLabel == null) )) {
+					$legendOutput .= $locationArray[$i-$legend_offset] ;
+
+				}
+				// if this is 0th box we have legend text, then spit out the legend text
+				else if ( ( $i == 0) && ( $legendLabel != null) ) {
+					$legendOutput .= $legendLabel ;
+				}
+
+				$legendOutput .= "\n\t\t\t</div>\n";
+			} // for
+		} // coloring by location (2,3,4)
+
+		
+		
+		
+		
+		
+    	if  ($displayParams['colorby'] == 1)  {
+		// coloring by event category
+			$num_o_boxes = count($catname) ;
+			if ($legendLabel != null) {$num_o_boxes+=1; }
+				
 			$legendOutput .= "\t\t\t<!-- coloring by event category -->\n";
 	    	for ($i = 0, $n = $num_o_boxes; ($i < $n); $i++) {
 				$legendOutput .= "\t\t\t<div class=\"mod_civicrm_fullcalendar_legend_cell\" \n";
@@ -1130,7 +1228,7 @@ $document->addScriptDeclaration($statement);
 						).
 						"%;";
 				} else {
-					$legendOutput .= "width: 280px;" ;
+					$legendOutput .= "padding: 2px; padding-left: 8px; padding-right: 4px; margin-top: 4px;" ;
 				}
 				$legendOutput .= "\">";
 				
@@ -1152,7 +1250,7 @@ $document->addScriptDeclaration($statement);
 				$legendOutput .= "\n\t\t\t</div>\n";
 			} // for
 
-		} // if then else --> color be event category
+		} // if then else --> color by event category
 		
 		
 		$legendOutput .= "\t\t</div> <!-- mod_civicrm_fullcalendar_legend_wrapper -->\n";

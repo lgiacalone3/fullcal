@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.42</version>
+    <version>0.1.44</version>
     <description>MOD_CIVICRM_FULLCALENDAR_DESCRIPTION</description>
 <!--
 	<install>
@@ -366,17 +366,24 @@
             <fieldset name="filteroptionsfieldset"  
 		      label="MOD_CIVICRM_FULLCALENDAR_FRONT_END_USER_FILTER_OPTIONS"
 		      >
-		<field name="filterOnStreetAddress" type="radio" default="0" 
-		       label="MOD_CIVICRM_FULLCALENDAR_FRONT_END_FILTER_ON_STREET_ADDRESS_FIELD"
-		       description="MOD_CIVICRM_FULLCALENDAR_FRONT_END_FILTER_ON_STREET_ADDRESS_FIELD_DESCRIPTION">
+		<field name="filterOnLocation" type="radio" default="0" 
+		       label="MOD_CIVICRM_FULLCALENDAR_FRONT_END_FILTER_ON_LOCATION"
+		       description="MOD_CIVICRM_FULLCALENDAR_FRONT_END_FILTER_ON_LOCATION_DESCRIPTION">
 		  <option value="0">MOD_CIVICRM_FULLCALENDAR_HIDE</option>
 		  <option value="1">MOD_CIVICRM_FULLCALENDAR_SHOW</option>
 		  </field>
-                <field name="filterTextForAllStreetAddresses" type="text" 
+                <field name="locationFilterField" type="list" default="1" 
+		       label="MOD_CIVICRM_FULLCALENDAR_FRONT_END_FILTER_ON_LOCATION_FIELD_CHOICE" 
+                       description="MOD_CIVICRM_FULLCALENDAR_FRONT_END_FILTER_ON_LOCATION_FIELD_CHOICE_DESCRIPTION">
+                    <option value="1">MOD_CIVICRM_FULLCALENDAR_EVENT_STREET_ADDRESS</option>
+                    <option value="2">MOD_CIVICRM_FULLCALENDAR_EVENT_SUPPLEMENTAL_ADDRESS_1</option>
+                    <option value="3">MOD_CIVICRM_FULLCALENDAR_EVENT_SUPPLEMENTAL_ADDRESS_2</option> 
+                </field>
+                <field name="filterTextForAllLocations" type="text" 
 		       default="ALL LOCATIONS"
 		       size="50" 
-		       label="MOD_CIVICRM_FULLCALENDAR_TEXT_FOR_ALL_LOCATIONS_FOR_STREET_ADDRESS_FILTER"
-                       description="MOD_CIVICRM_FULLCALENDAR_TEXT_FOR_ALL_LOCATIONS_FOR_STREET_ADDRESS_FILTER_DESCRIPTION">
+		       label="MOD_CIVICRM_FULLCALENDAR_TEXT_FOR_ALL_LOCATIONS_FOR_LOCATION_FILTER"
+                       description="MOD_CIVICRM_FULLCALENDAR_TEXT_FOR_ALL_LOCATIONS_FOR_LOCATION_FILTER_DESCRIPTION">
 		</field>
             </fieldset>
 

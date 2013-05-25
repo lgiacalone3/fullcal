@@ -120,7 +120,8 @@ class modCiviCRMFullCalendarHelper
         if (
         		(stristr(trim($params->get('fieldtemplate')), "{event_street_address}") != FALSE) ||
         		(stristr(trim($params->get('fieldtemplate')), "{event_supplemental_address_1}") != FALSE) ||
-        		(stristr(trim($params->get('fieldtemplate')), "{event_supplemental_address_2}") != FALSE)
+        		(stristr(trim($params->get('fieldtemplate')), "{event_supplemental_address_2}") != FALSE) ||
+        		$params->get('filterOnLocation') === "1"
         ) {
         	// get the event location data
         	$query->select( "a.street_address, a.supplemental_address_1, a.supplemental_address_2 ");
@@ -177,11 +178,12 @@ class modCiviCRMFullCalendarHelper
         $displayParams['fieldtemplate'] = trim($params->get('fieldtemplate'));
         $displayParams['agenda_timeFormat'] = trim($params->get('agenda_timeFormat'));
         $displayParams['allother_timeFormat'] = trim($params->get('allother_timeFormat'));
-        $displayParams['filterOnStreetAddress'] = trim($params->get('filterOnStreetAddress'));
-        $displayParams['filterTextForAllStreetAddresses'] = trim($params->get('filterTextForAllStreetAddresses'));
+        $displayParams['filterOnLocation'] = trim($params->get('filterOnLocation'));
+        $displayParams['filterTextForAllLocations'] = trim($params->get('filterTextForAllLocations'));
         $displayParams['calendar_titleFormat_month'] = trim($params->get('calendar_titleFormat_month'));
         $displayParams['calendar_titleFormat_week'] = trim($params->get('calendar_titleFormat_week'));
         $displayParams['calendar_titleFormat_day'] = trim($params->get('calendar_titleFormat_day'));
+        $displayParams['locationFilterField']  = trim($params->get('locationFilterField'));
         return $displayParams;
     } //end sendParams
 
