@@ -8,10 +8,13 @@ class JFormFieldColor extends JFormFieldList
 
     function getInput()
     {
+
         ob_start();
-        $jquery = JUri::root() . "modules/mod_civicrm_fullcalendar/fullcalendar/jquery/jquery-1.8.1.min.js";
-        $jspath = JUri::root() . "modules/mod_civicrm_fullcalendar/fullcalendar/spectrum/spectrum.js";
-        $css2 = JUri::root() . "modules/mod_civicrm_fullcalendar/fullcalendar/spectrum/spectrum.css";
+
+
+        $jquery = JUri::root() . "modules/mod_civicrm_fullcalendar/fullcalendar/jquery/jquery-1.9.1.min.js";
+        $jspath = JUri::root() . "modules/mod_civicrm_fullcalendar/spectrum/spectrum.js";
+        $css2 = JUri::root() . "modules/mod_civicrm_fullcalendar/spectrum/spectrum.css";
 
         //mysql query for category types
         $query = "SELECT civicrm_option_value.value, civicrm_option_value.label
@@ -93,6 +96,7 @@ class JFormFieldColor extends JFormFieldList
         $content = ob_get_contents();
         ob_end_clean();
         return $content;
+
 
     }
 

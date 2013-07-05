@@ -37,25 +37,27 @@ if ( $displayParams['filterOnLocation'] == 1 ) {
 
 
 
-
-
-
 $document =& JFactory::getDocument();
 
 
-$document->addStyleSheet(JURI::base() .
-		'modules/mod_civicrm_fullcalendar/fullcalendar/demos/cupertino/theme.css',
-		'text/css', 'screen');
-$document->addStyleSheet(JURI::base() .
-		'modules/mod_civicrm_fullcalendar/elements/legend.css',
-		'text/css', 'screen');
 $document->addStyleSheet(JURI::base() .
 		'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.css',
 		'text/css', 'screen');
 $document->addStyleSheet(JURI::base() .
 		'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.print.css',
 		'text/css', 'print');
+$document->addStyleSheet(JURI::base() .
+		'modules/mod_civicrm_fullcalendar/fullcalendar/demos/cupertino/theme.css',
+		'text/css', 'screen');
+$document->addStyleSheet(JURI::base() .
+		'modules/mod_civicrm_fullcalendar/elements/legend.css',
+		'text/css', 'screen');
 
+
+
+$document->addStyleSheet(JURI::base() .
+		'modules/mod_civicrm_fullcalendar/elements/fullcalendar_css_override.css',
+		'text/css', 'screen');
 
 
 
@@ -917,10 +919,14 @@ JSJS;
 			
 				
 			$document->addScript(JURI::base()
-					. 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/jquery-1.8.1.min.js');
+					. 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/'.
+					     'jquery-1.9.1.min.js'
+					     );
 
 			$document->addScript(JURI::base()
-					. 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/jquery-ui-1.8.23.custom.min.js');
+					. 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/'.
+					     'jquery-ui-1.10.2.custom.min.js'
+					     );
 
 
 			$document->addScript(JURI::base()

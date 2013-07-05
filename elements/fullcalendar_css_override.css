@@ -1,0 +1,7 @@
+
+/*
+* Override the header outline and the inner box borders that are displayed when rendering the module in the default Joomla! install themes with the fullcalendar provide CSS themes. 
+*/
+#fs-header table, tr, td {
+border: none;
+}
