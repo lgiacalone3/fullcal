@@ -236,7 +236,6 @@ $statement .=
 			// Set number of records to be displayed and clear counter
 			$maxevents = $displayParams['maxevents'] ;
 
-			$x = 1;
 
 			/*
 			 *  +---------------------------------------------+
@@ -376,7 +375,6 @@ $statement .=
 			 * 
 			 */
 				
-	
 
 
 				
@@ -390,7 +388,11 @@ $statement .=
 						
 						
 					foreach ($locationArray as &$loc) {
-						$select_and_option_values .= "<option value='".$loc."'>".$loc."</option>";
+						$select_and_option_values .= "<option value='".
+						htmlspecialchars($loc, ENT_QUOTES).
+						"'>".
+						htmlspecialchars($loc, ENT_QUOTES).
+						"</option>";
 					}
 						
 					$select_and_option_values .= "</select>";
@@ -402,11 +404,15 @@ $statement .=
 					"</script>\n\n";
 				} // if ( $displayParams['filterOnLocation'] === "1" )
 
-			
+
 
 				$events_array_statement = "\n\n\t\tvar myEventsArrayALL =  [\n";
 				$eventNumberWhat = 0;
 				$howManyEvents = count($eventtitles) ;
+				
+				// DEGUG
+				// echo "<P>How many events in \$howManyEvents: ".$howManyEvents."</p>" ;
+				
 				foreach ($eventtitles as &$event) {
 				
 				
@@ -436,11 +442,7 @@ $statement .=
 					// ================================= 
 					*/		
 					
-					if ($x > $maxevents) {
-						break;
-					} else {
-						$x++;
-					}
+					
 				
 					$baselink = 'index.php/component/civicrm/?task=civicrm/event/';
 				
@@ -486,6 +488,8 @@ $statement .=
 						"\t\t\t\t{\n\t\t\t\t" .
 						"id: '".$event->eventID."', ";
 				
+				// DEBUG  
+				// echo "Created javascript for event with id: ".$event->eventID." and \$eventNumberWhat is:".$eventNumberWhat."<BR/>";
 				
 				
 				
@@ -498,7 +502,7 @@ $statement .=
 						*  +-----------------------------------------------------+
 						*
 						*/
-						// we need to do lots of date stuff regargless of coloring or
+						// we need to do lots of date stuff regardless of coloring or
 						// if we have {event_duration} in the template
 				
 						$datetime = strtotime($event->start_date);
@@ -559,7 +563,7 @@ $statement .=
 							//single day
 				
 							$eventcolor = $color[0];
-							if ( ($emin == $smin) &&  ($shr==$ehr)   ) {
+							if ( ($emin == $smin) &&  ($shr==$ehr) && ($shr==0) && ($smin==0)  ) {
 								$e_duration = "1 day";
 								$allDay = true;
 								
@@ -749,7 +753,7 @@ $statement .=
 						 *  +-----------------------------------------------------+
 						*  |
 						*  |  assemble the 'title' param for fullcalendar's
-						*  |  event invokation
+						*  |  event invocation
 						*  |
 						*  +-----------------------------------------------------+
 						*
@@ -811,34 +815,34 @@ $statement .=
 				
 				
 						if ( $allDay == 0 ) {
-						$events_array_statement .=
-						"\n\t\t\t\t".
+							$events_array_statement .=
+							"\n\t\t\t\t".
 							"allDay: false, ".
 							"\n\t\t\t\t".
-				"start: new Date($sy, $sm, $sd, $shr, $smin), " .
-								"\n\t\t\t\t".
-								"end: new Date($ey, $em, $ed, $ehr, $emin), " ;
+							"start: new Date($sy, $sm, $sd, $shr, $smin), " .
+							"\n\t\t\t\t".
+							"end: new Date($ey, $em, $ed, $ehr, $emin), " ;
 						}
 						else {
-						$events_array_statement .=
-						"\n\t\t\t\t".
+							$events_array_statement .=
+							"\n\t\t\t\t".
 							"allDay: true, " .
 							"\n\t\t\t\t".
 							"start: new Date($sy, $sm, $sd), " .
-				"\n\t\t\t\t".
-				"end: new Date($ey, $em, $ed), " ;
-							}
-				
-							$events_array_statement .=
 							"\n\t\t\t\t".
-							"url: '$link' ,".
-							"\n\t\t\t\t".
-							"color: '$eventcolor' " ;
+							"end: new Date($ey, $em, $ed), " ;
+						}
+
 						$events_array_statement .=
-										"\n\t\t\t".
-										"}";
-				
-				
+						"\n\t\t\t\t".
+						"url: '$link' ,".
+						"\n\t\t\t\t".
+						"color: '$eventcolor' " ;
+						$events_array_statement .=
+						"\n\t\t\t".
+						"}";
+
+
 				
 				
 				
@@ -888,7 +892,7 @@ $statement .=
 			$statement .= $events_array_statement ;
 			
 			
-			// FOOBAR - move the event code starting at line 305 to this function 
+			// FOOBAR - move the event code starting at line 300 something to this function 
 			$statement .= mcfcEventsArray::buildArray( $eventtitles, $params );
 
 			// debug - only 2 events
