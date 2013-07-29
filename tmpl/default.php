@@ -248,30 +248,33 @@ $statement .=
 			*  |
 			*  +---------------------------------------------+
 			*/
+			$query = "SELECT civicrm_option_value.value, civicrm_option_value.label
+					FROM civicrm_option_value
+					INNER JOIN
+					civicrm_option_group
+					ON (civicrm_option_value.option_group_id = civicrm_option_group.id)
+					WHERE (civicrm_option_group.name = 'event_type')" ;
+			// AND (civicrm_option_value.is_active = '1')";
 
+
+			
 			// which categories are in the ones the user wants?
 			foreach ($eventtitles as &$event) {
 				for ($i = 0, $n = count($event->street_address); ($i < $n); $i++) {
 							$which_category_ids[] = $event->event_type_id;
 				} //for
 			}  // foreach
-			$which_category_ids = array_unique($which_category_ids);
-			sort($which_category_ids);
+			$which_category_ids = array_unique($which_category_ids); sort($which_category_ids);
+
 			$inclausevalues = "";
 			for ( $i=0, $n = count($which_category_ids); ($i < $n); $i++) {
 				$inclausevalues .= $which_category_ids[$i];
 				if ($i < ($n-1)) { $inclausevalues.=","; }  // don't add the last comma
+			}		if ( $inclausevalues != null) {
+				$query .= "AND value in (".$inclausevalues.")";
 			}
-			
-			
-			$query = "SELECT civicrm_option_value.value, civicrm_option_value.label
-						FROM civicrm_option_value
-						INNER JOIN
-						civicrm_option_group
-						ON (civicrm_option_value.option_group_id = civicrm_option_group.id)
-						WHERE (civicrm_option_group.name = 'event_type')
-			              and value in (".$inclausevalues.")";
-						// AND (civicrm_option_value.is_active = '1')";
+				
+						 
 			$db =& JFactory::getDBO();
 			$db->setQuery($query);
 			$result = $db->loadObjectList();

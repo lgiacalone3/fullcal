@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.50</version>
+    <version>0.1.51</version>
     <description>MOD_CIVICRM_FULLCALENDAR_DESCRIPTION</description>
 <!--
 	<install>
@@ -54,6 +54,8 @@
             <fieldset name="display" 
 		      label="MOD_CIVICRM_FULLCALENDAR_GENERAL_OPTIONS"
 		      >
+
+
                 <field type="spacer" 
 		       label="MOD_CIVICRM_FULLCALENDAR_DISPLAY_SETTINGS"
 		       />
@@ -321,7 +323,11 @@
             AND (civicrm_option_value.is_active = '1')"
                        key_field="value" value_field="label"/>
 
+
             </fieldset>
+
+
+
 
 
 
