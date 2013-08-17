@@ -923,12 +923,12 @@ JSJS;
 				
 			$document->addScript(JURI::base()
 					. 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/'.
-					     'jquery-1.9.1.min.js'
+					     'jquery-1.10.2.min.js'
 					     );
 
 			$document->addScript(JURI::base()
 					. 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/'.
-					     'jquery-ui-1.10.2.custom.min.js'
+					     'jquery-ui-1.10.3.custom.min.js'
 					     );
 
 
