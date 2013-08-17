@@ -388,7 +388,9 @@ $statement .=
 					JText::_( "MOD_CIVICRM_FULLCALENDAR_FILTER_BY_LOCATION_LABEL" ).
 					":<BR />".
 					"<P>".
-					"<select name='select' id='mcfc_location_filter' multiple>".
+					"<select ".
+					"size='".$displayParams['filterBoxNumberOfRows']."' ".
+					"name='select' id='mcfc_location_filter' multiple>".
 					"<option value='".$displayParams['filterTextForAllLocations']."' selected>".$displayParams['filterTextForAllLocations']."</option>";
 						
 						

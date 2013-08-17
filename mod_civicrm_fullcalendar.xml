@@ -58,18 +58,7 @@
 
 
 
-<!-- fullcal3ndar -->
-                <field name="coloring_scheme_id" type="sql"
-                       label="MOD_CIVICRM_FULLCALENDAR_COLORING_SCHEME_NAME"
-                       query="select distinct
-                                  cm.coloring_scheme_id,
-				  cm.coloring_scheme_name
-				from
-				  #__civicrm_fullcalendar_color_mapping cm
-				order by 
-				  cm.ordering"
-                       key_field="coloring_scheme_id" value_field="coloring_scheme_name"/>
-<!-- fullcal3ndar  -->
+
 
 
 
@@ -232,7 +221,7 @@
                     <option value="4">MOD_CIVICRM_FULLCALENDAR_EVENT_SUPPLEMENTAL_ADDRESS_2</option> 
                 </field>
 
-                <field name="colorpicker" type="list" default="2" 
+                <field name="colorpicker" type="list" default="20" 
 		       label="MOD_CIVICRM_FULLCALENDAR_COLOR_THEME"
                        description="MOD_CIVICRM_FULLCALENDAR_COLOR_THEME_DESCRIPTION">
                     <option value="0">MOD_CIVICRM_FULLCALENDAR_PRIMARY_COLORS</option>
@@ -409,6 +398,13 @@
 		       size="50" 
 		       label="MOD_CIVICRM_FULLCALENDAR_TEXT_FOR_ALL_LOCATIONS_FOR_LOCATION_FILTER"
                        description="MOD_CIVICRM_FULLCALENDAR_TEXT_FOR_ALL_LOCATIONS_FOR_LOCATION_FILTER_DESCRIPTION">
+		</field>
+                <field name="filterBoxNumberOfRows" type="text" 
+		       default="5"
+		       size="2" 
+		       label="MOD_CIVICRM_FULLCALENDAR_FILTER_BOX_NUMBER_OF_ROWS"
+                       description="MOD_CIVICRM_FULLCALENDAR_FILTER_BOX_NUMBER_OF_ROWS_DESCRIPTION"
+		       >
 		</field>
             </fieldset>
 

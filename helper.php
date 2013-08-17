@@ -184,6 +184,9 @@ class modCiviCRMFullCalendarHelper
         $displayParams['calendar_titleFormat_week'] = trim($params->get('calendar_titleFormat_week'));
         $displayParams['calendar_titleFormat_day'] = trim($params->get('calendar_titleFormat_day'));
         $displayParams['locationFilterField']  = trim($params->get('locationFilterField'));
+        $displayParams['filterBoxNumberOfRows']  = trim($params->get('filterBoxNumberOfRows'));
+        
+        
         return $displayParams;
     } //end sendParams
 
