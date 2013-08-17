@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.54</version>
+    <version>0.1.55</version>
     <description>MOD_CIVICRM_FULLCALENDAR_DESCRIPTION</description>
 <!--
 	<install>
@@ -58,33 +58,7 @@
 
 
 
-<!-- fullcal3ndar -->
-                <field name="coloring_scheme_id" type="sql"
-                       label="MOD_CIVICRM_FULLCALENDAR_COLORING_SCHEME_NAME"
-                       description="MOD_CIVICRM_FULLCALENDAR_COLORING_SCHEME_NAME_DESCRIPTION"
-                       query="select distinct
-                                  cm.coloring_scheme_id,
-				  cm.coloring_scheme_name
-				from
-				  #__civicrm_fullcalendar_color_mapping cm
-				order by 
-				  cm.ordering"
-                       key_field="coloring_scheme_id" value_field="coloring_scheme_name"/>
 
-
-                <field type="spacer" 
-		       label=""
-		       />
-
-                <field type="spacer" 
-		       label=""
-		       />
-
-                <field type="spacer" 
-		       label=""
-		       />
-
-<!-- fullcal3ndar  -->
 
 
 
