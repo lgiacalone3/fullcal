@@ -47,7 +47,7 @@ $document->addStyleSheet(JURI::base() .
 		'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.print.css',
 		'text/css', 'print');
 $document->addStyleSheet(JURI::base() .
-		'modules/mod_civicrm_fullcalendar/fullcalendar/demos/cupertino/theme.css',
+		'modules/mod_civicrm_fullcalendar/fullcalendar/demos/cupertino/jquery-ui.min.css',
 		'text/css', 'screen');
 $document->addStyleSheet(JURI::base() .
 		'modules/mod_civicrm_fullcalendar/elements/legend.css',
@@ -924,15 +924,14 @@ JSJS;
 			
 				
 			$document->addScript(JURI::base()
-					. 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/'.
-					     'jquery-1.10.2.min.js'
+					. 'modules/mod_civicrm_fullcalendar/fullcalendar/lib/'.
+					     'jquery.min.js'
 					     );
 
 			$document->addScript(JURI::base()
-					. 'modules/mod_civicrm_fullcalendar/fullcalendar/jquery/'.
-					     'jquery-ui-1.10.3.custom.min.js'
+					. 'modules/mod_civicrm_fullcalendar/fullcalendar/lib/'.
+					     'jquery-ui.custom.min.js'
 					     );
-
 
 			$document->addScript(JURI::base()
 					. 'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.min.js');
