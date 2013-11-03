@@ -154,6 +154,7 @@ class modCiviCRMFullCalendarHelper
         $displayParams['dateformat'] = trim($params->get('dateformat'));
         //$displayParams['summary'] = trim($params->get('summary'));
         $displayParams['colorby'] = trim($params->get('colorby'));
+        $displayParams['cssskinname'] = trim($params->get('cssskinname'));
         $displayParams['color1'] = trim($params->get('color1'));
         $displayParams['color2'] = trim($params->get('color2'));
         $displayParams['color3'] = trim($params->get('color3'));

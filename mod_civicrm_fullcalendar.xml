@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.56</version>
+    <version>0.1.57</version>
     <description>MOD_CIVICRM_FULLCALENDAR_DESCRIPTION</description>
 <!--
 	<install>
@@ -191,11 +191,11 @@
 		</field>
 
 
-		<field name="modal" type="radio" default="1" 
+		<field name="modal" type="radio" default="0" 
 		       label="MOD_CIVICRM_FULLCALENDAR_LINK_STYLE"
 		       description="MOD_CIVICRM_FULLCALENDAR_LINK_STYLE_DESCRIPTION">
-		  <option value="1">MOD_CIVICRM_FULLCALENDAR_MODAL_POPUP</option>
 		  <option value="0">MOD_CIVICRM_FULLCALENDAR_PAGE_REDIRECTION</option>
+		  <option value="1">MOD_CIVICRM_FULLCALENDAR_MODAL_POPUP</option>
 		</field>
 
 
@@ -203,6 +203,13 @@
                 <field type="spacer" 
 		       label="MOD_CIVICRM_FULLCALENDAR_COLOR_SETTINGS"
 		       />
+
+                <field name="cssskinname" type="list" default="0" 
+		       label="MOD_CIVICRM_FULLCALENDAR_SKIN_NAME"
+                       description="MOD_CIVICRM_FULLCALENDAR_SKIN_NAME_DESCRIPTION">
+                    <option value="0">cupertino from FullCalendar</option>
+                </field>
+
 
                 <field name="colorby" type="list" default="1" 
 		       label="MOD_CIVICRM_FULLCALENDAR_COLOR_BY"
