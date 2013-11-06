@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>lgiacalone3@yahoo.com, mod_civicrm_fullcalendar@schmitt.cc</authorEmail>
     <authorUrl>https://github.com/lgiacalone3/fullcal</authorUrl>
-    <version>0.1.57</version>
+    <version>0.1.58</version>
     <description>MOD_CIVICRM_FULLCALENDAR_DESCRIPTION</description>
 <!--
 	<install>
@@ -34,6 +34,7 @@
 	<folder>language/</folder>
         <folder>fullcalendar/</folder>
         <folder>spectrum/</folder>
+        <folder>spin/</folder>
         <folder>tmpl/</folder>
     </files>
 

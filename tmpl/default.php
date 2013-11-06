@@ -13,6 +13,69 @@ jimport('joomla.html.html');
 
 
 
+$document =& JFactory::getDocument();
+
+$document->addStyleSheet(JURI::base() .
+		'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.css',
+		'text/css', 'screen');
+$document->addStyleSheet(JURI::base() .
+		'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.print.css',
+		'text/css', 'print');
+$document->addStyleSheet(JURI::base() .
+		'modules/mod_civicrm_fullcalendar/fullcalendar/demos/cupertino/jquery-ui.min.css',
+		'text/css', 'screen');
+$document->addStyleSheet(JURI::base() .
+		'modules/mod_civicrm_fullcalendar/elements/legend.css',
+		'text/css', 'screen');
+
+$document->addStyleSheet(JURI::base() .
+		'modules/mod_civicrm_fullcalendar/elements/fullcalendar_css_override.css',
+		'text/css', 'screen');
+
+$document->addScript(JURI::base()
+		. 'modules/mod_civicrm_fullcalendar/fullcalendar/lib/'.
+		'jquery.min.js'
+);
+
+$document->addScript(JURI::base()
+		. 'modules/mod_civicrm_fullcalendar/fullcalendar/lib/'.
+		'jquery-ui.custom.min.js'
+);
+
+$document->addScript(JURI::base()
+		. 'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.min.js');
+
+
+//$document->addScript(JURI::base()
+//		. 'modules/mod_civicrm_fullcalendar/spin/spin.min.js');
+
+
+?>
+
+
+<!-- this will add the FullCalendar dynamically inside the div below -->
+<div id='mod_civicrm_fullcalendar'>
+	<div id='mod_civicrm_fullcalendar_notifications'>
+		<?php // echo $js_snippet_spinner_show; ?>
+	</div>
+	
+	
+	
+	<?php 
+	if ( $displayParams['filterOnLocation'] == 1 ) {
+	echo
+	"<div id=\"mod_civicrm_fullcalendar_filter_by\"></div>\n\n";
+    }
+    ?>
+
+	
+	<div id='calendar'></div>
+
+	
+	
+
+
+<?php 
 if ( $displayParams['modal'] == "1" ) {
 	jimport( 'joomla.html.html.behavior' );
 	JHtmlBehavior::modal();
@@ -31,61 +94,27 @@ if ( $displayParams['modal'] == "1" ) {
 }
 
 
-if ( $displayParams['filterOnLocation'] == 1 ) {
-	echo
-	"<div id=\"mod_civicrm_fullcalendar_filter_by\"></div>\n\n";
-}
 
 
-
-$document =& JFactory::getDocument();
-
-
-$document->addStyleSheet(JURI::base() .
-		'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.css',
-		'text/css', 'screen');
-$document->addStyleSheet(JURI::base() .
-		'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.print.css',
-		'text/css', 'print');
-$document->addStyleSheet(JURI::base() .
-		'modules/mod_civicrm_fullcalendar/fullcalendar/demos/cupertino/jquery-ui.min.css',
-		'text/css', 'screen');
-$document->addStyleSheet(JURI::base() .
-		'modules/mod_civicrm_fullcalendar/elements/legend.css',
-		'text/css', 'screen');
-
-
-
-$document->addStyleSheet(JURI::base() .
-		'modules/mod_civicrm_fullcalendar/elements/fullcalendar_css_override.css',
-		'text/css', 'screen');
-
-
-
-
-?>
-<!-- this will add the FullCalendar dynamically inside the div below -->
-<div id='mod_civicrm_fullcalendar'>
-	<div id='mod_civicrm_fullcalendar_notifications'>
-		<?php echo $js_snippet_spinner_show; ?>
-	</div>
-	<div id='calendar'></div>
-
-
-
-	<?php 
 	// get ready to call FullCalendar's javascript
-	$statement =  "var \$cfcj = jQuery.noConflict();\n".
-			"\$cfcj(document).ready(function() {\n";
+//	$statement =  "var \$cfcj = jQuery.noConflict();\n".
+	$statement =  "var cfcj = jQuery.noConflict();\n".
+//			"\$cfcj(document).ready(function() {\n";
+			"cfcj(document).ready(function() {\n";
 
 	if ( $displayParams['filterOnLocation'] === "1" ) {
-		$statement .= "\n\n//DEBUG alert('will init allLocationsText with '+ \$cfcj('#mcfc_location_filter').val() || []  );";
-		$statement .= "\nvar allLocationsText = \$cfcj('#mcfc_location_filter').val()  || [] ; \n\n";
+//		$statement .= "\n\n//DEBUG alert('will init allLocationsText with '+ \$cfcj('#mcfc_location_filter').val() || []  );";
+		$statement .= "\n\n//DEBUG alert('will init allLocationsText with '+ cfcj('#mcfc_location_filter').val() || []  );";
+//		$statement .= "\nvar allLocationsText = \$cfcj('#mcfc_location_filter').val()  || [] ; \n\n";
+		$statement .= "\nvar allLocationsText = cfcj('#mcfc_location_filter').val()  || [] ; \n\n";
 	}
 
-	// call FullCalendar's javascript
-	$statement .= "\$cfcj('#calendar').fullCalendar({\n\n";
+	
 
+	// call FullCalendar's javascript
+//	$statement .= "\$cfcj('#calendar').fullCalendar({\n\n";
+	$statement .= "cfcj('#calendar').fullCalendar({\n\n";
+	
 
 
 
@@ -224,6 +253,36 @@ $document->addStyleSheet(JURI::base() .
 					"\t\t events: myEventsArray" ;
 
 
+					
+					// ====================================================
+					// if we need modal dialog boxes for the events
+					// ====================================================
+					if ( $displayParams['modal'] == "1" ) {
+						$statement .= $js_snippet_eventClick_modal_dialogs ;
+					} // if ( $displayParams['modal'] == "1" ) {
+					
+					
+					$statement .= "\n\t\t\t});\n";
+					
+					
+					// add in the javascrupt for front-end filtering
+					if ( $displayParams['filterOnLocation'] === "1" ) {
+						$statement .= $js_snippet_mcfc_location_filter_mouseup ;
+					}
+					
+					$statement .= "\n\t\t}); // END of READY FUNCTION\n\n\n";
+					
+					
+					// OK, add it to the header
+					$document->addScriptDeclaration($statement);
+					$statement =
+					"<script type=\"text/javascript\">\n";
+
+					
+					
+					
+					
+					
 					//			$debug = 0;
 					//
 					//			if ($debug) {
@@ -899,33 +958,7 @@ $document->addStyleSheet(JURI::base() .
 
 							$events_array_statement .= "\t\t\t];\n";
 
-
-
-
-							// ====================================================
-							// if we need modal dialog boxes for the events
-							// ====================================================
-							if ( $displayParams['modal'] == "1" ) {
-								$statement .= $js_snippet_eventClick_modal_dialogs ;
-							} // if ( $displayParams['modal'] == "1" ) {
-
-
-							$statement .= "\n\t\t\t});\n";
-
-								
-							// add in the javascrupt for front-end filtering
-							if ( $displayParams['filterOnLocation'] === "1" ) {
-								$statement .= $js_snippet_mcfc_location_filter_mouseup ;
-							}
-
-								
-								
-
-
-							$statement .= "\n\t\t}); // END of READY FUNCTION";
-								
-								
-
+							
 								
 							$statement .= $events_array_statement ;
 								
@@ -952,34 +985,12 @@ JSJS;
 							// ====================================================
 
 								
-								
-
-							$document->addScript(JURI::base()
-									. 'modules/mod_civicrm_fullcalendar/fullcalendar/lib/'.
-									'jquery.min.js'
-							);
-
-							$document->addScript(JURI::base()
-									. 'modules/mod_civicrm_fullcalendar/fullcalendar/lib/'.
-									'jquery-ui.custom.min.js'
-							);
-
-							$document->addScript(JURI::base()
-									. 'modules/mod_civicrm_fullcalendar/fullcalendar/fullcalendar/fullcalendar.min.js');
-
-
-							$document->addScript(JURI::base()
-									. 'modules/mod_civicrm_fullcalendar/spin/spin.min.js');
+							
 								
 								
-
-
-								
-								
-							// This will add the javascript call for FullCalendar to the <HEAD>
-							//  refer to -> http://arshaw.com/fullcalendar/docs/usage/
-							$document->addScriptDeclaration($statement);
-
+							// This will add the array of events data
+							$statement .=  	"</script>\n\n";
+							echo $statement ; 			
 
 
 
@@ -1334,6 +1345,7 @@ JSJS;
 								}  // if color legend
 
 								?>
+
 </div>
 <!-- mod_civicrm_fullcalendar -->
 
@@ -1341,6 +1353,6 @@ JSJS;
 
 <?php 
 // clear out the loading message / spinner
-echo $js_snippet_spinner_hide ; 	
+// echo $js_snippet_spinner_hide ; 	
 ?>
 
