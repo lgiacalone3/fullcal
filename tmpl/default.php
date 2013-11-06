@@ -105,7 +105,7 @@ if ( $displayParams['modal'] == "1" ) {
 
 		
     //	$statement .= "\$cfcj(document).ready(function() {\n";
-	$statement .= "$(document).ready(function( $ ) {\n";
+	$statement .= "$(document).ready(function() {\n";
 
 	if ( $displayParams['filterOnLocation'] === "1" ) {
 //		$statement .= "\n\n//DEBUG alert('will init allLocationsText with '+ \$cfcj('#mcfc_location_filter').val() || []  );";
