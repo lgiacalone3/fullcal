@@ -6,7 +6,7 @@ $js_snippet_mcfc_location_filter_mouseup = <<<'MUMU'
 
 
 //$cfcj('#mcfc_location_filter')
-cfcj('#mcfc_location_filter')
+$('#mcfc_location_filter')
 		.change(
 		function() {
 
@@ -16,7 +16,7 @@ cfcj('#mcfc_location_filter')
 
 			// Let's see what got selected
 			//var selected_elements = $cfcj('#mcfc_location_filter').val() || [];
-			var selected_elements = cfcj('#mcfc_location_filter').val() || [];
+			var selected_elements = $('#mcfc_location_filter').val() || [];
 		
 			// DEBUG alert("You have selected:\n" + selected_elements.join(", \n") + "\n for a total of " + selected_elements.length + " elements.");
 
@@ -52,10 +52,12 @@ cfcj('#mcfc_location_filter')
 			} // if ALL LOCATONS else ...
 
 			//$cfcj('#calendar').fullCalendar('removeEvents');
-		    cfcj('#calendar').fullCalendar('removeEvents');
+		    $('#calendar').fullCalendar('removeEvents');
+
 			// DELETE // $cfcj('#calendar').fullCalendar( 'refetchEvents' );
+
 			//$cfcj('#calendar').fullCalendar('addEventSource',
-		    cfcj('#calendar').fullCalendar('addEventSource',
+		    $('#calendar').fullCalendar('addEventSource',
 					myEventsArray);
 
 		}); // END cfcj('#mcfc_location_filter').change(function()

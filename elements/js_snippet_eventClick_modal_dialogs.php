@@ -7,10 +7,12 @@ $js_snippet_eventClick_modal_dialogs = <<<'ECMD'
 	eventClick: function(event) {
     	    if (event.url) {
 				//$cfcj('a[id$="aref_mod_civicrm_fullcalendar_dialog"]').attr("href", event.url   );
-				cfcj('a[id$="aref_mod_civicrm_fullcalendar_dialog"]').attr("href", event.url   );		
+				$('a[id$="aref_mod_civicrm_fullcalendar_dialog"]').attr("href", event.url   );		
 
 		        // this is correct with just $() 
-		        $('aref_mod_civicrm_fullcalendar_dialog' ).click() ;
+		        // RESTORE $('aref_mod_civicrm_fullcalendar_dialog' ).click() ;
+	        	//$('a[id$="aref_mod_civicrm_fullcalendar_dialog.modal"]').click();
+		//  alert( $('aref_mod_civicrm_fullcalendar_dialog' ).click()  );
 				return false;
 	        } // if
 	} // eventClick: function(event)

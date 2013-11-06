@@ -67,10 +67,6 @@ $document->addScript(JURI::base()
 	"<div id=\"mod_civicrm_fullcalendar_filter_by\"></div>\n\n";
     }
     ?>
-
-	
-	<div id='calendar'></div>
-
 	
 	
 
@@ -92,32 +88,38 @@ if ( $displayParams['modal'] == "1" ) {
 	"rel=\"{handler: 'iframe', size: {x: 520, y: 400}}\"></a>".
 	"</div>\n\n";
 }
+?>
 
+
+	<div id='calendar'></div>
+
+
+<?php 
 
 
 
 	// get ready to call FullCalendar's javascript
 	$statement = "";
 //	$statement .=  "var \$cfcj = jQuery.noConflict();\n"; 
-    $statement .=  "var cfcj = jQuery.noConflict();\n";
+//RESTORE    $statement .=  "var cfcj = jQuery.noConflict();\n";
 
 		
     //	$statement .= "\$cfcj(document).ready(function() {\n";
-	$statement .= "cfcj(document).ready(function() {\n";
+	$statement .= "$(document).ready(function( $ ) {\n";
 
 	if ( $displayParams['filterOnLocation'] === "1" ) {
 //		$statement .= "\n\n//DEBUG alert('will init allLocationsText with '+ \$cfcj('#mcfc_location_filter').val() || []  );";
-		$statement .= "\n\n//DEBUG alert('will init allLocationsText with '+ cfcj('#mcfc_location_filter').val() || []  );";
+		$statement .= "\n\n//DEBUG alert('will init allLocationsText with '+ $('#mcfc_location_filter').val() || []  );";
 
 		//		$statement .= "\nvar allLocationsText = \$cfcj('#mcfc_location_filter').val()  || [] ; \n\n";
-		$statement .= "\nvar allLocationsText = cfcj('#mcfc_location_filter').val()  || [] ; \n\n";
+		$statement .= "\nvar allLocationsText = $('#mcfc_location_filter').val()  || [] ; \n\n";
 	}
 
 	
 
 	// call FullCalendar's javascript
 //	$statement .= "\$cfcj('#calendar').fullCalendar({\n\n";
-	$statement .= "cfcj('#calendar').fullCalendar({\n\n";
+	$statement .= "$('#calendar').fullCalendar({\n\n";
 	
 
 
