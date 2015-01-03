@@ -125,7 +125,7 @@ class modCiviCRMFullCalendarHelper
         ) {
         	// get the event location data
         	$query->select( "a.street_address, a.supplemental_address_1, a.supplemental_address_2 ");
-        	$query->leftJoin('civicrm_loc_block lb ON e.loc_block_id = lb.id')->leftJoin('civicrm_address a ON a.id = lb.id');
+		$query->leftJoin('civicrm_loc_block lb ON e.loc_block_id = lb.id')->leftJoin('civicrm_address a ON a.id = lb.address_id'); 
         }
 
         // DEBUG echo $query ;  // DEBUG
